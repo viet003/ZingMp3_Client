@@ -1,5 +1,5 @@
 import appReducer from "./appReducer"
-import { combineReducers, applyMiddleware } from "redux"
+import { combineReducers } from "redux"
 
 const rootReducers = combineReducers({
     app: appReducer,
