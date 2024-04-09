@@ -9,7 +9,7 @@ import path from "../utils/path.js"
 
 function Sidebar() {
     return (
-        <div className="pl-[20px] text-[14px] font-normal text-gray-800">
+        <div className="pl-[20px] text-[14px] font-normal text-gray-800 w-full h-full">
             <div className="w-full h-[70px] flex items-center">
                 <NavLink to={path.HOME}>
                     <img src={logo} alt="logo" className="w-[120px] h-[50px]" />
@@ -28,7 +28,7 @@ function Sidebar() {
                 }
             </div>
             <hr className="mr-[20px] my-[20px] border-gray-300" />
-            <div className="overflow-y-auto h-[320px] hover:scrollbar bar">
+            <div className="overflow-y-auto h-[280px] hover:scrollbar bar">
                 {
                     menu_2.map(item => (
                         <NavLink to={item.path} key={item.path}>
@@ -60,7 +60,7 @@ function Sidebar() {
                 }
             </div>
             <hr className="mr-[20px] my-[10px] border-gray-300" />
-            <div className="text-[16px] flex gap-2 items-center cursor-pointer py-[10px]">
+            <div className="text-[16px] flex gap-2 items-center cursor-pointer py-[2px]">
                 <IoAddCircleOutline className="text-[25px]"/>
                 <p>Tạo playlist mới</p>
             </div>

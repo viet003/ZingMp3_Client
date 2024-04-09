@@ -58,11 +58,11 @@ export const menu_2 = [
         text: "Top 100",
         icons: <CiStar className="text-[23px]" />
     },
-    {
-        path: path.RADIO,
-        text: "Music Video",
-        icons: <MdVideoLibrary className="text-[23px]" />
-    },
+    // {
+    //     path: path.RADIO,
+    //     text: "Music Video",
+    //     icons: <MdVideoLibrary className="text-[23px]" />
+    // },
 ]
 
 
