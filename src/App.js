@@ -1,4 +1,4 @@
-import { Home, Main, Radio, Zingchart } from "./containers/public"
+import { Playlist, Home, Main, Radio, Zingchart } from "./containers/public"
 import { Library } from "./containers/system"
 import { Route, Routes } from "react-router-dom";
 import path from "./utils/path"
@@ -19,6 +19,7 @@ function App() {
           <Route path={path.HOME} element={<Home />} />
           <Route path={path.ZINGCHART} element={<Zingchart />} />
           <Route path={path.RADIO} element={<Radio />} />
+          <Route path={path.PLAYLIST} element={<Playlist />} />
         </Route>
       </Routes>
     </div>

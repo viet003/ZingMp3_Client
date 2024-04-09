@@ -1,1 +1,2 @@
-export * from "./getHomeController"
+export * from "./homeController"
+export * from "./musicController"

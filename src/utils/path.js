@@ -3,7 +3,8 @@ const path = {
     HOME: '/home',
     LIBRARY: '/library',
     ZINGCHART: '/zingchart',
-    RADIO: '/radio'
+    RADIO: '/radio',
+    PLAYLIST: '/playlist/:title/:id'
 }
 
 export default path

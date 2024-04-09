@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getArrSlider } from '../utils/fn'
-import * as actions from '../store/actions/home'
+import * as actions from '../store/actions'
 import { useNavigate } from 'react-router-dom'
 
 const Slider = () => {
@@ -49,15 +49,17 @@ const Slider = () => {
         }
     }, [])
 
-    // const handleClickBanner = (item) => {
-    //     if (item?.type === 1) {
-    //         dispatch(actions.setCurSongId(item.encodeId))
-    //         dispatch(actions.play(true))
-    //     } else if (item?.type === 4) {
-    //         const albumPath = item?.link?.split('.')[0]
-    //         navigate(albumPath)
-    //     }
-    // }
+    const handleClickBanner = (item) => {
+        if (item?.type === 1) {
+            dispatch(actions.setCurSongId(item.encodeId))
+            // dispatch(actions.play(true))
+        } else if (item?.type === 4) {
+            const albumPath = item?.link?.split('.')[0]
+            // console.log(albumPath)
+            navigate(albumPath)
+        }
+        console.log(item)
+    }
 
     return (
         <div className='w-full overflow-hidden px-[59px]'>
@@ -66,7 +68,7 @@ const Slider = () => {
                     <img
                         key={item.encodeId}
                         src={item.banner}
-                        // onClick={() => handleClickBanner(item)}
+                        onClick={() => handleClickBanner(item)}
                         className={`slider-item flex-1 object-contain w-[30%] rounded-lg ${index <= 2 ? 'block' : 'hidden'}`}
                     />
                 ))}

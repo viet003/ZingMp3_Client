@@ -24,3 +24,4 @@ export const getHome = () => async (dispatch) => {
         })
     }
 }
+
