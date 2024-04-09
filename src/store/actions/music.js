@@ -5,8 +5,17 @@ export const setCurSongId = (sid) => ({
     sid
 })
 
-
 export const setPlay = (isPlaying) => ({
     type: actionTypes.SET_PLAY,
     isPlaying
+})
+
+export const setIsPlayAtList = (isPlayAtList) => ({
+    type: actionTypes.SET_PLAY_AT_LIST,
+    isPlayAtList
+})
+
+export const setSongs = (songs) => ({
+    type: actionTypes.SET_PLAY_LIST,
+    songs
 })

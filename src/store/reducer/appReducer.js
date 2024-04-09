@@ -2,7 +2,6 @@ import actionTypes from '../actions/actionTypes';
 
 const initState = {
     banner: [],
-
 }
 
 const appReducer = (state = initState, action) => {
@@ -12,7 +11,6 @@ const appReducer = (state = initState, action) => {
                 ...state,
                 banner: action.homeData?.find(item => item.sectionType === 'banner')?.items || null
             }
-
         default:
             return state
     }
