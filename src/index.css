@@ -4,7 +4,7 @@
 
 @layer base {
     * {
-        font-family: Inter,sans-serif;
+        font-family: Inter, sans-serif;
     }
 
     .bar:hover::-webkit-scrollbar-thumb {
@@ -15,10 +15,20 @@
         @apply w-1
     }
 
-    ::-webkit-scrollbar-track {
-    }
+    ::-webkit-scrollbar-track {}
 
     ::-webkit-scrollbar-thumb {
         @apply rounded-full bg-gray-300 hidden h-4
+    }
+
+    .truncate-lines-2 {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        /* Limit to two lines */
+        /* max-height: calc(1.2em * 2); */
+        /* Adjust according to your font size and line height */
     }
 }

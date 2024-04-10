@@ -52,7 +52,7 @@ const Slider = () => {
     const handleClickBanner = (item) => {
         if (item?.type === 1) {
             dispatch(actions.setCurSongId(item.encodeId))
-            // dispatch(actions.play(true))
+            // dispatch(actions.setPlay(true))
         } else if (item?.type === 4) {
             const albumPath = item?.link?.split('.')[0]
             // console.log(albumPath)
@@ -62,14 +62,14 @@ const Slider = () => {
     }
 
     return (
-        <div className='w-full overflow-hidden px-[59px]'>
+        <div className='w-full overflow-hidden'>
             <div className='flex w-full gap-8 pt-8'>
                 {banner?.map((item, index) => (
                     <img
                         key={item.encodeId}
                         src={item.banner}
                         onClick={() => handleClickBanner(item)}
-                        className={`slider-item flex-1 object-contain w-[30%] rounded-lg ${index <= 2 ? 'block' : 'hidden'}`}
+                        className={`slider-item flex-1 object-contain w-[30%] rounded-lg ${index <= 2 ? 'block' : 'hidden'} cursor-pointer`}
                     />
                 ))}
             </div>
