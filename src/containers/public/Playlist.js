@@ -29,7 +29,7 @@ function Playlist() {
 
   return (
     playlistData && (
-      <div className='grid grid-cols-[25%,75%] gap-8 w-full h-[calc(100vh-70px)]'>
+      <div className='grid grid-cols-[25%,75%] gap-8 w-full h-[calc(100vh-90px)]'>
         <div className='flex-none flex flex-col items-center gap-2'>
           <div className='mt-[50px] flex flex-col gap-5 cursor-default'>
             <img src={playlistData?.thumbnailM} alt="thumbnail" className='w-full object-contain rounded-md shadow-md' />
@@ -51,7 +51,7 @@ function Playlist() {
 
           </div>
         </div>
-        <Scrollbars style={{ width: '100%', height: '90%' }}>
+        <Scrollbars style={{ width: '100%', height: '85%' }}>
           <Lists songs={playlistData?.song?.items} totalDuration={playlistData?.song?.totalDuration} />
         </Scrollbars>
       </div>

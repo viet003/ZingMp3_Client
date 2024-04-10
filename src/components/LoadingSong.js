@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { RotatingLines } from "react-loader-spinner"
 function LoadingSong() {
     return (
@@ -12,4 +12,4 @@ function LoadingSong() {
     )
 }
 
-export default LoadingSong
+export default memo(LoadingSong)

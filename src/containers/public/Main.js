@@ -19,7 +19,7 @@ const Main = () => {
 
       </div>
       <div className='w-full bg-primarybg'>
-        <div className='h-[50px] px-[59px] flex items-center mb-5'>
+        <div className='h-[70px] px-[59px] flex items-center mb-5'>
           <Header />
         </div>
         <div className="px-[59px]">

@@ -14,6 +14,11 @@ import moment from 'moment';
 import { toast } from 'react-toastify';
 import { Tooltip } from 'react-tooltip'
 import LoadingSong from './LoadingSong';
+import { SlVolume2 } from "react-icons/sl";
+import { MdOutlineOndemandVideo } from "react-icons/md";
+import { MdOutlineMusicVideo } from "react-icons/md";
+import { CiMicrophoneOn } from "react-icons/ci";
+import { TbPlaylist } from "react-icons/tb";
 
 
 var intervalId
@@ -27,6 +32,7 @@ function Player() {
   const [isShuff, setIsShuff] = useState(false)
   const [isReapet, setIsReapet] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [volume, setVolume] = useState(50)
   const thumbRef = useRef()
   const trackRef = useRef()
 
@@ -41,7 +47,7 @@ function Player() {
     }
   };
 
-
+  // fetch data song
   useEffect(() => {
     const fetchSong = async () => {
       setLoading(true)
@@ -106,6 +112,12 @@ function Player() {
       audio.removeEventListener('ended', handleAutoNext)
     }
   }, [audio, isShuff, isReapet])
+
+  // change volume
+  useEffect(() => {
+    const vol = Number(volume) / 100
+    audio.volume = vol
+  })
 
   // play or pause
   const handleTogglePlayMusic = async () => {
@@ -177,11 +189,11 @@ function Player() {
           <span className='text-xs text-gray-500'>{detailSong?.artistsNames}</span>
         </div>
         <div className='flex gap-4 pl-2'>
-          <span className={`cursor-pointer`}>
-            <AiOutlineHeart data-tooltip-id="my-tooltip" data-tooltip-content="Thêm vào thư viện" size={20} />
+          <span className={`cursor-pointer`} data-tooltip-id="my-tooltip" data-tooltip-content="Thêm vào thư viện" size={20} >
+            <AiOutlineHeart size={20} />
           </span>
-          <span className={`cursor-pointer`}>
-            <BsThreeDots data-tooltip-id="my-tooltip" data-tooltip-content="Xem thêm" size={20} />
+          <span className={`cursor-pointer`} data-tooltip-id="my-tooltip" data-tooltip-content="Xem thêm" size={20} >
+            <BsThreeDots size={20} />
           </span>
         </div>
       </div>
@@ -211,8 +223,20 @@ function Player() {
           </span>
         </div>
       </div>
-      <div className='flex-auto'>
-        Volume
+      <div className='flex-auto flex items-center gap-4 justify-end '>
+        <MdOutlineOndemandVideo size={21} />
+        <MdOutlineMusicVideo size={21} />
+        <CiMicrophoneOn size={21} />
+        <div className='flex gap-4 items-center'>
+          <SlVolume2 size={21} />
+          <input
+            onChange={(e) => { setVolume(e.target.value) }}
+            type='range' step={1} min={0} max={100}
+            value={volume}
+            className='h-[4px] w-[100px] accent-primary cursor-pointer hover:h-[5px]' />
+        </div>
+        <div className='border border-gray-400 h-10' />
+        <TbPlaylist size={21} />
       </div>
     </div>
   )
