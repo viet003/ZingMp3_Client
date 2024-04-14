@@ -38,20 +38,24 @@ function Items({ item, isShow }) {
                     className='object-cover rounded-xl cursor-pointer relative overflow-hidden'>
                     <img ref={imgRef} src={item?.thumbnail} className='rounded-xl w-full' />
                     {
-                        isHover && 
+                        isHover &&
                         <div
-                        onClick={(e) => {e.preventDefault(); navigator(item?.link?.split('.')[0])}} 
-                        className='absolute top-0 left-0 bottom-0 right-0 bg-black opacity-70 z-20 flex justify-center items-center'>
+                            onClick={(e) => { e.preventDefault(); navigator(item?.link?.split('.')[0]) }}
+                            className='absolute top-0 left-0 bottom-0 right-0 bg-black opacity-70 z-20 flex justify-center items-center'>
                         </div>
                     }
                     {
                         isHover && (
-                            <div className='flex items-center justify-center gap-7 z-20 text-white absolute top-0 left-0 right-0 bottom-0'>
-                                <GrFavorite size={20} />
-                                <div onClick={(e) => {e.preventDefault()}} className='h-[50px] w-[50px] rounded-full border-white border-2 flex pl-[7px] items-center'>
-                                    <CiPlay1 size={35} />
+                            <div className='flex items-center justify-center gap-7 z-20 text-white absolute top-[40%] left-0 w-full'>
+                                <div className='w-[30px] h-[30px] hover:bg-gray-500 flex items-center justify-center rounded-full'>
+                                    <GrFavorite size={20} />
                                 </div>
-                                <HiOutlineDotsHorizontal size={20} />
+                                <div onClick={(e) => { e.preventDefault() }} className='h-[50px] w-[50px] rounded-full border-white border-2 flex pl-[10px] items-center'>
+                                    <CiPlay1 size={30} />
+                                </div>
+                                <div className='w-[30px] h-[30px] hover:bg-gray-500 flex items-center justify-center rounded-full'>
+                                    <HiOutlineDotsHorizontal size={20} />
+                                </div>
                             </div>
                         )
                     }

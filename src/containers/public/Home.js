@@ -28,7 +28,6 @@ const Home = () => {
       <SectionNotSlider items={sadMusic} />
       <SectionTop100Al items={top100} />
       <SectionTop100Al items={hotAlbum} />
-
       <div className={`${curSongId ? 'h-[100px]' : 'h-0'} w-full`}>
       </div>
     </div>
