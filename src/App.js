@@ -20,6 +20,7 @@ function App() {
           <Route path={path.ZINGCHART} element={<Zingchart />} />
           <Route path={path.RADIO} element={<Radio />} />
           <Route path={path.PLAYLIST} element={<Playlist />} />
+          <Route path={path.HUD} element={<Playlist />} />
         </Route>
       </Routes>
     </div>

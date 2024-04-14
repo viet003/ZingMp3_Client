@@ -54,12 +54,34 @@ module.exports = {
             '-webkit-transform': 'translateX(0);',
             transform: 'translateX(0);'
           }
-        }
+        },
+        'animation-scale-up': {
+          '0%': {
+            '-webkit-transform': 'scale(1)',
+            transform: 'scale(1)'
+          },
+          '100%': {
+            '-webkit-transform': 'scale(1.2)',
+            transform: 'scale(1.2)'
+          }
+        },
+        'animation-scale-down': {
+          '0%': {
+            '-webkit-transform': 'scale(1.2)',
+            transform: 'scale(1.2)'
+          },
+          '100%': {
+            '-webkit-transform': 'scale(1)',
+            transform: 'scale(1)'
+          }
+        }        
       },
       animation: {
         'slide-right': 'slide-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;',
         'slide-left': 'slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;',
         'slide-left2': 'slide-left2 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;',
+        'animation-scale-up': 'animation-scale-up 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
+        'animation-scale-down': 'animation-scale-down 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both'
       },
     },
   },

@@ -5,19 +5,20 @@ import moment from 'moment'
 import { Lists } from '../../components'
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import { FaPlay } from "react-icons/fa";
-import { MdFavoriteBorder } from "react-icons/md";
 import { useDispatch } from 'react-redux'
 import * as actions from "../../store/actions"
 
 
 function Playlist() {
   const dispatch = useDispatch()
-  const { pid, title } = useParams()
+  const { pid } = useParams()
   const [playlistData, setPlaylistData] = useState(null) // Khởi tạo playlistData là null
 
   useEffect(() => {
     const fetchDetailPlaylist = async () => {
+      // dispatch(actions.setLoading(true))
       const response = await apis.apiGetDetailPlaylist(pid)
+      // dispatch(actions.setLoading(false))
       if (response?.data?.err === 0) {
         setPlaylistData(response.data?.data)
         dispatch(actions.setSongs(response?.data?.data?.song?.items))
@@ -26,7 +27,7 @@ function Playlist() {
 
     fetchDetailPlaylist()
   }, [pid])
-
+  
   return (
     playlistData && (
       <div className='grid grid-cols-[25%,75%] gap-8 w-full h-[calc(100vh-90px)]'>

@@ -4,7 +4,7 @@ import { getArrSlider } from '../utils/fn'
 import * as actions from '../store/actions'
 import { useNavigate } from 'react-router-dom'
 
-const Slider = () => {
+const SliderBanner = () => {
 
     const { banner } = useSelector(state => state.app)
     const dispatch = useDispatch()
@@ -58,7 +58,7 @@ const Slider = () => {
             // console.log(albumPath)
             navigate(albumPath)
         }
-        console.log(item)
+        // console.log(item)
     }
 
     return (
@@ -77,4 +77,4 @@ const Slider = () => {
     )
 }
 
-export default Slider
+export default SliderBanner

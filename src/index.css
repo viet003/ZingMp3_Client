@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* @import url('https://cdn.syncfusion.com/ej2/material.css');
+@import url("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"); */
+
 @layer base {
     * {
         font-family: Inter, sans-serif;

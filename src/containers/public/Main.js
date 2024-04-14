@@ -28,7 +28,7 @@ const Main = () => {
         </div>
         {
           curSongId !== null && (
-            <div className='h-[90px] fixed bottom-0 left-0 w-full'>
+            <div className='h-[90px] fixed bottom-0 left-0 w-full z-50'>
               <Player />
             </div>
           )

@@ -19,3 +19,8 @@ export const setSongs = (songs) => ({
     type: actionTypes.SET_PLAY_LIST,
     songs
 })
+
+export const setLoading = (loading) => ({
+    type: actionTypes.LOADING,
+    loading
+})

@@ -1,6 +1,7 @@
 const actionTypes = {
     // get banner
     GET_HOME: 'GET_HOME',
+    LOADING: 'LOADING',
 
     // music
     SET_CUR_SONG_ID: 'SET_CUR_SONG_ID',

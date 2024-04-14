@@ -14,7 +14,10 @@ const initState = {
         name: null,
         data: null
     },
-    newMusic: [],
+    newMusic: {
+        name: null,
+        data: null
+    },
     top100: {
         name: null,
         data: null
@@ -23,7 +26,11 @@ const initState = {
         name: null,
         data: null
     },
-    hotRadio: [],
+    hotRadio: {
+        name: null,
+        data: null
+    },
+    loading: false,
 }
 
 const appReducer = (state = initState, action) => {
@@ -44,16 +51,28 @@ const appReducer = (state = initState, action) => {
                     name: action.homeData?.find(item => item.sectionId === "hEditorTheme4")?.title || null,
                     data: action.homeData?.find(item => item.sectionId === "hEditorTheme4")?.items || null
                 },
-                newMusic: action.homeData?.find(item => item.sectionId === "hNewrelease")?.items || null,
+                newMusic: {
+                    name: action.homeData?.find(item => item.sectionId === "hNewrelease")?.title || null,
+                    data: action.homeData?.find(item => item.sectionId === "hNewrelease")?.items || null
+                },
                 top100: {
                     name: action.homeData?.find(item => item.sectionId === "h100")?.title || null,
-                    data: action.homeData?.find(item => item.sectionId === "h100")?.items || null   
+                    data: action.homeData?.find(item => item.sectionId === "h100")?.items || null
                 },
                 hotAlbum: {
                     name: action.homeData?.find(item => item.sectionId === "hAlbum")?.title || null,
-                    data: action.homeData?.find(item => item.sectionId === "hAlbum")?.items || null   
+                    data: action.homeData?.find(item => item.sectionId === "hAlbum")?.items || null
                 },
-                hotRadio: action.homeData?.find(item => item.sectionId === "hLiveRadio")?.items || null,
+                hotRadio: {
+                    name: action.homeData?.find(item => item.sectionId === "hLiveRadio")?.title || null,
+                    data: action.homeData?.find(item => item.sectionId === "hLiveRadio")?.items || null
+                },
+
+            }
+        case actionTypes.LOADING:
+            return {
+                ...state,
+                loading: action.loading
             }
         default:
             return state

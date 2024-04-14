@@ -1,7 +1,9 @@
 import React from 'react'
 import { MdKeyboardArrowRight } from "react-icons/md";
+import Items from './Items';
 
 const SectionTop100Al = ({ items }) => {
+
     return (
         <div className='w-full flex flex-col gap-3'>
             <div className='flex justify-between items-center'>
@@ -14,20 +16,7 @@ const SectionTop100Al = ({ items }) => {
             <div className='grid grid-cols-5 gap-7'>
                 {
                     items?.data?.slice(0, 5).map((item) => (
-                        <div className='flex flex-col' key={item?.encodeId}>
-                            <div className='object-cover rounded-xl cursor-pointer'>
-                                <img src={item?.thumbnailM} className='rounded-xl object-cover' />
-                            </div>
-                            {
-                                item?.title && <p className='font-semibold text-[14px] text-gray-600 cursor-default truncate text-ellipsis mt-3 mb-1'>
-                                    {item?.title}
-                                </p>}
-                            <p className='text-[11px] cursor-pointer'>
-                                {
-                                    item?.artists?.map((e) => e.name + ', ')
-                                }
-                            </p>
-                        </div>
+                        <Items item={item} isShow={true} key={item?.encodeId}/>
                     ))
                 }
             </div>

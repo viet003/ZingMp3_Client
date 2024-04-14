@@ -1,5 +1,8 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { MdKeyboardArrowRight } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
+import Items from './Items';
+
 
 function SectionNotSlider({ items }) {
   return (
@@ -14,14 +17,7 @@ function SectionNotSlider({ items }) {
       <div className='grid grid-cols-5 gap-7'>
         {
           items?.data?.slice(0, 5).map((item) => (
-            <div className='flex flex-col gap-3' key={item?.encodeId}>
-              <div className='object-cover rounded-xl cursor-pointer'>
-                <img src={item?.thumbnail} className='rounded-xl object-cover' />
-              </div>
-              <p className='font-semibold text-[14px] text-gray-600 cursor-default truncate-lines-2 text-ellipsis'>
-                {item?.sortDescription}
-              </p>
-            </div>
+            <Items item={item} isShow={false} key={item?.encodeId}/>
           ))
         }
       </div>
