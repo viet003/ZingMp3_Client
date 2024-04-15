@@ -10,7 +10,7 @@ export const getHome = () => async (dispatch) => {
                 type: actionTypes.GET_HOME,
                 homeData: response.data.data.items
             })
-            
+            // console.log(response?.data?.data?.items)
         } else {
             dispatch({
                 type: actionTypes.GET_HOME,

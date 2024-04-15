@@ -1,13 +1,14 @@
 const actionTypes = {
     // get banner
     GET_HOME: 'GET_HOME',
-    LOADING: 'LOADING',
+    LOADING_APP: 'LOADING_APP',
 
     // music
     SET_CUR_SONG_ID: 'SET_CUR_SONG_ID',
     SET_PLAY_AT_LIST: 'SET_PLAY_AT_LIST',
     SET_PLAY_LIST: 'SET_PLAY_LIST',
     SET_PLAY: 'SET_PLAY',
+    LOADING_SONG: 'LOADING_SONG',
 
     // login_out
     LOGIN_SUCCESS: 'LOGIN',

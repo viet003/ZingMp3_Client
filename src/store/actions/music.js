@@ -20,7 +20,12 @@ export const setSongs = (songs) => ({
     songs
 })
 
-export const setLoading = (loading) => ({
-    type: actionTypes.LOADING,
-    loading
+export const setLoadingApp = (loadingApp) => ({
+    type: actionTypes.LOADING_APP,
+    loadingApp
+})
+
+export const setLoadingSong = (loadingSong) => ({
+    type: actionTypes.LOADING_SONG,
+    loadingSong
 })

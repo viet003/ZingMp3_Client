@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useParams } from "react-router-dom"
 import * as apis from "../../controllers"
 import moment from 'moment'
@@ -8,14 +8,34 @@ import { FaPlay } from "react-icons/fa";
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import * as actions from "../../store/actions"
-import { LoadingApp } from "../../components"
+import { LoadingApp, AudioPlay, LoadingSong } from "../../components"
 
 function Playlist() {
   const dispatch = useDispatch()
-  const { curSongId } = useSelector(state => state.music)
+  const { curSongId, isPlaying, loadingSong } = useSelector(state => state.music)
   const { pid } = useParams()
   const [playlistData, setPlaylistData] = useState(null) // Khởi tạo playlistData là null
   const [isLoading, setIsLoading] = useState(false)
+  const [isHover, setIsHover] = useState(false)
+
+  const imgRef = useRef()
+
+  const handleHover = () => {
+    setIsHover(true);
+    if (imgRef.current) {
+      imgRef.current.classList?.remove('animate-scale-down');
+      imgRef.current.classList?.add('animate-scale-up');
+    }
+  };
+
+  const handleOut = () => {
+    setIsHover(false);
+    if (imgRef.current) {
+      imgRef.current.classList?.remove('animate-scale-up');
+      imgRef.current.classList?.add('animate-scale-down');
+    }
+  };
+
   useEffect(() => {
     setIsLoading(true)
     const fetchDetailPlaylist = async () => {
@@ -44,7 +64,41 @@ function Playlist() {
       <div className={`h-full grid grid-cols-[25%,75%] gap-8 w-full`}>
         <div className='flex-none flex flex-col items-center gap-2'>
           <div className='mt-[50px] flex flex-col gap-5 cursor-default'>
-            <img src={playlistData?.thumbnailM} alt="thumbnail" className='w-full object-contain rounded-md shadow-md' />
+            <div onMouseEnter={handleHover} onMouseLeave={handleOut} className='w-full cursor-default object-contain rounded-md shadow-md overflow-hidden relative'>
+              <img ref={imgRef} src={playlistData?.thumbnailM} alt="thumbnail" className='w-full object-contain rounded-md shadow-md' />
+              {
+                isHover && !isPlaying && !loadingSong &&
+                <div
+                  // onClick={(e) => { e.preventDefault(); dispatch(actions.setPlay(true)) }}
+                  className='absolute top-0 left-0 bottom-0 right-0 bg-black opacity-70 z-20 flex justify-center items-center'>
+                  <div onClick={(e) => { e.preventDefault() }} className='h-[50px] w-[50px] rounded-full border-white border-2 flex justify-center items-center'>
+                    <FaPlay size={25} className='text-white' />
+                  </div>
+                </div>
+              }
+              {
+                loadingSong && (
+                  <div
+                    // onClick={(e) => { e.preventDefault(); dispatch(actions.setPlay(false)) }}
+                    className='absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center'>
+                    <div onClick={(e) => { e.preventDefault() }} className='h-[50px] w-[50px] rounded-full border-white border-2 flex justify-center items-center'>
+                      <LoadingSong />
+                    </div>
+                  </div>
+                )
+              }
+              {
+                isPlaying && !loadingSong && (
+                  <div
+                    // onClick={(e) => { e.preventDefault(); dispatch(actions.setPlay(false)) }}
+                    className='absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center'>
+                    <div onClick={(e) => { e.preventDefault() }} className='h-[50px] w-[50px] rounded-full border-white border-2 flex justify-center items-center'>
+                      <AudioPlay />
+                    </div>
+                  </div>
+                )
+              }
+            </div>
             <div className='flex flex-col items-center gap-1'>
               <h3 className='text-[20px] font-bold text-gray-800'>{playlistData?.title}</h3>
               <span className='flex gap-2 items-center text-gray-500 text-xs'>

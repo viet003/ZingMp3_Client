@@ -1,15 +1,17 @@
 import React, { memo } from 'react'
 import { RotatingLines } from "react-loader-spinner"
-function LoadingSong() {
+
+const LoadingSong = () => {
     return (
         <RotatingLines
-            strokeColor='grey'
+            strokeColor='white'
             strokeWidth='5px'
             animationDuration='0.75'
             width='25'
-            visible={true} 
+            visible={true}
         />
     )
 }
 
 export default memo(LoadingSong)
+

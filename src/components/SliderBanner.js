@@ -52,7 +52,7 @@ const SliderBanner = () => {
     const handleClickBanner = (item) => {
         if (item?.type === 1) {
             dispatch(actions.setCurSongId(item.encodeId))
-            // dispatch(actions.setPlay(true))
+            dispatch(actions.setPlay(true))
         } else if (item?.type === 4) {
             const albumPath = item?.link?.split('.')[0]
             // console.log(albumPath)

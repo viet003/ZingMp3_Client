@@ -61,14 +61,14 @@ module.exports = {
             transform: 'scale(1)'
           },
           '100%': {
-            '-webkit-transform': 'scale(1.2)',
-            transform: 'scale(1.2)'
+            '-webkit-transform': 'scale(1.1)',
+            transform: 'scale(1.1)'
           }
         },
         'animation-scale-down': {
           '0%': {
-            '-webkit-transform': 'scale(1.2)',
-            transform: 'scale(1.2)'
+            '-webkit-transform': 'scale(1.1)',
+            transform: 'scale(1.1)'
           },
           '100%': {
             '-webkit-transform': 'scale(1)',
@@ -80,8 +80,8 @@ module.exports = {
         'slide-right': 'slide-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;',
         'slide-left': 'slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;',
         'slide-left2': 'slide-left2 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;',
-        'animation-scale-up': 'animation-scale-up 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
-        'animation-scale-down': 'animation-scale-down 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both'
+        'scale-up': 'animation-scale-up 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
+        'scale-down': 'animation-scale-down 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both'
       },
     },
   },

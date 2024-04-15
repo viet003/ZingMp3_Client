@@ -30,7 +30,7 @@ const initState = {
         name: null,
         data: null
     },
-    loading: false,
+    loadingApp: false,
 }
 
 const appReducer = (state = initState, action) => {
@@ -69,10 +69,10 @@ const appReducer = (state = initState, action) => {
                 },
 
             }
-        case actionTypes.LOADING:
+        case actionTypes.LOADING_APP:
             return {
                 ...state,
-                loading: action.loading
+                loadingApp: action.loadingApp
             }
         default:
             return state

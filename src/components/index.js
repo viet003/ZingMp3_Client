@@ -8,7 +8,8 @@ export { default as SectionTop100Al } from './SectionTop100Al';
 export { default as SectionSlider } from './SectionSlider';
 export { default as ZingChartHome } from './ZingChartHome';
 export { default as LoadingApp } from './LoadingApp';
-export { default as Audio } from './Audio';
+export { default as AudioPlay } from './AudioPlay';
 export { default as Items } from './Items';
+export { default as LoadingSong } from './LoadingSong';
 export { default as Lists} from './Lists';
 export { default as List } from './List'

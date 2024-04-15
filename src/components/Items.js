@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { GrFavorite } from "react-icons/gr";
-import { CiPlay1 } from "react-icons/ci";
-import { CiPause1 } from "react-icons/ci";
+import { FaPlay } from "react-icons/fa";
+// import { CiPause1 } from "react-icons/ci";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import { Tooltip } from 'react-tooltip'
 
 
 function Items({ item, isShow }) {
@@ -15,23 +16,24 @@ function Items({ item, isShow }) {
     const handleHover = () => {
         setIsHover(true);
         if (imgRef.current) {
-            imgRef.current.classList?.remove('animation-scale-down');
-            imgRef.current.classList?.add('animation-scale-up');
+            imgRef.current.classList?.remove('animate-scale-down');
+            imgRef.current.classList?.add('animate-scale-up');
         }
     };
 
     const handleOut = () => {
         setIsHover(false);
         if (imgRef.current) {
-            imgRef.current.classList?.remove('animation-scale-up');
-            imgRef.current.classList?.add('animation-scale-down');
+            imgRef.current.classList?.remove('animate-scale-up');
+            imgRef.current.classList?.add('animate-scale-down');
         }
     };
 
     return (
         <div>
+            <Tooltip id="my-tooltip" style={{ fontSize: '12px', borderRadius: '20px', backgroundColor:'gray' }} />
             <div
-                className='flex flex-col gap-3' key={item?.encodeId}>
+                className='flex flex-col gap-2' key={item?.encodeId}>
                 <div
                     onMouseEnter={handleHover}
                     onMouseLeave={handleOut}
@@ -47,22 +49,33 @@ function Items({ item, isShow }) {
                     {
                         isHover && (
                             <div className='flex items-center justify-center gap-7 z-20 text-white absolute top-[40%] left-0 w-full'>
-                                <div className='w-[30px] h-[30px] hover:bg-gray-500 flex items-center justify-center rounded-full'>
+                                <div data-tooltip-id="my-tooltip" data-tooltip-content="Thêm vào thư viện" className='w-[30px] h-[30px] hover:bg-gray-500 flex items-center justify-center rounded-full'>
                                     <GrFavorite size={20} />
                                 </div>
-                                <div onClick={(e) => { e.preventDefault() }} className='h-[50px] w-[50px] rounded-full border-white border-2 flex pl-[10px] items-center'>
-                                    <CiPlay1 size={30} />
+                                <div onClick={(e) => { e.preventDefault() }} className='h-[50px] w-[50px] rounded-full border-white border-2 flex justify-center items-center'>
+                                    <FaPlay size={25} />
                                 </div>
-                                <div className='w-[30px] h-[30px] hover:bg-gray-500 flex items-center justify-center rounded-full'>
+                                <div data-tooltip-id="my-tooltip" data-tooltip-content="Khác" className='w-[30px] h-[30px] hover:bg-gray-500 flex items-center justify-center rounded-full'>
                                     <HiOutlineDotsHorizontal size={20} />
                                 </div>
                             </div>
                         )
                     }
                 </div>
-                <p className='font-medium text-[14px] text-gray-500 cursor-default truncate-lines-2 text-ellipsis'>
-                    {item?.sortDescription}
-                </p>
+                {
+                    !isShow && (
+                        <p className='font-medium text-[14px] text-gray-500 cursor-default truncate-lines-2 text-ellipsis'>
+                            {item?.sortDescription}
+                        </p>
+                    )
+                }
+                {
+                    isShow && (
+                        <p className='font-medium text-[14px] text-gray-500 cursor-default truncate text-ellipsis'>
+                            {item?.title}
+                        </p>
+                    )
+                }
                 <>
                     {
                         isShow && item?.artists && (

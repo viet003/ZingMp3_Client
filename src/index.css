@@ -35,4 +35,8 @@
         /* max-height: calc(1.2em * 2); */
         /* Adjust according to your font size and line height */
     }
+
+    @keyframes identifier {
+        
+    }
 }

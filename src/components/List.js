@@ -3,19 +3,25 @@ import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../store/actions'
 import { BsMusicNoteBeamed } from "react-icons/bs";
-import { Audio } from "../components"
+import { AudioPlay } from "../components"
+import LoadingSong from "../components/LoadingSong"
+import { FaPlay } from "react-icons/fa";
+
 
 const List = ({ songData }) => {
 
     const dispatch = useDispatch()
-    const { curSongId, isPlaying } = useSelector(state => state.music)
+    const { curSongId, isPlaying, loadingSong } = useSelector(state => state.music)
     // console.log(songData);
     return (
-        <div className='grid grid-cols-[50%,40%,10%] justify-between items-center p-[10px] border-t border-[rgba(0,0,0,0.05)] hover:bg-[#DDE4E4] cursor-pointer'
+        <div className={`${curSongId === songData?.encodeId ? 'bg-gray-300' : ''} grid grid-cols-[50%,40%,10%] justify-between items-center p-[10px] border-t border-[rgba(0,0,0,0.05)] rounded-md hover:bg-[#DDE4E4] cursor-pointer mr-4`}
             onClick={() => {
-                dispatch(actions.setCurSongId(songData?.encodeId))
-                dispatch(actions.setPlay(true))
-                dispatch(actions.setIsPlayAtList(true))
+                if (curSongId !== songData?.encodeId) {
+                    dispatch(actions.setCurSongId(songData?.encodeId))
+                    dispatch(actions.setPlay(true))
+                    dispatch(actions.setIsPlayAtList(true))
+                    dispatch(actions.setLoadingSong(true))
+                }
             }}
         >
             <div className='flex items-center gap-3 flex-1'>
@@ -25,11 +31,13 @@ const List = ({ songData }) => {
                 <div className='w-12 h-10 rounded-md object-cover relative'>
                     <img src={songData?.thumbnail} alt="thumbnailM" className='w-full h-full object-cover rounded-md' />
                     {
-                        // curSongId === songData?.encodeId && isPlaying && (
-                        //     <div className='absolute top-0 left-0 right-0 bottom-0 bg-black opacity-50 rounded-md'>
-                        //         {/* <Audio /> */}
-                        //     </div>
-                        // )
+                        curSongId === songData?.encodeId && (
+                            <div className='absolute top-0 left-0 right-0 bottom-0 bg-black opacity-50 rounded-md flex justify-center items-center'>
+                                {
+                                    loadingSong ? <LoadingSong className='text-white z-50' /> : isPlaying ? <AudioPlay /> : <FaPlay className='text-white' />
+                                }
+                            </div>
+                        )
                     }
                 </div>
                 <span className='flex flex-col w-full'>

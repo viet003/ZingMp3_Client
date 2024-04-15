@@ -25,13 +25,13 @@ var intervalId
 function Player() {
   const [audio, setAudio] = useState(new Audio())
   const dispatch = useDispatch()
-  const { curSongId, isPlaying, isPlayAtList, songs } = useSelector(state => state.music)
+  const { curSongId, isPlaying, isPlayAtList, songs, loadingSong } = useSelector(state => state.music)
   const [detailSong, setDetailSong] = useState(null)
   const [currentSecond, setCurrentSecond] = useState(0)
   const [canPlay, setCanPlay] = useState(true)
   const [isShuff, setIsShuff] = useState(false)
   const [isReapet, setIsReapet] = useState(false)
-  const [loading, setLoading] = useState(false)
+  // const [loading, setLoading] = useState(false)
   const [volume, setVolume] = useState(50)
   const thumbRef = useRef()
   const trackRef = useRef()
@@ -50,7 +50,7 @@ function Player() {
   // fetch data song
   useEffect(() => {
     const fetchSong = async () => {
-      setLoading(true)
+      dispatch(actions.setLoadingSong(true))
       const [rs1, rs2] = await Promise.all([
         await apis.apiGetDetailSong(curSongId),
         await apis.apiGetSong(curSongId)
@@ -70,7 +70,7 @@ function Player() {
         toast.warn(rs2.data.msg)
         setCanPlay(false)
       }
-      setLoading(false)
+      dispatch(actions.setLoadingSong(false))
     }
 
     fetchSong()
@@ -132,6 +132,20 @@ function Player() {
       }
     }
   }
+
+  
+  // useEffect(() => {
+  //   if (canPlay) {
+  //     if (isPlaying) {
+  //       audio.pause()
+  //       dispatch(actions.setPlay(false))
+  //     } else {
+  //       audio.play().then(() => {
+  //         dispatch(actions.setPlay(true))
+  //       })
+  //     }
+  //   }
+  // }, [isPlaying])
 
   //prev song
   const handlePrevSong = () => {
@@ -205,7 +219,7 @@ function Player() {
             className='p-1 border border-gray-700 cursor-pointer hover:text-hover hover:border-primary rounded-full flex items-center justify-center'
             onClick={handleTogglePlayMusic}
           >
-            {loading ? <LoadingSong /> : isPlaying ? <BsPauseFill size={25} /> : <BsFillPlayFill size={25} />}
+            {loadingSong ? <LoadingSong /> : isPlaying ? <BsPauseFill size={25} /> : <BsFillPlayFill size={25} />}
           </span>
           <span onClick={handleNextSong} data-tooltip-id="my-tooltip" data-tooltip-content="Bài hát kế tiếp" className={`${!isPlayAtList ? 'text-gray-500' : 'text-black cursor-pointer hover:text-hover'}`} ><MdSkipNext size={24} /></span>
           <span onClick={() => { setIsReapet(prev => !prev) }} className={`${isReapet && "text-primary"} cursor-pointer hover:text-hover`} data-tooltip-id="my-tooltip" data-tooltip-content="Bật phát lại tất cả"><CiRepeat size={24} /></span>
