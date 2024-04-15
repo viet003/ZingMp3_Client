@@ -60,7 +60,7 @@ function Items({ item, isShow }) {
                         )
                     }
                 </div>
-                <p className='font-semibold text-[14px] text-gray-600 cursor-default truncate-lines-2 text-ellipsis'>
+                <p className='font-medium text-[14px] text-gray-500 cursor-default truncate-lines-2 text-ellipsis'>
                     {item?.sortDescription}
                 </p>
                 <>

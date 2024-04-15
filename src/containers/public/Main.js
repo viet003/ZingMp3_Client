@@ -26,6 +26,8 @@ const Main = () => {
         <div className="px-[59px]">
           <Outlet />
         </div>
+        <div className={`${curSongId ? 'h-[100px]' : 'h-0'} w-full`}>
+        </div>
         {
           curSongId !== null && (
             <div className='h-[90px] fixed bottom-0 left-0 w-full z-50'>

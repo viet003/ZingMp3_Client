@@ -6,15 +6,18 @@ import { Lists } from '../../components'
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import { FaPlay } from "react-icons/fa";
 import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import * as actions from "../../store/actions"
-
+import { LoadingApp } from "../../components"
 
 function Playlist() {
   const dispatch = useDispatch()
+  const { curSongId } = useSelector(state => state.music)
   const { pid } = useParams()
   const [playlistData, setPlaylistData] = useState(null) // Khởi tạo playlistData là null
-
+  const [isLoading, setIsLoading] = useState(false)
   useEffect(() => {
+    setIsLoading(true)
     const fetchDetailPlaylist = async () => {
       // dispatch(actions.setLoading(true))
       const response = await apis.apiGetDetailPlaylist(pid)
@@ -23,14 +26,22 @@ function Playlist() {
         setPlaylistData(response.data?.data)
         dispatch(actions.setSongs(response?.data?.data?.song?.items))
       }
+      setIsLoading(false)
     }
 
     fetchDetailPlaylist()
   }, [pid])
-  
+
   return (
-    playlistData && (
-      <div className='grid grid-cols-[25%,75%] gap-8 w-full h-[calc(100vh-90px)]'>
+    <div className={`${curSongId ? 'h-[calc(100vh-170px)]' : 'h-[calc(100vh-70px)]'} w-full relative`}>
+      {
+        isLoading && (
+          <div className='absolute top-0 -left-10 -right-10 bottom-0 bg-primarybg z-50 flex items-center justify-center'>
+            <LoadingApp />
+          </div>
+        )
+      }
+      <div className={`h-full grid grid-cols-[25%,75%] gap-8 w-full`}>
         <div className='flex-none flex flex-col items-center gap-2'>
           <div className='mt-[50px] flex flex-col gap-5 cursor-default'>
             <img src={playlistData?.thumbnailM} alt="thumbnail" className='w-full object-contain rounded-md shadow-md' />
@@ -48,15 +59,15 @@ function Playlist() {
             <FaPlay />
             <p>Phát ngẫu nhiên</p>
           </button>
-          <div className='flex gap-5'> 
+          <div className='flex gap-5'>
 
           </div>
         </div>
-        <Scrollbars style={{ width: '100%', height: '85%' }}>
+        <Scrollbars style={{ width: '100%', height: '100%' }}>
           <Lists songs={playlistData?.song?.items} totalDuration={playlistData?.song?.totalDuration} />
         </Scrollbars>
       </div>
-    )
+    </div>
   )
 }
 

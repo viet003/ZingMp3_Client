@@ -5,9 +5,13 @@ import React from 'react'
 import { NavLink } from "react-router-dom"
 import logo from "../assets/logo.svg"
 import path from "../utils/path.js"
+import { useSelector } from 'react-redux';
 
 
 function Sidebar() {
+
+    const { curSongId } = useSelector(state => state.music)
+
     return (
         <div className="pl-[20px] text-[14px] font-normal text-gray-800 w-full h-full">
             <div className="w-full h-[70px] flex items-center">
@@ -46,7 +50,7 @@ function Sidebar() {
                 </div>
                 <div className="flex text-[13px] justify-between mr-[10px] my-5 cursor-default">
                     <p className="font-semibold">THƯ VIỆN</p>
-                    <FaPen/>
+                    <FaPen />
                 </div>
                 {
                     menu_3.map(item => (
@@ -61,9 +65,14 @@ function Sidebar() {
             </div>
             <hr className="mr-[20px] my-[10px] border-gray-300" />
             <div className="text-[16px] flex gap-2 items-center cursor-pointer py-[2px]">
-                <IoAddCircleOutline className="text-[25px]"/>
+                <IoAddCircleOutline className="text-[25px]" />
                 <p>Tạo playlist mới</p>
             </div>
+            {
+                curSongId && (
+                    <div className="h-[90px]"></div>
+                )
+            }
         </div>
     )
 }

@@ -117,7 +117,7 @@ function Player() {
   useEffect(() => {
     const vol = Number(volume) / 100
     audio.volume = vol
-  })
+  }, [volume])
 
   // play or pause
   const handleTogglePlayMusic = async () => {

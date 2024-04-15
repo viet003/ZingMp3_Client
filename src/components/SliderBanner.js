@@ -63,7 +63,7 @@ const SliderBanner = () => {
 
     return (
         <div className='w-full overflow-hidden'>
-            <div className='flex w-full gap-8 pt-8'>
+            <div className='flex w-full gap-8'>
                 {banner?.map((item, index) => (
                     <img
                         key={item.encodeId}
