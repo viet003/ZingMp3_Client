@@ -5,6 +5,7 @@ import path from "./utils/path"
 import { useEffect } from 'react'
 import * as actions from './store/actions/home'
 import { useDispatch } from 'react-redux';
+import 'react-tooltip/dist/react-tooltip.css'
 
 function App() {
   const dispatch = useDispatch()

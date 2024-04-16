@@ -3,7 +3,7 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import { useSelector } from 'react-redux';
 import { ItemNewRelease } from './';
 
-const NewRelease = ({ items }) => {
+const NewRelease = () => {
     const { newRelease } = useSelector(state => state.app)
     const [isActive, setIsActive] = useState(0);
     const [dataSong, setDataSong] = useState([]);
@@ -12,7 +12,6 @@ const NewRelease = ({ items }) => {
         if (newRelease) {
             isActive === 0 ? setDataSong(newRelease?.data?.all) : isActive === 1 ? setDataSong(newRelease?.data?.others) : setDataSong(newRelease?.data?.vPop);
         }
-        console.log(dataSong)
     }, [isActive, newRelease])
 
     return (

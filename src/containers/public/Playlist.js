@@ -4,7 +4,7 @@ import * as apis from "../../controllers"
 import moment from 'moment'
 import { Lists } from '../../components'
 import { Scrollbars } from 'react-custom-scrollbars-2';
-import { FaPlay } from "react-icons/fa";
+import { FaPlay, FaPause } from "react-icons/fa";
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import * as actions from "../../store/actions"
@@ -44,6 +44,7 @@ function Playlist() {
       // dispatch(actions.setLoading(false))
       if (response?.data?.err === 0) {
         setPlaylistData(response.data?.data)
+        console.log(response.data?.data?.song?.items)
         dispatch(actions.setSongs(response?.data?.data?.song?.items))
       }
       setIsLoading(false)
@@ -88,7 +89,7 @@ function Playlist() {
                 )
               }
               {
-                isPlaying && !loadingSong && (
+                isPlaying && !loadingSong && playlistData?.song?.items?.find((item) => item?.encodeId === curSongId) && (
                   <div
                     // onClick={(e) => { e.preventDefault(); dispatch(actions.setPlay(false)) }}
                     className='absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center'>
@@ -110,8 +111,11 @@ function Playlist() {
             </div>
           </div>
           <button className='flex gap-2 items-center bg-primary w-[200px] h-[40px] hover:bg-hover rounded-full justify-center text-white font-semibold'>
-            <FaPlay />
-            <p>Phát ngẫu nhiên</p>
+            {
+              !playlistData?.song?.items?.find((item) => item?.encodeId === curSongId) ?
+              <><FaPlay /><p>Phát ngẫu nhiên</p></> : 
+              isPlaying ? <><FaPause /><p>Tạm dừng</p></> : <><FaPlay /><p>Tiếp tục phát</p></>
+            }
           </button>
           <div className='flex gap-5'>
 
