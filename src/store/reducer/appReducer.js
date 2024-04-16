@@ -2,6 +2,10 @@ import actionTypes from '../actions/actionTypes';
 
 const initState = {
     banner: [],
+    newRelease: {
+        name: null,
+        data: null
+    },
     chill: {
         name: null,
         data: null
@@ -42,6 +46,10 @@ const appReducer = (state = initState, action) => {
                 chill: {
                     name: action.homeData?.find(item => item.sectionId === "hEditorTheme")?.title || null,
                     data: action.homeData?.find(item => item.sectionId === "hEditorTheme")?.items || null
+                },
+                newRelease: {
+                    name: action.homeData?.find(item => item.sectionType === "new-release")?.title || null,
+                    data: action.homeData?.find(item => item.sectionType === "new-release")?.items || null
                 },
                 remix: {
                     name: action.homeData?.find(item => item.sectionId === "hEditorTheme3")?.title || null,

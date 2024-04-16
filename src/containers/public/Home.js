@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react'
 import { SliderBanner } from './../../components';
 import { useSelector } from 'react-redux';
-import { SectionNotSlider, SectionTop100Al, SectionSlider, LoadingApp } from './../../components';
+import { SectionNotSlider, SectionTop100Al, SectionSlider, LoadingApp, NewRelease } from './../../components';
 
 
 const Home = () => {
-  const { chill, remix, sadMusic, top100, hotAlbum, newMusic } = useSelector(state => state.app)
-  const { curSongId } = useSelector(state => state.music)
+  const { chill, remix, sadMusic, top100, hotAlbum, newMusic, newRelease } = useSelector(state => state.app)
+  // const { curSongId } = useSelector(state => state.music)
   const { loading } = useSelector(state => state.music)
 
   useEffect(() => {
-    console.log(loading)
+    // console.log(newRelease?.data?.all)
   }, [loading])
 
   return (
@@ -23,6 +23,7 @@ const Home = () => {
         </div>
       }
       <SliderBanner />
+      <NewRelease items={newRelease} />
       <SectionNotSlider items={chill} />
       <SectionNotSlider items={remix} />
       <SectionNotSlider items={sadMusic} />

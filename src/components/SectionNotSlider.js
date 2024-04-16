@@ -1,6 +1,5 @@
-import React, { useRef, useState } from 'react'
+import React from 'react'
 import { MdKeyboardArrowRight } from "react-icons/md";
-import { useNavigate } from 'react-router-dom';
 import Items from './Items';
 
 

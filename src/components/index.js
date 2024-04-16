@@ -10,6 +10,7 @@ export { default as ZingChartHome } from './ZingChartHome';
 export { default as LoadingApp } from './LoadingApp';
 export { default as AudioPlay } from './AudioPlay';
 export { default as Items } from './Items';
+export { default as NewRelease } from './NewRelease';
 export { default as LoadingSong } from './LoadingSong';
 export { default as Lists} from './Lists';
 export { default as List } from './List'
