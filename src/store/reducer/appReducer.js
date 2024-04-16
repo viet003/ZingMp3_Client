@@ -18,6 +18,8 @@ const initState = {
         name: null,
         data: null
     },
+    RTChart: {},
+    weekChart: [],
     newMusic: {
         name: null,
         data: null
@@ -59,6 +61,8 @@ const appReducer = (state = initState, action) => {
                     name: action.homeData?.find(item => item.sectionId === "hEditorTheme4")?.title || null,
                     data: action.homeData?.find(item => item.sectionId === "hEditorTheme4")?.items || null
                 },
+                RTChart: action.homeData?.find(item => item.sectionType === 'RTChart') || null,
+                weekChart: action.homeData?.find(item => item.sectionType === 'weekChart')?.items || null,
                 newMusic: {
                     name: action.homeData?.find(item => item.sectionId === "hNewrelease")?.title || null,
                     data: action.homeData?.find(item => item.sectionId === "hNewrelease")?.items || null

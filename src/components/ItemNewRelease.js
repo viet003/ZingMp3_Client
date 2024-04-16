@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { memo, useState } from 'react'
 import { FaPlay } from "react-icons/fa";
 import moment from "moment"
 import "moment/locale/vi"
@@ -53,4 +53,4 @@ const ItemNewRelease = ({ item }) => {
     )
 }
 
-export default ItemNewRelease
+export default memo(ItemNewRelease)

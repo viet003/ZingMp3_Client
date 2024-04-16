@@ -1,6 +1,6 @@
 import React from 'react'
 import { MdKeyboardArrowRight } from "react-icons/md";
-import Items from './Items';
+import { ItemsSectionNotSlider } from './';
 
 const SectionTop100Al = ({ items }) => {
 
@@ -16,7 +16,7 @@ const SectionTop100Al = ({ items }) => {
             <div className='grid grid-cols-5 gap-7'>
                 {
                     items?.data?.slice(0, 5).map((item) => (
-                        <Items item={item} isShow={true} key={item?.encodeId}/>
+                        <ItemsSectionNotSlider item={item} isShow={true} key={item?.encodeId} />
                     ))
                 }
             </div>

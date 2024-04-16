@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, memo } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { GrFavorite } from "react-icons/gr";
 import { FaPlay } from "react-icons/fa";
@@ -7,7 +7,7 @@ import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { Tooltip } from 'react-tooltip'
 
 
-function Items({ item, isShow }) {
+function ItemsSectionNotSlider({ item, isShow }) {
 
     const navigator = useNavigate()
     const [isHover, setIsHover] = useState(false)
@@ -92,4 +92,4 @@ function Items({ item, isShow }) {
     )
 }
 
-export default Items
+export default memo(ItemsSectionNotSlider)

@@ -5,13 +5,13 @@ import { SectionNotSlider, SectionTop100Al, ZingChartHome, LoadingApp, NewReleas
 
 
 const Home = () => {
-  const { chill, remix, sadMusic, top100, hotAlbum, newMusic} = useSelector(state => state.app)
+  const { chill, remix, sadMusic, top100, hotAlbum, weekChart, RTChart } = useSelector(state => state.app)
   // const { curSongId } = useSelector(state => state.music)
   const { loading } = useSelector(state => state.music)
 
   useEffect(() => {
-    // console.log(newRelease?.data?.all)
-  }, [loading])
+    // console.log(RTChart)
+  }, [weekChart])
 
   return (
     <div className='flex flex-col gap-10 w-full overflow-hidden relative py-[30px]'>
