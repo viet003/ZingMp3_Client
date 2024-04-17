@@ -20,9 +20,9 @@ const SectionChart = () => {
     <div className='flex flex-col gap-7'>
       <div className='grid grid-cols-[35%,65%] gap-x-7 gap-y-3 p-5 rounded-md bg-gradient-to-tl from-[#6b3483] #8d22c3 to-[rgba(55,13,80,0.9)] '>
         <div className='flex flex-col gap-5'>
-          <Link 
-          to={path.ZINGCHART}
-          className='flex items-center gap-2 cursor-pointer'>
+          <Link
+            to={path.ZINGCHART}
+            className='flex items-center gap-2 cursor-pointer'>
             <h1 className='font-semibold text-[30px] bg-gradient-to-r from-[#e35050] to-indigo-400 inline-block text-transparent bg-clip-text'>#zingchart</h1>
             <div className='w-[20px] h-[20px] flex pl-[6px] items-center bg-white rounded-full'>
               <FaPlay size={10} />
@@ -42,7 +42,7 @@ const SectionChart = () => {
           </div>
         </div>
         <div className='w-full flex items-center justify-center'>
-          <ChartSectionChart className='w-full'/>
+          <ChartSectionChart className='w-full' />
         </div>
       </div>
       <div className='grid grid-cols-3 gap-3'>

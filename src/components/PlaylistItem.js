@@ -12,7 +12,8 @@ const PlaylistItem = ({ songData }) => {
 
     const dispatch = useDispatch()
     const { curSongId, isPlaying, loadingSong } = useSelector(state => state.music)
-    // console.log(songData);
+
+
     return (
         <div className={`${curSongId === songData?.encodeId ? 'bg-gray-300' : ''} grid grid-cols-[50%,40%,10%] justify-between items-center p-[10px] border-t border-[rgba(0,0,0,0.05)] rounded-md hover:bg-[#DDE4E4] cursor-pointer mr-4`}
             onClick={() => {

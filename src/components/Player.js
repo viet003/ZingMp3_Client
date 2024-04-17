@@ -11,7 +11,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
 import * as actions from '../store/actions'
 import moment from 'moment';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { Tooltip } from 'react-tooltip'
 import LoadingSong from './LoadingSong';
 import { SlVolume2 } from "react-icons/sl";
@@ -19,6 +19,7 @@ import { MdOutlineOndemandVideo } from "react-icons/md";
 import { MdOutlineMusicVideo } from "react-icons/md";
 import { CiMicrophoneOn } from "react-icons/ci";
 import { TbPlaylist } from "react-icons/tb";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 var intervalId
@@ -28,10 +29,10 @@ function Player() {
   const { curSongId, isPlaying, isPlayAtList, songs, loadingSong } = useSelector(state => state.music)
   const [detailSong, setDetailSong] = useState(null)
   const [currentSecond, setCurrentSecond] = useState(0)
-  const [canPlay, setCanPlay] = useState(true)
+  const [canPlay, setCanPlay] = useState(false)
   const [isShuff, setIsShuff] = useState(false)
   const [isReapet, setIsReapet] = useState(false)
-  // const [loading, setLoading] = useState(false)
+  const [checkIsInPlaylist, setCheckIsInPlaylist] = useState(false)
   const [volume, setVolume] = useState(50)
   const thumbRef = useRef()
   const trackRef = useRef()
@@ -60,15 +61,21 @@ function Player() {
       }
       if (rs2.data.err === 0) {
         audio.pause()
+        thumbRef.current.style.cssText = `right: 100%`
         setAudio(new Audio(rs2?.data?.data['128']))
         setCanPlay(true)
       } else {
+        setCanPlay(false)
         audio.pause()
+        thumbRef.current.style.cssText = `right: 100%`
         dispatch(actions.setPlay(false))
         setAudio(new Audio())
-        thumbRef.current.style.cssText = `right: 100%`
-        toast.warn(rs2.data.msg)
-        setCanPlay(false)
+        if (checkIsInPlaylist) {
+          toast.warn(rs2.data.msg + ". Hệ thống tự động chuyển bài")
+          handleNextSong()
+        } else {
+          toast.warn(rs2.data.msg)
+        }
       }
       dispatch(actions.setLoadingSong(false))
     }
@@ -82,28 +89,52 @@ function Player() {
     intervalId && clearInterval(intervalId)
     setCurrentSecond(0)
     audio.load()
-    if (isPlaying && thumbRef.current) {
-      audio.play();
+    if (isPlaying && canPlay) {
+      if (audio && thumbRef.current) {
+        audio.play().then(() => { })
+        intervalId = setInterval(() => {
+          let percent = Math.round(audio?.currentTime * 10000 / detailSong?.duration) / 100
+          setCurrentSecond(Math.round(audio?.currentTime))
+          thumbRef.current.style.cssText = `right: ${100 - percent}%`
+        }, 200)
+      }
+    } else {
       intervalId = setInterval(() => {
         let percent = Math.round(audio?.currentTime * 10000 / detailSong?.duration) / 100
         setCurrentSecond(Math.round(audio?.currentTime))
         thumbRef.current.style.cssText = `right: ${100 - percent}%`
       }, 200)
     }
-  }, [audio])
+  }, [audio, canPlay])
+
+  // check this song in playlist
+  useEffect(() => {
+    let check = songs?.filter(item => item?.encodeId === curSongId);
+    check?.length !== 0 ? setCheckIsInPlaylist(true) : setCheckIsInPlaylist(false)
+  }, [songs, curSongId])
+
+  // play or pause
+  useEffect(() => {
+    if (canPlay) {
+      if (isPlaying && audio) {
+        audio.play().then(() => {
+        })
+      } else {
+        audio.pause()
+      }
+    } 
+  }, [isPlaying])
 
   // auto next when finish
   useEffect(() => {
-    const handleAutoNext = () => {
+    const handleAutoNext = async () => {
       if (isShuff) {
         handleShuff()
       } else if (isReapet) {
         handleNextSong()
       } else {
-        audio.pause()
-        dispatch(actions.setPlay(false))
+        handleNextSong()
       }
-      console.log(isReapet, isShuff)
     }
     // check ended event
     audio.addEventListener('ended', handleAutoNext)
@@ -117,71 +148,64 @@ function Player() {
   useEffect(() => {
     const vol = Number(volume) / 100
     audio.volume = vol
-  }, [volume])
+  }, [volume, audio])
 
   // play or pause
   const handleTogglePlayMusic = async () => {
     if (canPlay) {
       if (isPlaying) {
-        audio.pause()
         dispatch(actions.setPlay(false))
       } else {
-        audio.play().then(() => {
-          dispatch(actions.setPlay(true))
-        })
+        dispatch(actions.setPlay(true))
       }
     }
   }
 
-  
-  // useEffect(() => {
-  //   if (canPlay) {
-  //     if (isPlaying) {
-  //       audio.pause()
-  //       dispatch(actions.setPlay(false))
-  //     } else {
-  //       audio.play().then(() => {
-  //         dispatch(actions.setPlay(true))
-  //       })
-  //     }
-  //   }
-  // }, [isPlaying])
-
   //prev song
   const handlePrevSong = () => {
     let currentSongIndex;
-    songs?.forEach((el, index) => {
-      if (el.encodeId === curSongId) {
-        currentSongIndex = index
+    if (checkIsInPlaylist) {
+      songs?.forEach((el, index) => {
+        if (el.encodeId === curSongId) {
+          currentSongIndex = index
+        }
+      })
+      if (currentSongIndex >= 1) {
+        dispatch(actions.setCurSongId(songs[currentSongIndex - 1].encodeId))
       }
-    })
-    if (currentSongIndex >= 1) {
-      dispatch(actions.setCurSongId(songs[currentSongIndex - 1].encodeId))
+      dispatch(actions.setPlay(true))
     }
-    dispatch(actions.setPlay(true))
   }
 
   // next song
   const handleNextSong = () => {
     let currentSongIndex;
-    songs?.forEach((el, index) => {
-      if (el.encodeId === curSongId) {
-        currentSongIndex = index
+    if (checkIsInPlaylist) {
+      songs?.forEach((el, index) => {
+        if (el.encodeId === curSongId) {
+          currentSongIndex = index
+        }
+      })
+      if (currentSongIndex === songs?.length - 1) {
+        dispatch(actions.setCurSongId(songs[0].encodeId))
+      } else {
+        dispatch(actions.setCurSongId(songs[currentSongIndex + 1].encodeId))
       }
-    })
-    if (currentSongIndex === songs?.length - 1) {
-      dispatch(actions.setCurSongId(songs[0].encodeId))
+      dispatch(actions.setPlay(true))
     } else {
-      dispatch(actions.setCurSongId(songs[currentSongIndex + 1].encodeId))
+      dispatch(actions.setPlay(false))
     }
-    dispatch(actions.setPlay(true))
   }
 
   // shuff event
   const handleShuff = () => {
-    const rdIndex = Math.round(Math.random() * songs?.length) - 1
-    dispatch(actions.setCurSongId(songs[rdIndex].encodeId))
-    dispatch(actions.setPlay(true))
+    if (checkIsInPlaylist) {
+      const rdIndex = Math.round(Math.random() * songs?.length) - 1
+      dispatch(actions.setCurSongId(songs[rdIndex].encodeId))
+      dispatch(actions.setPlay(true))
+    } else {
+      dispatch(actions.setPlay(false))
+    }
   }
 
   // event progress bar
@@ -252,6 +276,7 @@ function Player() {
         <div className='border border-gray-400 h-10' />
         <TbPlaylist size={21} />
       </div>
+      <ToastContainer />
     </div>
   )
 }

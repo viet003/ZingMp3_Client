@@ -9,6 +9,7 @@ import { BsThreeDots } from "react-icons/bs";
 import { Tooltip } from 'react-tooltip'
 
 const ItemSectionNewRelease = ({ item }) => {
+
     const dispatch = useDispatch()
     const [isHover, setIsHover] = useState(false)
     const { curSongId, loadingSong, isPlaying } = useSelector(state => state.music)
@@ -32,7 +33,9 @@ const ItemSectionNewRelease = ({ item }) => {
                     </div>
                 }
                 {
-                    curSongId === item.encodeId && <div className={`flex absolute top-0 left-0 right-0 bottom-0 bg-black bg-opacity-60 items-center justify-center cursor-pointer`}>
+                    curSongId === item.encodeId && <div 
+                    onClick={() => {dispatch(actions.setPlay(!isPlaying))}}
+                    className={`flex absolute top-0 left-0 right-0 bottom-0 bg-black bg-opacity-60 items-center justify-center cursor-pointer`}>
                         {
                             loadingSong ? <LoadingSong className='text-white z-50' /> : isPlaying ? <AudioPlay /> : <FaPlay className='text-white' />
                         }

@@ -31,7 +31,7 @@ const SectionNewRelease = () => {
             <div className='grid grid-cols-3 gap-x-7 gap-y-2'>
                 {
                     dataSong?.slice(0, 12).map((item) => (
-                        <ItemSectionNewRelease item={item} key={item?.encodeId}/>
+                        <ItemSectionNewRelease item={item} key={item?.encodeId} />
                     ))
                 }
             </div>

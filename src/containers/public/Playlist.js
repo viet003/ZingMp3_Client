@@ -70,8 +70,8 @@ function Playlist() {
               {
                 isHover && !isPlaying && !loadingSong &&
                 <div
-                  // onClick={(e) => { e.preventDefault(); dispatch(actions.setPlay(true)) }}
-                  className='absolute top-0 left-0 bottom-0 right-0 bg-black opacity-70 z-20 flex justify-center items-center'>
+                  onClick={(e) => { e.preventDefault(); dispatch(actions.setPlay(true)) }}
+                  className='absolute cursor-pointer top-0 left-0 bottom-0 right-0 bg-black opacity-70 z-20 flex justify-center items-center'>
                   <div onClick={(e) => { e.preventDefault() }} className='h-[50px] w-[50px] rounded-full border-white border-2 flex justify-center items-center'>
                     <FaPlay size={25} className='text-white' />
                   </div>
@@ -81,7 +81,7 @@ function Playlist() {
                 loadingSong && (
                   <div
                     // onClick={(e) => { e.preventDefault(); dispatch(actions.setPlay(false)) }}
-                    className='absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center'>
+                    className='absolute cursor-pointer top-0 left-0 right-0 bottom-0 flex justify-center items-center'>
                     <div onClick={(e) => { e.preventDefault() }} className='h-[50px] w-[50px] rounded-full border-white border-2 flex justify-center items-center'>
                       <LoadingSong />
                     </div>
@@ -91,8 +91,8 @@ function Playlist() {
               {
                 isPlaying && !loadingSong && playlistData?.song?.items?.find((item) => item?.encodeId === curSongId) && (
                   <div
-                    // onClick={(e) => { e.preventDefault(); dispatch(actions.setPlay(false)) }}
-                    className='absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center'>
+                    onClick={(e) => { e.preventDefault(); dispatch(actions.setPlay(false)) }}
+                    className='absolute cursor-pointer top-0 left-0 right-0 bottom-0 flex justify-center items-center'>
                     <div onClick={(e) => { e.preventDefault() }} className='h-[50px] w-[50px] rounded-full border-white border-2 flex justify-center items-center'>
                       <AudioPlay />
                     </div>
