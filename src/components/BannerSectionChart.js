@@ -1,6 +1,6 @@
 import React, { memo, useRef } from 'react'
 
-const BannerZingChartHome = ({ item }) => {
+const BannerSectionChart = ({ item }) => {
 
   const imgRef = useRef()
 
@@ -29,4 +29,4 @@ const BannerZingChartHome = ({ item }) => {
   )
 }
 
-export default memo(BannerZingChartHome)
+export default memo(BannerSectionChart)

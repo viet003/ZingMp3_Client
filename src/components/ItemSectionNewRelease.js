@@ -2,13 +2,13 @@ import React, { memo, useState } from 'react'
 import { FaPlay } from "react-icons/fa";
 import moment from "moment"
 import "moment/locale/vi"
-import { AudioPlay, LoadingSong } from './';
+import { AudioPlay, LoadingSong } from '.';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from "../store/actions"
 import { BsThreeDots } from "react-icons/bs";
 import { Tooltip } from 'react-tooltip'
 
-const ItemNewRelease = ({ item }) => {
+const ItemSectionNewRelease = ({ item }) => {
     const dispatch = useDispatch()
     const [isHover, setIsHover] = useState(false)
     const { curSongId, loadingSong, isPlaying } = useSelector(state => state.music)
@@ -19,19 +19,20 @@ const ItemNewRelease = ({ item }) => {
             onMouseLeave={() => { setIsHover(false) }}
             className={`${curSongId === item.encodeId ? 'bg-sidebarbg' : 'bg-transparent'} grid grid-cols-[20%,55%,15%] gap-2 p-2 rounded-md hover:bg-sidebarbg`}>
             <div
-                onClick={() => {
-                    dispatch(actions.setCurSongId(item.encodeId))
-                    dispatch(actions.setPlay(true))
-                }}
                 className='relative rounded-md overflow-hidden h-[60px] w-[60px]'>
                 <img src={item?.thumbnail} className='rounded-md object-cover w-full h-full' />
                 {
-                    curSongId !== item.encodeId && <div className={`${isHover && curSongId !== item.encodeId ? 'flex' : 'hidden'} absolute top-0 left-0 right-0 bottom-0 bg-black opacity-60 items-center justify-center cursor-pointer`}>
+                    curSongId !== item.encodeId && <div 
+                    onClick={() => {
+                        dispatch(actions.setCurSongId(item.encodeId))
+                        dispatch(actions.setPlay(true))
+                    }}
+                    className={`${isHover && curSongId !== item.encodeId ? 'flex' : 'hidden'} absolute top-0 left-0 right-0 bottom-0 bg-black bg-opacity-60 items-center justify-center cursor-pointer`}>
                         <FaPlay className='text-white opacity-100' />
                     </div>
                 }
                 {
-                    curSongId === item.encodeId && <div className={`flex absolute top-0 left-0 right-0 bottom-0 bg-black opacity-60 items-center justify-center cursor-pointer`}>
+                    curSongId === item.encodeId && <div className={`flex absolute top-0 left-0 right-0 bottom-0 bg-black bg-opacity-60 items-center justify-center cursor-pointer`}>
                         {
                             loadingSong ? <LoadingSong className='text-white z-50' /> : isPlaying ? <AudioPlay /> : <FaPlay className='text-white' />
                         }
@@ -53,4 +54,4 @@ const ItemNewRelease = ({ item }) => {
     )
 }
 
-export default memo(ItemNewRelease)
+export default memo(ItemSectionNewRelease)

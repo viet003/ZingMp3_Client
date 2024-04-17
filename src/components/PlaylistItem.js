@@ -3,12 +3,12 @@ import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../store/actions'
 import { BsMusicNoteBeamed } from "react-icons/bs";
-import { AudioPlay } from "../components"
-import LoadingSong from "../components/LoadingSong"
+import { AudioPlay } from "."
+import LoadingSong from "./LoadingSong"
 import { FaPlay } from "react-icons/fa";
 
 
-const List = ({ songData }) => {
+const PlaylistItem = ({ songData }) => {
 
     const dispatch = useDispatch()
     const { curSongId, isPlaying, loadingSong } = useSelector(state => state.music)
@@ -32,7 +32,7 @@ const List = ({ songData }) => {
                     <img src={songData?.thumbnail} alt="thumbnailM" className='w-full h-full object-cover rounded-md' />
                     {
                         curSongId === songData?.encodeId && (
-                            <div className='absolute top-0 left-0 right-0 bottom-0 bg-black opacity-50 rounded-md flex justify-center items-center'>
+                            <div className='absolute top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 rounded-md flex justify-center items-center'>
                                 {
                                     loadingSong ? <LoadingSong className='text-white z-50' /> : isPlaying ? <AudioPlay /> : <FaPlay className='text-white' />
                                 }
@@ -55,4 +55,4 @@ const List = ({ songData }) => {
     )
 }
 
-export default memo(List)
+export default memo(PlaylistItem)

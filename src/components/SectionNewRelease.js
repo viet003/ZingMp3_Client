@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { useSelector } from 'react-redux';
-import { ItemNewRelease } from './';
+import { ItemSectionNewRelease } from '.';
 
-const NewRelease = () => {
+const SectionNewRelease = () => {
     const { newRelease } = useSelector(state => state.app)
     const [isActive, setIsActive] = useState(0);
     const [dataSong, setDataSong] = useState([]);
@@ -31,7 +31,7 @@ const NewRelease = () => {
             <div className='grid grid-cols-3 gap-x-7 gap-y-2'>
                 {
                     dataSong?.slice(0, 12).map((item) => (
-                        <ItemNewRelease item={item} key={item?.encodeId}/>
+                        <ItemSectionNewRelease item={item} key={item?.encodeId}/>
                     ))
                 }
             </div>
@@ -39,4 +39,4 @@ const NewRelease = () => {
     )
 }
 
-export default NewRelease
+export default SectionNewRelease

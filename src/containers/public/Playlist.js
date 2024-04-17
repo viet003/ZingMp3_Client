@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useParams } from "react-router-dom"
 import * as apis from "../../controllers"
 import moment from 'moment'
-import { Lists } from '../../components'
+import { PlaylistListItems } from '../../components'
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import { FaPlay, FaPause } from "react-icons/fa";
 import { useDispatch } from 'react-redux'
@@ -44,7 +44,7 @@ function Playlist() {
       // dispatch(actions.setLoading(false))
       if (response?.data?.err === 0) {
         setPlaylistData(response.data?.data)
-        console.log(response.data?.data?.song?.items)
+        // console.log(response.data?.data?.song?.items)
         dispatch(actions.setSongs(response?.data?.data?.song?.items))
       }
       setIsLoading(false)
@@ -122,7 +122,7 @@ function Playlist() {
           </div>
         </div>
         <Scrollbars style={{ width: '100%', height: '100%' }}>
-          <Lists songs={playlistData?.song?.items} totalDuration={playlistData?.song?.totalDuration} />
+          <PlaylistListItems songs={playlistData?.song?.items} totalDuration={playlistData?.song?.totalDuration} />
         </Scrollbars>
       </div>
     </div>

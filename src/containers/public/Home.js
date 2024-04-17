@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
-import { SliderBanner } from './../../components';
 import { useSelector } from 'react-redux';
-import { SectionNotSlider, SectionTop100Al, ZingChartHome, LoadingApp, NewRelease } from './../../components';
+import { SectionNotSlider, SectionTop100Al, SectionChart, LoadingApp, SectionNewRelease, SectionSliderBanner } from './../../components';
 
 
 const Home = () => {
-  const { chill, remix, sadMusic, top100, hotAlbum, weekChart, RTChart } = useSelector(state => state.app)
+  const { chill, remix, sadMusic, top100, hotAlbum, weekChart } = useSelector(state => state.app)
   // const { curSongId } = useSelector(state => state.music)
   const { loading } = useSelector(state => state.music)
 
@@ -22,12 +21,12 @@ const Home = () => {
           }
         </div>
       }
-      <SliderBanner />
-      <NewRelease/>
+      <SectionSliderBanner />
+      <SectionNewRelease/>
       <SectionNotSlider items={chill} />
       <SectionNotSlider items={remix} />
       <SectionNotSlider items={sadMusic} />
-      <ZingChartHome items={sadMusic} />
+      <SectionChart items={sadMusic} />
       <SectionTop100Al items={top100} />
       <SectionTop100Al items={hotAlbum} />
     </div>
