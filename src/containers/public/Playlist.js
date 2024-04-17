@@ -2,20 +2,19 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useParams } from "react-router-dom"
 import * as apis from "../../controllers"
 import moment from 'moment'
-import { PlaylistListItems } from '../../components'
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import { FaPlay, FaPause } from "react-icons/fa";
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import * as actions from "../../store/actions"
-import { LoadingApp, AudioPlay, LoadingSong } from "../../components"
+import { LoadingApp, AudioPlay, LoadingSong, PlaylistListItems } from "../../components"
 
 function Playlist() {
   const dispatch = useDispatch()
   const { curSongId, isPlaying, loadingSong } = useSelector(state => state.music)
   const { pid } = useParams()
   const [playlistData, setPlaylistData] = useState(null) // Khởi tạo playlistData là null
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [isHover, setIsHover] = useState(false)
 
   const imgRef = useRef()

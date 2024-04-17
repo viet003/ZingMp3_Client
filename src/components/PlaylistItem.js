@@ -19,7 +19,7 @@ const PlaylistItem = ({ songData }) => {
             onClick={() => {
                 if (curSongId !== songData?.encodeId) {
                     dispatch(actions.setCurSongId(songData?.encodeId))
-                    dispatch(actions.setPlay(true))
+                    // dispatch(actions.setPlay(true))
                     dispatch(actions.setIsPlayAtList(true))
                     dispatch(actions.setLoadingSong(true))
                 }
