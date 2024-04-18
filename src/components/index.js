@@ -1,6 +1,7 @@
 export { default as Header } from './Header';
 export { default as Search } from './Search';
-export { default as Sidebar } from './Sidebar';
+export { default as SidebarLeft } from './SidebarLeft';
+export { default as SidebarRight } from './SidebarRight';
 export { default as SectionSliderBanner } from './SectionSliderBanner';
 export { default as Player } from './Player';
 
@@ -22,5 +23,9 @@ export { default as LoadingApp } from './LoadingApp';
 export { default as LoadingSong } from './LoadingSong';
 export { default as AudioPlay } from './AudioPlay';
 
-export { default as PlaylistListItems} from './PlaylistListItems';
-export { default as PlaylistItem } from './PlaylistItem'
+export { default as AlbumListItems} from './AlbumListItems';
+export { default as AlbumItem } from './AlbumItem'
+
+export { default as PlayListSong } from './PlayListSong'
+
+

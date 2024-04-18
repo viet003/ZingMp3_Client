@@ -1,10 +1,10 @@
 import React, { memo } from 'react'
-import { PlaylistItem } from './'
+import { AlbumItem } from '.'
 import moment from 'moment'
 import { BsDot } from 'react-icons/bs'
 
 
-const PlaylistListItems = ({ songs, totalDuration }) => {
+const AlbumListItems = ({ songs, totalDuration }) => {
 
     // console.log({ songs, totalDuration })
     return (
@@ -16,7 +16,7 @@ const PlaylistListItems = ({ songs, totalDuration }) => {
             </div>
             <div className='flex flex-col'>
                 {songs?.map(item => (
-                    <PlaylistItem key={item.encodeId} songData={item} />
+                    <AlbumItem key={item.encodeId} songData={item} />
                 ))}
             </div>
             <span className='flex items-center gap-1 py-[10px] border-t border-[rgba(0,0,0,0.05)]'>
@@ -28,4 +28,4 @@ const PlaylistListItems = ({ songs, totalDuration }) => {
     )
 }
 
-export default memo(PlaylistListItems)
+export default memo(AlbumListItems)

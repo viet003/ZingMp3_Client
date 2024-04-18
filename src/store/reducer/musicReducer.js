@@ -5,7 +5,10 @@ const initState = {
     isPlaying: false,
     isPlayAtList: false,
     loadingSong: false,
-    songs: []
+    playlist: {
+        title: null,
+        data: null,
+    }
 }
 
 const musicReducer = (state = initState, action) => {
@@ -28,7 +31,10 @@ const musicReducer = (state = initState, action) => {
         case actionTypes.SET_PLAY_LIST:
             return {
                 ...state,
-                songs: action.songs
+                playlist: {
+                    title: action.playlist?.title,
+                    data: action.playlist?.song?.items
+                }
             }
         case actionTypes.LOADING_SONG:
             return {

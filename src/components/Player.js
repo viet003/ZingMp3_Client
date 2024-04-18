@@ -23,12 +23,13 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 var intervalId
-function Player() {
+const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
   const [audio, setAudio] = useState(new Audio())
   const dispatch = useDispatch()
-  const { curSongId, isPlaying, isPlayAtList, songs, loadingSong } = useSelector(state => state.music)
+  const { curSongId, isPlaying, isPlayAtList, playlist, loadingSong } = useSelector(state => state.music)
   const [detailSong, setDetailSong] = useState(null)
   const [currentSecond, setCurrentSecond] = useState(0)
+  const [currentSongIndex, setCurrentSongIndex] = useState(-1)
   const [canPlay, setCanPlay] = useState(false)
   const [isShuff, setIsShuff] = useState(false)
   const [isReapet, setIsReapet] = useState(false)
@@ -84,6 +85,17 @@ function Player() {
     // console.log(curSongId)
   }, [curSongId])
 
+  // check currenIndex song
+  useEffect(() => {
+    let currentSongIndex;
+    playlist?.data?.forEach((el, index) => {
+      if (el.encodeId === curSongId) {
+        currentSongIndex = index
+        setCurrentSongIndex(currentSongIndex)
+      }
+    })
+  }, [curSongId, playlist])
+
   // 
   useEffect(() => {
     intervalId && clearInterval(intervalId)
@@ -109,9 +121,9 @@ function Player() {
 
   // check this song in playlist
   useEffect(() => {
-    let check = songs?.filter(item => item?.encodeId === curSongId);
+    let check = playlist?.data?.filter(item => item?.encodeId === curSongId);
     check?.length !== 0 ? setCheckIsInPlaylist(true) : setCheckIsInPlaylist(false)
-  }, [songs, curSongId])
+  }, [playlist, curSongId])
 
   // play or pause
   useEffect(() => {
@@ -122,7 +134,7 @@ function Player() {
       } else {
         audio.pause()
       }
-    } 
+    }
   }, [isPlaying])
 
   // auto next when finish
@@ -165,15 +177,16 @@ function Player() {
   const handlePrevSong = () => {
     let currentSongIndex;
     if (checkIsInPlaylist) {
-      songs?.forEach((el, index) => {
+      playlist?.data?.forEach((el, index) => {
         if (el.encodeId === curSongId) {
           currentSongIndex = index
+          setCurrentSongIndex(currentSongIndex)
         }
       })
       if (currentSongIndex >= 1) {
-        dispatch(actions.setCurSongId(songs[currentSongIndex - 1].encodeId))
+        dispatch(actions.setCurSongId(playlist?.data[currentSongIndex - 1].encodeId))
+        dispatch(actions.setPlay(true))
       }
-      dispatch(actions.setPlay(true))
     }
   }
 
@@ -181,15 +194,16 @@ function Player() {
   const handleNextSong = () => {
     let currentSongIndex;
     if (checkIsInPlaylist) {
-      songs?.forEach((el, index) => {
+      playlist?.data?.forEach((el, index) => {
         if (el.encodeId === curSongId) {
           currentSongIndex = index
+          setCurrentSongIndex(currentSongIndex)
         }
       })
-      if (currentSongIndex === songs?.length - 1) {
-        dispatch(actions.setCurSongId(songs[0].encodeId))
+      if (currentSongIndex === playlist?.data?.length - 1) {
+        dispatch(actions.setCurSongId(playlist?.data[0].encodeId))
       } else {
-        dispatch(actions.setCurSongId(songs[currentSongIndex + 1].encodeId))
+        dispatch(actions.setCurSongId(playlist?.data[currentSongIndex + 1].encodeId))
       }
       dispatch(actions.setPlay(true))
     } else {
@@ -200,8 +214,8 @@ function Player() {
   // shuff event
   const handleShuff = () => {
     if (checkIsInPlaylist) {
-      const rdIndex = Math.round(Math.random() * songs?.length) - 1
-      dispatch(actions.setCurSongId(songs[rdIndex].encodeId))
+      const rdIndex = Math.round(Math.random() * playlist?.data?.length) - 1
+      dispatch(actions.setCurSongId(playlist?.data[rdIndex].encodeId))
       dispatch(actions.setPlay(true))
     } else {
       dispatch(actions.setPlay(false))
@@ -228,24 +242,24 @@ function Player() {
         </div>
         <div className='flex gap-4 pl-2'>
           <span className={`cursor-pointer`} data-tooltip-id="my-tooltip" data-tooltip-content="Thêm vào thư viện" size={20} >
-            <AiOutlineHeart size={20} />
+            <AiOutlineHeart size={20} style={{ color: 'rgb(75,85,99)' }} />
           </span>
           <span className={`cursor-pointer`} data-tooltip-id="my-tooltip" data-tooltip-content="Xem thêm" size={20} >
-            <BsThreeDots size={20} />
+            <BsThreeDots size={20} style={{ color: 'rgb(75,85,99)' }} />
           </span>
         </div>
       </div>
       <div className='flex-auto flex items-center justify-center gap-4 flex-col py-2'>
         <div className='flex gap-8 justify-center items-center'>
           <span onClick={() => setIsShuff(prev => !prev)} className='cursor-pointer hover:text-hover' data-tooltip-id="my-tooltip" data-tooltip-content="Bật phát ngẫu nhiên"><CiShuffle className={`${isShuff && "text-primary"}`} size={24} /></span>
-          <span onClick={handlePrevSong} data-tooltip-id="my-tooltip" data-tooltip-content="Bài hát trước" className={`${!isPlayAtList ? 'text-gray-500' : 'text-black cursor-pointer hover:text-hover'}`} ><MdSkipPrevious size={24} /></span>
+          <span onClick={handlePrevSong} data-tooltip-id="my-tooltip" data-tooltip-content="Bài hát trước" className={`${checkIsInPlaylist && currentSongIndex >= 1 ? 'text-black cursor-pointer hover:text-hover' : 'text-gray-500'}`} ><MdSkipPrevious size={24} /></span>
           <span
             className='p-1 border border-gray-700 cursor-pointer hover:text-hover hover:border-primary rounded-full flex items-center justify-center'
             onClick={handleTogglePlayMusic}
           >
             {loadingSong ? <LoadingSong /> : isPlaying ? <BsPauseFill size={25} /> : <BsFillPlayFill size={25} />}
           </span>
-          <span onClick={handleNextSong} data-tooltip-id="my-tooltip" data-tooltip-content="Bài hát kế tiếp" className={`${!isPlayAtList ? 'text-gray-500' : 'text-black cursor-pointer hover:text-hover'}`} ><MdSkipNext size={24} /></span>
+          <span onClick={handleNextSong} data-tooltip-id="my-tooltip" data-tooltip-content="Bài hát kế tiếp" className={`${!checkIsInPlaylist ? 'text-gray-500' : 'text-black cursor-pointer hover:text-hover'}`} ><MdSkipNext size={24} /></span>
           <span onClick={() => { setIsReapet(prev => !prev) }} className={`${isReapet && "text-primary"} cursor-pointer hover:text-hover`} data-tooltip-id="my-tooltip" data-tooltip-content="Bật phát lại tất cả"><CiRepeat size={24} /></span>
 
         </div>
@@ -262,19 +276,21 @@ function Player() {
         </div>
       </div>
       <div className='flex-auto flex items-center gap-4 justify-end '>
-        <MdOutlineOndemandVideo size={21} />
-        <MdOutlineMusicVideo size={21} />
-        <CiMicrophoneOn size={21} />
+        <MdOutlineOndemandVideo size={21} style={{ color: 'rgb(75,85,99)' }} />
+        <MdOutlineMusicVideo size={21} style={{ color: 'rgb(75,85,99)' }} />
+        <CiMicrophoneOn size={21} style={{ color: 'rgb(75,85,99)' }} />
         <div className='flex gap-4 items-center'>
-          <SlVolume2 size={21} />
+          <SlVolume2 size={19} style={{ color: 'rgb(75,85,99)' }} />
           <input
             onChange={(e) => { setVolume(e.target.value) }}
             type='range' step={1} min={0} max={100}
             value={volume}
             className='h-[4px] w-[100px] accent-primary cursor-pointer hover:h-[5px]' />
         </div>
-        <div className='border border-gray-400 h-10' />
-        <TbPlaylist size={21} />
+        <div className='border border-gray-400 h-10 text-gray-600' />
+        <div className={`${toggleSideBarRight ? 'bg-primary' : 'bg-transparent'} p-1 rounded-md duration-300 ease-in-out`}>
+          <TbPlaylist size={21} style={{ color: toggleSideBarRight ? "white" : 'rgb(75,85,99)', cursor: 'pointer' }} onClick={() => handleToggleSideBarRight()} />
+        </div>
       </div>
       <ToastContainer />
     </div>

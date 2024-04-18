@@ -44,8 +44,8 @@ const ItemSectionNewRelease = ({ item }) => {
             </div>
             <div className='overflow-hidden flex flex-col'>
                 <p className='truncate text-ellipsis text-[14px] font-semibold text-gray-600 cursor-pointer hover:text-primary'>{item?.title}</p>
-                <p className='truncate text-ellipsis text-[12px] text-gray-500'>{item?.artistsNames}</p>
-                <p className='truncate text-ellipsis text-[12px] text-gray-500'>{moment(item?.releaseDate * 1000).fromNow()}</p>
+                <p className='truncate text-ellipsis text-[12px] text-gray-500 cursor-default'>{item?.artistsNames}</p>
+                <p className='truncate text-ellipsis text-[12px] text-gray-500 cursor-default'>{moment(item?.releaseDate * 1000).fromNow()}</p>
             </div>
             <div className={`${isHover ? 'flex' : 'hidden'} flex justify-end items-center cursor-pointer`}>
                 <div data-tooltip-id="my-tooltip" data-tooltip-content="Khác" className='h-[40px] w-[40px] rounded-full hover:bg-gray-300 flex justify-center items-center'>

@@ -8,7 +8,8 @@ import path from "../utils/path.js"
 import { useSelector } from 'react-redux';
 
 
-function Sidebar() {
+function SidebarLeft
+() {
 
     const { curSongId } = useSelector(state => state.music)
 
@@ -77,4 +78,5 @@ function Sidebar() {
     )
 }
 
-export default Sidebar
+export default SidebarLeft
+

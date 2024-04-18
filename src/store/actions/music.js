@@ -15,9 +15,9 @@ export const setIsPlayAtList = (isPlayAtList) => ({
     isPlayAtList
 })
 
-export const setSongs = (songs) => ({
+export const setPlaylist = (playlist) => ({
     type: actionTypes.SET_PLAY_LIST,
-    songs
+    playlist
 })
 
 export const setLoadingApp = (loadingApp) => ({

@@ -8,7 +8,7 @@ import LoadingSong from "./LoadingSong"
 import { FaPlay } from "react-icons/fa";
 
 
-const PlaylistItem = ({ songData }) => {
+const AlbumItem = ({ songData }) => {
 
     const dispatch = useDispatch()
     const { curSongId, isPlaying, loadingSong } = useSelector(state => state.music)
@@ -19,7 +19,7 @@ const PlaylistItem = ({ songData }) => {
             onClick={() => {
                 if (curSongId !== songData?.encodeId) {
                     dispatch(actions.setCurSongId(songData?.encodeId))
-                    // dispatch(actions.setPlay(true))
+                    dispatch(actions.setPlay(true))
                     dispatch(actions.setIsPlayAtList(true))
                     dispatch(actions.setLoadingSong(true))
                 }
@@ -56,4 +56,4 @@ const PlaylistItem = ({ songData }) => {
     )
 }
 
-export default memo(PlaylistItem)
+export default memo(AlbumItem)

@@ -7,7 +7,7 @@ import { FaPlay, FaPause } from "react-icons/fa";
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import * as actions from "../../store/actions"
-import { LoadingApp, AudioPlay, LoadingSong, PlaylistListItems } from "../../components"
+import { LoadingApp, AudioPlay, LoadingSong, AlbumListItems } from "../../components"
 
 function Playlist() {
   const dispatch = useDispatch()
@@ -43,8 +43,8 @@ function Playlist() {
       // dispatch(actions.setLoading(false))
       if (response?.data?.err === 0) {
         setPlaylistData(response.data?.data)
-        // console.log(response.data?.data?.song?.items)
-        dispatch(actions.setSongs(response?.data?.data?.song?.items))
+        console.log(response.data?.data)
+        dispatch(actions.setPlaylist(response?.data?.data))
       }
       setIsLoading(false)
     }
@@ -121,7 +121,7 @@ function Playlist() {
           </div>
         </div>
         <Scrollbars style={{ width: '100%', height: '100%' }}>
-          <PlaylistListItems songs={playlistData?.song?.items} totalDuration={playlistData?.song?.totalDuration} />
+          <AlbumListItems songs={playlistData?.song?.items} totalDuration={playlistData?.song?.totalDuration} />
         </Scrollbars>
       </div>
     </div>
