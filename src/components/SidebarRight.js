@@ -11,22 +11,17 @@ const SidebarRight = () => {
 
   const { playlist, curSongId } = useSelector(state => state.music)
   const [isActive, setIsActive] = useState(0)
-  const [playListSongs, setPlayListSongs] = useState(null)
-  const [currentSong, setCurrentSong] = useState(null)
+  const [currentSong, setCurrentSong] = useState({})
   const [currentIndex, setCurrentIndex] = useState(-1)
-
-  useEffect(() => {
-    setPlayListSongs(playlist)
-    // console.log(playlist)
-  }, [playlist])
 
   useEffect(() => {
     let crSong = playlist?.data?.filter(item => item?.encodeId === curSongId)
     let crIndex = playlist?.data?.findIndex(item => item?.encodeId === curSongId)
-    // console.log(crIndex)
-    setCurrentSong(crSong)
+    setCurrentSong(crSong[0])
     setCurrentIndex(crIndex)
+    // console.log(crSong)
   }, [playlist, curSongId])
+
 
   return (
     <div className='w-full h-full p-2'>
@@ -51,26 +46,34 @@ const SidebarRight = () => {
         </div>
       </div>
       <Scrollbars style={{ width: '100%', height: '80%' }}>
-      <div className='flex flex-col gap-2'>
-        <div>
-          {
+        <div className='flex flex-col gap-2'>
+          <div>
+            {/* {
             currentIndex !== -1 && playlist?.data?.slice(0, currentIndex).map((item) => (
               <PlayListSong item={item} key={item?.encodeId} />
             ))
-          }
-        </div>
-        <div className='px-2 text-[14px]'>
-          <p className='font-semibold'>Tiếp theo</p>
-          <p><span className='text-gray-400'>Từ playlist</span><span className='ml-2 text-primary'>{playListSongs?.title}</span></p>
-        </div>
-        <div>
-          {
+          } */}
+            {
+              <PlayListSong item={currentSong} />
+            }
+          </div>
+          <div className='px-2 text-[14px]'>
+            <p className='font-semibold'>Tiếp theo</p>
+            <p><span className='text-gray-400'>Từ playlist</span><span className='ml-2 text-primary'>{playlist?.title}</span></p>
+          </div>
+          <div>
+            {/* {
              currentIndex !== -1 && playlist?.data?.slice(currentIndex).map((item) => (
               <PlayListSong item={item} key={item?.encodeId} />
             ))
-          }
+          } */}
+            {
+              playlist?.data?.filter(item => item.encodeId !== curSongId).slice(currentIndex, currentIndex + 20).map((item) => (
+                <PlayListSong item={item} key={item?.encodeId} />
+              ))
+            }
+          </div>
         </div>
-      </div>
       </Scrollbars>
       <Tooltip id="sbright-tooltip" place='top' positionStrategy='absolute' style={{ fontSize: '12px', borderRadius: '20px' }} />
     </div>

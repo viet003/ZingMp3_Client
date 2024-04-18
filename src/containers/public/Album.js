@@ -43,7 +43,7 @@ function Playlist() {
       // dispatch(actions.setLoading(false))
       if (response?.data?.err === 0) {
         setPlaylistData(response.data?.data)
-        console.log(response.data?.data)
+        // console.log(response.data?.data)
         dispatch(actions.setPlaylist(response?.data?.data))
       }
       setIsLoading(false)

@@ -201,9 +201,9 @@ const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
         }
       })
       if (currentSongIndex === playlist?.data?.length - 1) {
-        dispatch(actions.setCurSongId(playlist?.data[0].encodeId))
+        dispatch(actions.setCurSongId(playlist?.data[0]?.encodeId))
       } else {
-        dispatch(actions.setCurSongId(playlist?.data[currentSongIndex + 1].encodeId))
+        dispatch(actions.setCurSongId(playlist?.data[currentSongIndex + 1]?.encodeId))
       }
       dispatch(actions.setPlay(true))
     } else {

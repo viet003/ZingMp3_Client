@@ -18,17 +18,17 @@ const ItemSectionNewRelease = ({ item }) => {
         <div
             onMouseEnter={() => { setIsHover(true) }}
             onMouseLeave={() => { setIsHover(false) }}
-            className={`${curSongId === item.encodeId ? 'bg-sidebarbg' : 'bg-transparent'} grid grid-cols-[20%,55%,15%] gap-2 p-2 rounded-md hover:bg-sidebarbg`}>
+            className={`${curSongId === item?.encodeId ? 'bg-sidebarbg' : 'bg-transparent'} grid grid-cols-[20%,55%,15%] gap-2 p-2 rounded-md hover:bg-sidebarbg`}>
             <div
                 className='relative rounded-md overflow-hidden h-[60px] w-[60px]'>
                 <img src={item?.thumbnail} className='rounded-md object-cover w-full h-full' />
                 {
                     curSongId !== item.encodeId && <div 
                     onClick={() => {
-                        dispatch(actions.setCurSongId(item.encodeId))
+                        dispatch(actions.setCurSongId(item?.encodeId))
                         dispatch(actions.setPlay(true))
                     }}
-                    className={`${isHover && curSongId !== item.encodeId ? 'flex' : 'hidden'} absolute top-0 left-0 right-0 bottom-0 bg-black bg-opacity-60 items-center justify-center cursor-pointer`}>
+                    className={`${isHover && curSongId !== item?.encodeId ? 'flex' : 'hidden'} absolute top-0 left-0 right-0 bottom-0 bg-black bg-opacity-60 items-center justify-center cursor-pointer`}>
                         <FaPlay className='text-white opacity-100' />
                     </div>
                 }
