@@ -12,6 +12,7 @@ const SectionNewRelease = () => {
         if (newRelease) {
             isActive === 0 ? setDataSong(newRelease?.data?.all) : isActive === 1 ? setDataSong(newRelease?.data?.others) : setDataSong(newRelease?.data?.vPop);
         }
+        // console.log(newRelease?.data?.all)
     }, [isActive, newRelease])
 
     return (

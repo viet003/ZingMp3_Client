@@ -20,6 +20,11 @@ export const setPlaylist = (playlist) => ({
     playlist
 })
 
+export const setHistoryPlaylist = (historyPlaylist) => ({
+    type: actionTypes.SET_HISTORY_SONG,
+    historyPlaylist
+})
+
 export const setLoadingApp = (loadingApp) => ({
     type: actionTypes.LOADING_APP,
     loadingApp

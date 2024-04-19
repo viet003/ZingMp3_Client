@@ -25,6 +25,7 @@ const ItemSectionNewRelease = ({ item }) => {
                 {
                     curSongId !== item.encodeId && <div 
                     onClick={() => {
+                        // console.log(item?.encodeId)
                         dispatch(actions.setCurSongId(item?.encodeId))
                         dispatch(actions.setPlay(true))
                     }}

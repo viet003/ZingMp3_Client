@@ -18,7 +18,7 @@ import { SlVolume2 } from "react-icons/sl";
 import { MdOutlineOndemandVideo } from "react-icons/md";
 import { MdOutlineMusicVideo } from "react-icons/md";
 import { CiMicrophoneOn } from "react-icons/ci";
-import { TbPlaylist } from "react-icons/tb";
+import { MdOutlineQueueMusic } from "react-icons/md";
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -26,10 +26,11 @@ var intervalId
 const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
   const [audio, setAudio] = useState(new Audio())
   const dispatch = useDispatch()
-  const { curSongId, isPlaying, isPlayAtList, playlist, loadingSong } = useSelector(state => state.music)
+  const { curSongId, isPlaying, isPlayAtList, playlist, loadingSong, historyPlaylist } = useSelector(state => state.music)
   const [detailSong, setDetailSong] = useState(null)
   const [currentSecond, setCurrentSecond] = useState(0)
   const [currentSongIndex, setCurrentSongIndex] = useState(-1)
+  const [hsPlaylist, setHsPlaylist] = useState([])
   const [canPlay, setCanPlay] = useState(false)
   const [isShuff, setIsShuff] = useState(false)
   const [isReapet, setIsReapet] = useState(false)
@@ -62,13 +63,17 @@ const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
       }
       if (rs2.data.err === 0) {
         audio.pause()
-        thumbRef.current.style.cssText = `right: 100%`
+        if (thumbRef.current) {
+          thumbRef.current.style.cssText = `right: 100%`
+        }
         setAudio(new Audio(rs2?.data?.data['128']))
         setCanPlay(true)
       } else {
         setCanPlay(false)
         audio.pause()
-        thumbRef.current.style.cssText = `right: 100%`
+        if (thumbRef.current) {
+          thumbRef.current.style.cssText = `right: 100%`
+        }
         dispatch(actions.setPlay(false))
         setAudio(new Audio())
         if (checkIsInPlaylist) {
@@ -107,14 +112,18 @@ const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
         intervalId = setInterval(() => {
           let percent = Math.round(audio?.currentTime * 10000 / detailSong?.duration) / 100
           setCurrentSecond(Math.round(audio?.currentTime))
-          thumbRef.current.style.cssText = `right: ${100 - percent}%`
+          if (thumbRef.current) {
+            thumbRef.current.style.cssText = `right: ${100 - percent}%`
+          }
         }, 200)
       }
     } else {
       intervalId = setInterval(() => {
         let percent = Math.round(audio?.currentTime * 10000 / detailSong?.duration) / 100
         setCurrentSecond(Math.round(audio?.currentTime))
-        thumbRef.current.style.cssText = `right: ${100 - percent}%`
+        if (thumbRef.current) {
+          thumbRef.current.style.cssText = `right: ${100 - percent}%`
+        }
       }, 200)
     }
   }, [audio, canPlay])
@@ -147,6 +156,7 @@ const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
       } else {
         handleNextSong()
       }
+      addSongToHistory()
     }
     // check ended event
     audio.addEventListener('ended', handleAutoNext)
@@ -161,6 +171,12 @@ const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
     const vol = Number(volume) / 100
     audio.volume = vol
   }, [volume, audio])
+
+  // get list historysongs
+  useEffect(() => {
+    // console.log(historyPlaylist)
+    setHsPlaylist(historyPlaylist)
+  }, [historyPlaylist])
 
   // play or pause
   const handleTogglePlayMusic = async () => {
@@ -231,6 +247,21 @@ const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
     setCurrentSecond(Math.round(audio?.currentTime))
   }
 
+  // add song to historyPlaylist
+  const addSongToHistory = () => {
+    if (hsPlaylist?.length === 0) {
+      hsPlaylist.push(detailSong)
+      dispatch(actions.setHistoryPlaylist(hsPlaylist))
+    } else if (hsPlaylist && hsPlaylist?.length >= 20) {
+      hsPlaylist.pop();
+      hsPlaylist.unshift(detailSong)
+      dispatch(actions.setHistoryPlaylist(hsPlaylist))
+    } else {
+      hsPlaylist.unshift(detailSong)
+      dispatch(actions.setHistoryPlaylist(hsPlaylist))
+    }
+  }
+
   return (
     <div className='grid grid-cols-[25%,50%,25%] h-full bg-playerbg px-[25px]'>
       <Tooltip id="my-tooltip" style={{ fontSize: '12px', borderRadius: '20px' }} />
@@ -249,8 +280,8 @@ const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
           </span>
         </div>
       </div>
-      <div className='flex-auto flex items-center justify-center gap-4 flex-col py-2'>
-        <div className='flex gap-8 justify-center items-center'>
+      <div className='flex-auto flex items-center justify-center gap-2 flex-col py-2'>
+        <div className='flex gap-6 justify-center items-center pt-3'>
           <span onClick={() => setIsShuff(prev => !prev)} className='cursor-pointer hover:text-hover' data-tooltip-id="my-tooltip" data-tooltip-content="Bật phát ngẫu nhiên"><CiShuffle className={`${isShuff && "text-primary"}`} size={24} /></span>
           <span onClick={handlePrevSong} data-tooltip-id="my-tooltip" data-tooltip-content="Bài hát trước" className={`${checkIsInPlaylist && currentSongIndex >= 1 ? 'text-black cursor-pointer hover:text-hover' : 'text-gray-500'}`} ><MdSkipPrevious size={24} /></span>
           <span
@@ -264,14 +295,14 @@ const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
 
         </div>
         <div className='w-4/5 flex items-center justify-start gap-3'>
-          <span className='text-[11px]'>
+          <span className='text-[11px] text-gray-500'>
             {moment.utc(currentSecond * 1000).format('mm:ss')}
           </span>
           <div ref={trackRef} onClick={handleProgress} className='cursor-pointer hover:h-[7px] bg-[rgba(0,0,0,0.1)] relative w-full m-auto h-[4px] rounded-l-full rounded-r-full'>
             <div ref={thumbRef} id='thumb-progress' className='bg-primary absolute top-0 left-0 h-full bottom-0 rounded-l-full rounded-r-full'></div>
           </div>
           <span className='text-[11px]'>
-            {moment.utc(detailSong?.duration * 1000).format('mm:ss')}
+            {detailSong ? moment.utc(detailSong?.duration * 1000).format('mm:ss') : '00.00'}
           </span>
         </div>
       </div>
@@ -289,7 +320,7 @@ const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
         </div>
         <div className='border border-gray-400 h-10 text-gray-600' />
         <div className={`${toggleSideBarRight ? 'bg-primary' : 'bg-transparent'} p-1 rounded-md duration-300 ease-in-out`}>
-          <TbPlaylist size={21} style={{ color: toggleSideBarRight ? "white" : 'rgb(75,85,99)', cursor: 'pointer' }} onClick={() => handleToggleSideBarRight()} />
+          <MdOutlineQueueMusic size={21} style={{ color: toggleSideBarRight ? "white" : 'rgb(75,85,99)', cursor: 'pointer' }} onClick={() => handleToggleSideBarRight()} />
         </div>
       </div>
       <ToastContainer />

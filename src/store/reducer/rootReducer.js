@@ -9,20 +9,19 @@ import persistReducer from "redux-persist/es/persistReducer";
 
 const commonConfig = {
     storage,
-    stateReconciler : autoMergeLevel2
+    stateReconciler: autoMergeLevel2
 }
 
 const authConfig = {
     ...commonConfig,
     key: 'auth',
-    whiteList: ['isLoggedIn','token']
+    whitelist: ['isLoggedIn', 'token']
 }
 
 const musicConfig = {
     ...commonConfig,
     key: 'music',
-    whiteList: ['curSongId'],
-    blackList: ['']
+    whitelist: ['curSongId', 'historyPlaylist'],
 }
 
 const rootReducers = combineReducers({

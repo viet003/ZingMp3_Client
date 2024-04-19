@@ -5,6 +5,7 @@ const initState = {
     isPlaying: false,
     isPlayAtList: false,
     loadingSong: false,
+    historyPlaylist: [],
     playlist: {
         title: null,
         data: null,
@@ -35,6 +36,11 @@ const musicReducer = (state = initState, action) => {
                     title: action.playlist?.title,
                     data: action.playlist?.song?.items
                 }
+            }
+        case actionTypes.SET_HISTORY_SONG:
+            return {
+                ...state,
+                historyPlaylist: [...action.historyPlaylist] || []
             }
         case actionTypes.LOADING_SONG:
             return {

@@ -8,6 +8,7 @@ const actionTypes = {
     SET_PLAY_AT_LIST: 'SET_PLAY_AT_LIST',
     SET_PLAY_LIST: 'SET_PLAY_LIST',
     SET_PLAY: 'SET_PLAY',
+    SET_HISTORY_SONG: 'SET_HISTORY_SONG',
     LOADING_SONG: 'LOADING_SONG',
 
     // login_out

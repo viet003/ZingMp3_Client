@@ -7,16 +7,30 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"); */
 
 .text-shadow-no1 {
-    text-shadow: 1px 1px 0 #4a90e2, -1px 1px 0 #4a90e2, -1px -1px 0 #4a90e2, 1px -1px 0 #4a90e2;  
+    text-shadow: 1px 1px 0 #4a90e2, -1px 1px 0 #4a90e2, -1px -1px 0 #4a90e2, 1px -1px 0 #4a90e2;
 }
 
 .text-shadow-no2 {
-    text-shadow: 1px 1px 0 #50e3c2, -1px 1px 0 #50e3c2, -1px -1px 0 #50e3c2, 1px -1px 0 #50e3c2;  
+    text-shadow: 1px 1px 0 #50e3c2, -1px 1px 0 #50e3c2, -1px -1px 0 #50e3c2, 1px -1px 0 #50e3c2;
 }
 
 .text-shadow-no3 {
-    text-shadow: 1px 1px 0 #e35050, -1px 1px 0 #e35050, -1px -1px 0 #e35050, 1px -1px 0 #e35050;  
+    text-shadow: 1px 1px 0 #e35050, -1px 1px 0 #e35050, -1px -1px 0 #e35050, 1px -1px 0 #e35050;
 }
+
+.shadow-bottom {
+    box-shadow: 0 0px 10px -5px rgba(115, 115, 115, 0.75);
+}
+
+/* css for react-custom-scrollbars-2 */
+.track-horizontal {
+    background-color: blue;
+    width: 100%;
+    left: 0px;
+    bottom: 0px;
+    height: 10px !important;
+}
+
 
 @layer base {
     * {
@@ -48,7 +62,5 @@
         /* Adjust according to your font size and line height */
     }
 
-    @keyframes identifier {
-        
-    }
+    @keyframes identifier {}
 }
