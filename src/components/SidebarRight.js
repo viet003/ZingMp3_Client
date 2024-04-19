@@ -17,7 +17,7 @@ const SidebarRight = () => {
   useEffect(() => {
     let crSong = playlist?.data?.filter(item => item?.encodeId === curSongId)[0]
     let crIndex = playlist?.data?.findIndex(item => item?.encodeId === curSongId)
-    setCurrentSong(crSong[0])
+    setCurrentSong(crSong)
     setCurrentIndex(crIndex)
     // console.log(crSong)
   }, [playlist, curSongId])
