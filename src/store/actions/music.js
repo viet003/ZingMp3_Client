@@ -15,6 +15,12 @@ export const setIsPlayAtList = (isPlayAtList) => ({
     isPlayAtList
 })
 
+export const isSetTimeOff = (isSetTimeOff) => ({
+    type: actionTypes.SET_TIME_OFF,
+    isSetTimeOff
+})
+
+
 export const setPlaylist = (playlist) => ({
     type: actionTypes.SET_PLAY_LIST,
     playlist

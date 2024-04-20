@@ -6,6 +6,7 @@ const actionTypes = {
     // music
     SET_CUR_SONG_ID: 'SET_CUR_SONG_ID',
     SET_PLAY_AT_LIST: 'SET_PLAY_AT_LIST',
+    SET_TIME_OFF: 'SET_TIME_OFF',
     SET_PLAY_LIST: 'SET_PLAY_LIST',
     SET_PLAY: 'SET_PLAY',
     SET_HISTORY_SONG: 'SET_HISTORY_SONG',

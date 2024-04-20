@@ -9,7 +9,7 @@ import { PlayListSong } from '.';
 
 const SidebarRight = ({ handleToggleTime }) => {
 
-  const { playlist, curSongId, historyPlaylist } = useSelector(state => state.music)
+  const { playlist, curSongId, historyPlaylist, isSetTimeOff } = useSelector(state => state.music)
   const [isActive, setIsActive] = useState(0)
   const [currentSong, setCurrentSong] = useState({})
   const [currentIndex, setCurrentIndex] = useState(-1)
@@ -40,10 +40,10 @@ const SidebarRight = ({ handleToggleTime }) => {
         </div>
         <div
           onClick={() => {handleToggleTime()}}
-          data-tooltip-id="sbright-tooltip" data-tooltip-content="Hẹn giờ dừng phát nhạc" className='h-[30px] w-[30px] flex items-center justify-center bg-sidebarbg rounded-full cursor-pointer hover:bg-gray-300'>
-          <GiAlarmClock size={20} style={{ color: 'gray' }} />
+          data-tooltip-id="sbRight-tooltip" data-tooltip-content="Hẹn giờ dừng phát nhạc" className={`${isSetTimeOff ? 'bg-primary hover:bg-hover' : 'bg-sidebarbg hover:bg-gray-300'} h-[30px] w-[30px] flex items-center justify-center rounded-full cursor-pointer`}>
+          <GiAlarmClock size={20} style={{ color: isSetTimeOff ? 'white' : 'gray' }} />
         </div>
-        <div data-tooltip-id="sbright-tooltip" data-tooltip-content="Khác" className='h-[30px] w-[30px] flex items-center justify-center bg-sidebarbg rounded-full cursor-pointer hover:bg-gray-300'>
+        <div data-tooltip-id="sbRight-tooltip" data-tooltip-content="Khác" className='h-[30px] w-[30px] flex items-center justify-center bg-sidebarbg rounded-full cursor-pointer hover:bg-gray-300'>
           <BsThreeDots size={17} style={{ color: 'gray' }} />
         </div>
       </div>
@@ -87,7 +87,7 @@ const SidebarRight = ({ handleToggleTime }) => {
             </div>
           </Scrollbars>
       }
-      <Tooltip id="sbright-tooltip" place='top' positionStrategy='absolute' style={{ fontSize: '12px', borderRadius: '20px' }} />
+      <Tooltip id="sbRight-tooltip" place='top' positionStrategy='absolute' style={{ fontSize: '12px', borderRadius: '20px' }} />
     </div>
   )
 }

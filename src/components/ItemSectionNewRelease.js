@@ -49,11 +49,11 @@ const ItemSectionNewRelease = ({ item }) => {
                 <p className='truncate text-ellipsis text-[12px] text-gray-500 cursor-default'>{moment(item?.releaseDate * 1000).fromNow()}</p>
             </div>
             <div className={`${isHover ? 'flex' : 'hidden'} flex justify-end items-center cursor-pointer`}>
-                <div data-tooltip-id="my-tooltip" data-tooltip-content="Khác" className='h-[40px] w-[40px] rounded-full hover:bg-gray-300 flex justify-center items-center'>
+                <div data-tooltip-id="newRelease-toolTip" data-tooltip-content="Khác" className='h-[40px] w-[40px] rounded-full hover:bg-gray-300 flex justify-center items-center'>
                     <BsThreeDots />
                 </div>
             </div>
-            <Tooltip id="my-tooltip" style={{ fontSize: '12px', borderRadius: '20px', backgroundColor: 'gray' }} />
+            <Tooltip id="newRelease-toolTip" style={{ fontSize: '12px', borderRadius: '20px', backgroundColor: 'gray' }} />
         </div>
     )
 }

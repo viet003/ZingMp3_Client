@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Legend, chart, plugins, scales } from "chart.js/auto"
+import { chart } from "chart.js/auto"
 import { Line } from "react-chartjs-2"
 
 const ChartSectionChart = () => {

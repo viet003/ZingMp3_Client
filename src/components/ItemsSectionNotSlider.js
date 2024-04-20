@@ -31,7 +31,7 @@ function ItemsSectionNotSlider({ item, isShow }) {
 
     return (
         <div>
-            <Tooltip id="my-tooltip" style={{ fontSize: '12px', borderRadius: '20px', backgroundColor:'gray' }} />
+            <Tooltip id="notSlider-tooltip" place='top' style={{ fontSize: '12px', borderRadius: '20px', zIndex: '100'}} />
             <div
                 className='flex flex-col gap-2' key={item?.encodeId}>
                 <div
@@ -49,13 +49,13 @@ function ItemsSectionNotSlider({ item, isShow }) {
                     {
                         isHover && (
                             <div className='flex items-center justify-center gap-7 z-20 text-white absolute top-[40%] left-0 w-full'>
-                                <div data-tooltip-id="my-tooltip" data-tooltip-content="Thêm vào thư viện" className='w-[30px] h-[30px] hover:bg-gray-500 flex items-center justify-center rounded-full'>
+                                <div data-tooltip-id="notSlider-tooltip" data-tooltip-content="Thêm vào thư viện" className='w-[30px] h-[30px] hover:bg-gray-500 flex items-center justify-center rounded-full'>
                                     <GrFavorite size={20} />
                                 </div>
                                 <div onClick={(e) => { e.preventDefault() }} className='h-[50px] w-[50px] rounded-full border-white border-2 flex justify-center items-center'>
                                     <FaPlay size={25} />
                                 </div>
-                                <div data-tooltip-id="my-tooltip" data-tooltip-content="Khác" className='w-[30px] h-[30px] hover:bg-gray-500 flex items-center justify-center rounded-full'>
+                                <div data-tooltip-id="notSlider-tooltip" data-tooltip-content="Khác" className='w-[30px] h-[30px] hover:bg-gray-500 flex items-center justify-center rounded-full'>
                                     <HiOutlineDotsHorizontal size={20} />
                                 </div>
                             </div>

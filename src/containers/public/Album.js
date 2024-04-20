@@ -56,7 +56,7 @@ function Playlist() {
     <div className={`${curSongId ? 'h-[calc(100vh-170px)]' : 'h-[calc(100vh-70px)]'} w-full relative`}>
       {
         isLoading && (
-          <div className='absolute top-0 -left-10 -right-10 bottom-0 bg-primarybg z-50 flex items-center justify-center'>
+          <div className='absolute top-0 -left-10 -right-10 bottom-0 bg-primarybg z-30 flex items-center justify-center'>
             <LoadingApp />
           </div>
         )
