@@ -63,7 +63,7 @@ const SectionSliderBanner = () => {
 
     return (
         <div className='w-full overflow-hidden'>
-            <div className='grid grid-cols-3 w-full gap-8'>
+            <div className='grid grid-cols-3 grid-rows-1 w-full gap-8'>
                 {banner?.map((item, index) => (
                     <img
                         key={item.encodeId}

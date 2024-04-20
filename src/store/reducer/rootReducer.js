@@ -21,7 +21,7 @@ const authConfig = {
 const musicConfig = {
     ...commonConfig,
     key: 'music',
-    whitelist: ['curSongId', 'historyPlaylist'],
+    whitelist: ['curSongId', 'historyPlaylist','playlist'],
 }
 
 const rootReducers = combineReducers({

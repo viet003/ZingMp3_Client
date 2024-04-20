@@ -27,5 +27,8 @@ export { default as AlbumListItems} from './AlbumListItems';
 export { default as AlbumItem } from './AlbumItem'
 
 export { default as PlayListSong } from './PlayListSong'
+export { default as SetTimeOffMusic } from './SetTimeOffMusic'
+
+
 
 

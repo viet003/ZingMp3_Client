@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
-import { SidebarLeft, Header, Player, SidebarRight } from '../../components'
+import { SidebarLeft, Header, Player, SidebarRight, SetTimeOffMusic } from '../../components'
 import { useSelector } from 'react-redux'
 
 const Main = () => {
@@ -52,19 +52,7 @@ const Main = () => {
       </div>
       {
         timeOff && (
-          <div className="fixed inset-0 flex justify-center items-center z-50 w-full">
-            <div className="bg-gray-400 opacity-60 fixed inset-0 z-50 h-screen w-screen" onClick={(e) => { e.preventDefault(); setTimeOff(false) }}></div>
-            <div div className='h-[330px] w-[330px] bg-primarybg rounded-xl flex flex-col items-center gap-5 p-10 z-50' >
-              <p className='font-semibold text-[18px]'>Hẹn giờ dừng phát nhạc</p>
-              <div className='w-full h-[100px] bg-gray-200 rounded-md grid grid-cols-[40%,20%,40%]'>
-                <div><span></span>GIỜ</div>
-                <div><span></span>PHÚT</div>
-              </div>
-              <p className='text-gray-500 text-[13px]'>Chọn thời gian để dừng phát nhạc</p>
-              <button className='w-full text-white bg-primary flex items-center justify-center h-[40px] rounded-full'>LƯU LẠI</button>
-              <button>HỦY</button>
-            </div >
-          </div>
+          <SetTimeOffMusic setTimeOff={setTimeOff}/>
         )
       }
     </div>
