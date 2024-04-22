@@ -39,8 +39,8 @@ const musicReducer = (state = initState, action) => {
       return {
         ...state,
         playlist: {
-          title: action.playlist?.title,
-          data: action.playlist?.song?.items,
+          title: action.playlist?.title || null,
+          data: action.playlist?.song?.items || null,
         },
       };
     case actionTypes.SET_HISTORY_SONG:

@@ -1,8 +1,8 @@
 import React, { memo, useState } from 'react'
 import { FaPlay } from "react-icons/fa";
-import { AudioPlay, LoadingSong } from '.';
+import { AudioPlay, LoadingSong } from '..';
 import { useSelector, useDispatch } from 'react-redux';
-import * as actions from "../store/actions"
+import * as actions from "../../store/actions"
 import { BsThreeDots } from "react-icons/bs";
 import { Tooltip } from 'react-tooltip'
 import { AiOutlineHeart } from "react-icons/ai";

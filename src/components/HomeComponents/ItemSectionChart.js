@@ -1,8 +1,8 @@
 import React, { memo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { LoadingSong, AudioPlay } from "."
+import { LoadingSong, AudioPlay } from ".."
 import { FaPlay } from 'react-icons/fa'
-import * as actions from "../store/actions"
+import * as actions from "../../store/actions"
 
 const ItemSectionChart = ({ item, index, percent, textSd }) => {
 

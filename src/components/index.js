@@ -2,32 +2,34 @@ export { default as Header } from './Header';
 export { default as Search } from './Search';
 export { default as SidebarLeft } from './SidebarLeft';
 export { default as SidebarRight } from './SidebarRight';
-export { default as SectionSliderBanner } from './SectionSliderBanner';
-export { default as Player } from './Player';
+export { default as SectionSliderBanner } from './HomeComponents/SectionSliderBanner';
+export { default as Player } from './AudioComponent/Player';
+export { default as StaticAudio } from './AudioComponent/StaticAudio';
 
-export { default as SectionNotSlider } from './SectionNotSlider';
-export { default as ItemsSectionNotSlider } from './ItemsSectionNotSlider';
-export { default as SectionTop100Al } from './SectionTop100Al';
 
-export { default as SectionSlider } from './SectionSlider';
+export { default as SectionNotSlider } from './HomeComponents/SectionNotSlider';
+export { default as ItemsSectionNotSlider } from './HomeComponents/ItemsSectionNotSlider';
+export { default as SectionTop100Al } from './HomeComponents/SectionTop100Al';
 
-export { default as SectionChart } from './SectionChart';
-export { default as BannerSectionChart } from './BannerSectionChart';
-export { default as ItemSectionChart } from './ItemSectionChart';
-export { default as ChartSectionChart } from './ChartSectionChart';
+export { default as SectionSlider } from './HomeComponents/SectionSlider';
 
-export { default as SectionNewRelease } from './SectionNewRelease';
-export { default as ItemSectionNewRelease } from './ItemSectionNewRelease';
+export { default as SectionChart } from './HomeComponents/SectionChart';
+export { default as BannerSectionChart } from './HomeComponents/BannerSectionChart';
+export { default as ItemSectionChart } from './HomeComponents/ItemSectionChart';
+export { default as ChartSectionChart } from './HomeComponents/ChartSectionChart';
+
+export { default as SectionNewRelease } from './HomeComponents/SectionNewRelease';
+export { default as ItemSectionNewRelease } from './HomeComponents/ItemSectionNewRelease';
 
 export { default as LoadingApp } from './LoadingApp';
 export { default as LoadingSong } from './LoadingSong';
-export { default as AudioPlay } from './AudioPlay';
+export { default as AudioPlay } from './AudioComponent/AudioPlay';
 
-export { default as AlbumListItems} from './AlbumListItems';
-export { default as AlbumItem } from './AlbumItem'
+export { default as AlbumListItems} from './AlbumComponents/AlbumListItems';
+export { default as AlbumItem } from './AlbumComponents/AlbumItem'
 
-export { default as PlayListSong } from './PlayListSong'
-export { default as SetTimeOffMusic } from './SetTimeOffMusic'
+export { default as PlayListSong } from './Playlistcomponents/PlayListSong'
+export { default as SetTimeOffMusic } from './AudioComponent/SetTimeOffMusic'
 
 
 

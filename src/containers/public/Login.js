@@ -1,5 +1,5 @@
 import React from 'react';
-import girl from "../../assets/girl.png"
+import girl from "../../assets/images/girl.png"
 import app, { auth } from "../../firebase/firebaseConfig"
 import { FacebookAuthProvider, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 

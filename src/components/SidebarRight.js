@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { GiAlarmClock } from "react-icons/gi";
 import { BsThreeDots } from "react-icons/bs";
+import { AiOutlineDelete } from "react-icons/ai";
+import { GoDownload } from "react-icons/go";
+import { IoAddCircleOutline } from "react-icons/io5";
 import { Tooltip } from 'react-tooltip'
-import 'react-tooltip/dist/react-tooltip.css'
 import { Scrollbars } from 'react-custom-scrollbars-2';
-import { PlayListSong } from '.';
+import { PlayListSong } from './';
+import * as actions from "../store/actions"
+import 'react-tooltip/dist/react-tooltip.css'
 
-const SidebarRight = ({ handleToggleTime }) => {
-
+const SidebarRight = ({ handleToggleTime, setToggleSideBarRight }) => {
+  const dispatch = useDispatch()
   const { playlist, curSongId, historyPlaylist, isSetTimeOff } = useSelector(state => state.music)
   const [isActive, setIsActive] = useState(0)
+  const [openOnather, setAnotherOpen] = useState(false)
   const [currentSong, setCurrentSong] = useState({})
   const [currentIndex, setCurrentIndex] = useState(-1)
 
@@ -21,6 +26,13 @@ const SidebarRight = ({ handleToggleTime }) => {
     setCurrentIndex(crIndex)
     // console.log(crSong)
   }, [playlist, curSongId])
+
+  const handleDeletePlaylist = () => {
+    setAnotherOpen(false)
+    setToggleSideBarRight(false)
+    dispatch(actions.setCurSongId(null))
+    dispatch(actions.setPlaylist(null))
+  }
 
 
   return (
@@ -39,12 +51,34 @@ const SidebarRight = ({ handleToggleTime }) => {
           </button>
         </div>
         <div
-          onClick={() => {handleToggleTime()}}
+          onClick={() => { handleToggleTime() }}
           data-tooltip-id="sbRight-tooltip" data-tooltip-content="Hẹn giờ dừng phát nhạc" className={`${isSetTimeOff ? 'bg-primary hover:bg-hover' : 'bg-sidebarbg hover:bg-gray-300'} h-[30px] w-[30px] flex items-center justify-center rounded-full cursor-pointer`}>
           <GiAlarmClock size={20} style={{ color: isSetTimeOff ? 'white' : 'gray' }} />
         </div>
-        <div data-tooltip-id="sbRight-tooltip" data-tooltip-content="Khác" className='h-[30px] w-[30px] flex items-center justify-center bg-sidebarbg rounded-full cursor-pointer hover:bg-gray-300'>
-          <BsThreeDots size={17} style={{ color: 'gray' }} />
+        <div data-tooltip-id="sbRight-tooltip" data-tooltip-content="Khác" className='relative h-[30px] w-[30px] flex items-center justify-center bg-sidebarbg rounded-full cursor-pointer hover:bg-gray-300'>
+          <BsThreeDots size={17} style={{ color: 'gray' }} onClick={(e) => { e.preventDefault(); setAnotherOpen(prev => !prev) }}/>
+          {
+            openOnather && (
+              <div 
+              
+              className='absolute flex flex-col gap-1 text-[15px] w-[250px] bg-primarybg shadow-xl top-[120%] right-2 py-3 rounded-xl' style={{ zIndex: "60" }}>
+                <div 
+                onClick={()=> {handleDeletePlaylist()}}
+                className='flex gap-2 text-gray-600 hover:bg-white hover:bg-opacity-30 hover:text-primary px-5 py-2'>
+                  <AiOutlineDelete size={20} />
+                  <p>Xóa danh sách phát</p>
+                </div>
+                <div className='flex gap-2 text-gray-600 hover:bg-white hover:bg-opacity-30 hover:text-primary px-5 py-2'>
+                  <GoDownload size={20} />
+                  <p>Tải danh sách phát</p>
+                </div>
+                <div className='flex gap-2 text-gray-600 hover:bg-white hover:bg-opacity-30 hover:text-primary px-5 py-2'>
+                  <IoAddCircleOutline size={20} />
+                  <p>Thêm vào playlist</p>
+                </div>
+              </div>
+            )
+          }
         </div>
       </div>
       {
@@ -80,8 +114,8 @@ const SidebarRight = ({ handleToggleTime }) => {
             autoHideDuration={200} style={{ width: '100%', height: '80%' }}>
             <div className='flex flex-col gap-2 pr-2'>
               {
-                historyPlaylist?.map((item) => (
-                  <PlayListSong item={item} key={item?.encodeId} isCurrentSong={false} />
+                historyPlaylist?.map((item, index) => (
+                  <PlayListSong item={item} key={index} isCurrentSong={false} />
                 ))
               }
             </div>

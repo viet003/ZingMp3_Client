@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { FaPlay } from 'react-icons/fa';
-import { BannerSectionChart, ItemSectionChart, ChartSectionChart } from '.';
+import { BannerSectionChart, ItemSectionChart, ChartSectionChart } from '..';
 import { Link } from 'react-router-dom';
-import path from '../utils/path';
+import path from '../../utils/path';
 
 const SectionChart = () => {
 

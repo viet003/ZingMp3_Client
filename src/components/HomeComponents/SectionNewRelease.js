@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { useSelector } from 'react-redux';
-import { ItemSectionNewRelease } from '.';
+import { ItemSectionNewRelease } from '..';
 
 const SectionNewRelease = () => {
     const { newRelease } = useSelector(state => state.app)

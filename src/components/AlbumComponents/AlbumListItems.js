@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { AlbumItem } from '.'
+import { AlbumItem } from '..'
 import moment from 'moment'
 import { BsDot } from 'react-icons/bs'
 

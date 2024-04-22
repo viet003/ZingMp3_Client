@@ -1,19 +1,18 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import * as apis from "../controllers"
-import { BsPauseFill } from "react-icons/bs";
-import { BsFillPlayFill } from "react-icons/bs";
+import * as apis from "../../controllers"
+import { BsPauseFill, BsFillPlayFill } from "react-icons/bs";
 import { CiShuffle } from "react-icons/ci";
 import { MdSkipPrevious } from "react-icons/md";
 import { MdSkipNext } from "react-icons/md";
 import { CiRepeat } from "react-icons/ci";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
-import * as actions from '../store/actions'
+import * as actions from '../../store/actions'
 import moment from 'moment';
 import { toast, ToastContainer } from 'react-toastify';
 import { Tooltip } from 'react-tooltip'
-import LoadingSong from './LoadingSong';
+import LoadingSong from '../LoadingSong';
 import { SlVolume2 } from "react-icons/sl";
 import { MdOutlineOndemandVideo } from "react-icons/md";
 import { MdOutlineMusicVideo } from "react-icons/md";
@@ -26,14 +25,14 @@ var intervalId
 const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
   const [audio, setAudio] = useState(new Audio())
   const dispatch = useDispatch()
-  const { curSongId, isPlaying, isPlayAtList, playlist, loadingSong, historyPlaylist } = useSelector(state => state.music)
+  const { curSongId, isPlaying, playlist, loadingSong, historyPlaylist } = useSelector(state => state.music)
   const [detailSong, setDetailSong] = useState(null)
   const [currentSecond, setCurrentSecond] = useState(0)
   const [currentSongIndex, setCurrentSongIndex] = useState(-1)
   const [hsPlaylist, setHsPlaylist] = useState([])
   const [canPlay, setCanPlay] = useState(false)
   const [isShuff, setIsShuff] = useState(false)
-  const [isReapet, setIsReapet] = useState(false)
+  const [repeat, setRepeat] = useState(0)
   const [checkIsInPlaylist, setCheckIsInPlaylist] = useState(false)
   const [volume, setVolume] = useState(50)
   const thumbRef = useRef()
@@ -103,7 +102,6 @@ const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
 
   // 
   useEffect(() => {
-    intervalId && clearInterval(intervalId)
     setCurrentSecond(0)
     audio.load()
     if (isPlaying && canPlay) {
@@ -125,6 +123,9 @@ const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
           thumbRef.current.style.cssText = `right: ${100 - percent}%`
         }
       }, 200)
+    }
+    return () => {
+      intervalId && clearInterval(intervalId)
     }
   }, [audio, canPlay])
 
@@ -151,8 +152,8 @@ const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
     const handleAutoNext = async () => {
       if (isShuff) {
         handleShuff()
-      } else if (isReapet) {
-        handleNextSong()
+      } else if (repeat != 0) {
+        handleRepeat()
       } else {
         handleNextSong()
       }
@@ -164,7 +165,31 @@ const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
     return () => {
       audio.removeEventListener('ended', handleAutoNext)
     }
-  }, [audio, isShuff, isReapet])
+  }, [audio, isShuff, repeat])
+
+  //
+  // Repeat song
+  const handleRepeat = () => {
+    const length = playlist?.data?.length;
+    // console.log(length)
+    if (repeat == 2 && checkIsInPlaylist) {
+      if (playlist?.data[length - 1]?.encodeId === curSongId) {
+        dispatch(actions.setCurSongId(playlist?.data[0].encodeId))
+        dispatch(actions.setPlay(true))
+      } else {
+        handleNextSong()
+      }
+    } else if (repeat == 1) {
+      // dispatch(actions.setPlay(false))
+      audio.currentTime = 0;
+      audio.load()
+      audio.play()
+      // dispatch(actions.setPlay(true))
+    } else {
+      dispatch(actions.setPlay(false))
+      audio.currentTime = 0
+    }
+  }
 
   // change volume
   useEffect(() => {
@@ -227,6 +252,7 @@ const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
     }
   }
 
+
   // shuff event
   const handleShuff = () => {
     if (checkIsInPlaylist) {
@@ -249,6 +275,7 @@ const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
 
   // add song to historyPlaylist
   const addSongToHistory = () => {
+    if (hsPlaylist[0].encodeId === curSongId) return
     if (hsPlaylist?.length === 0) {
       hsPlaylist.push(detailSong)
       dispatch(actions.setHistoryPlaylist(hsPlaylist))
@@ -264,7 +291,7 @@ const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
 
   return (
     <div className='grid grid-cols-[25%,50%,25%] h-full bg-playerbg px-[25px]'>
-      <Tooltip id="my-tooltip" style={{ fontSize: '12px', borderRadius: '20px' }} />
+      <Tooltip id="player-tooltip" style={{ fontSize: '12px', borderRadius: '20px' }} />
       <div className='flex-auto flex gap-3 items-center'>
         <img src={detailSong?.thumbnail} alt="thumbnail" className='w-16 h-16 object-cover rounded-md' />
         <div className='flex flex-col'>
@@ -272,26 +299,26 @@ const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
           <span className='text-xs text-gray-500'>{detailSong?.artistsNames}</span>
         </div>
         <div className='flex gap-4 pl-2'>
-          <span className={`cursor-pointer`} data-tooltip-id="my-tooltip" data-tooltip-content="Thêm vào thư viện" size={20} >
+          <span className={`cursor-pointer`} data-tooltip-id="player-tooltip" data-tooltip-content="Thêm vào thư viện" size={20} >
             <AiOutlineHeart size={20} style={{ color: 'rgb(75,85,99)' }} />
           </span>
-          <span className={`cursor-pointer`} data-tooltip-id="my-tooltip" data-tooltip-content="Xem thêm" size={20} >
+          <span className={`cursor-pointer`} data-tooltip-id="player-tooltip" data-tooltip-content="Xem thêm" size={20} >
             <BsThreeDots size={20} style={{ color: 'rgb(75,85,99)' }} />
           </span>
         </div>
       </div>
       <div className='flex-auto flex items-center justify-center gap-2 flex-col py-2'>
         <div className='flex gap-6 justify-center items-center pt-3'>
-          <span onClick={() => setIsShuff(prev => !prev)} className='cursor-pointer hover:text-hover' data-tooltip-id="my-tooltip" data-tooltip-content="Bật phát ngẫu nhiên"><CiShuffle className={`${isShuff && "text-primary"}`} size={24} /></span>
-          <span onClick={handlePrevSong} data-tooltip-id="my-tooltip" data-tooltip-content="Bài hát trước" className={`${checkIsInPlaylist && currentSongIndex >= 1 ? 'text-black cursor-pointer hover:text-hover' : 'text-gray-500'}`} ><MdSkipPrevious size={24} /></span>
+          <span onClick={() => setIsShuff(prev => !prev)} className='cursor-pointer hover:text-hover' data-tooltip-id="player-tooltip" data-tooltip-content="Bật phát ngẫu nhiên"><CiShuffle className={`${isShuff && "text-primary"}`} size={24} /></span>
+          <span onClick={handlePrevSong} data-tooltip-id="player-tooltip" data-tooltip-content="Bài hát trước" className={`${checkIsInPlaylist && currentSongIndex >= 1 ? 'text-black cursor-pointer hover:text-hover' : 'text-gray-500'}`} ><MdSkipPrevious size={24} /></span>
           <span
             className='p-1 border border-gray-700 cursor-pointer hover:text-hover hover:border-primary rounded-full flex items-center justify-center'
             onClick={handleTogglePlayMusic}
           >
             {loadingSong ? <LoadingSong /> : isPlaying ? <BsPauseFill size={25} /> : <BsFillPlayFill size={25} />}
           </span>
-          <span onClick={handleNextSong} data-tooltip-id="my-tooltip" data-tooltip-content="Bài hát kế tiếp" className={`${!checkIsInPlaylist ? 'text-gray-500' : 'text-black cursor-pointer hover:text-hover'}`} ><MdSkipNext size={24} /></span>
-          <span onClick={() => { setIsReapet(prev => !prev) }} className={`${isReapet && "text-primary"} cursor-pointer hover:text-hover`} data-tooltip-id="my-tooltip" data-tooltip-content="Bật phát lại tất cả"><CiRepeat size={24} /></span>
+          <span onClick={handleNextSong} data-tooltip-id="player-tooltip" data-tooltip-content="Bài hát kế tiếp" className={`${!checkIsInPlaylist ? 'text-gray-500' : 'text-black cursor-pointer hover:text-hover'}`} ><MdSkipNext size={24} /></span>
+          <span onClick={() => { repeat !== 2 ? setRepeat(prev => prev + 1) : setRepeat(0) }} className={`${repeat !== 0 && "text-primary"} cursor-pointer hover:text-hover relative`} data-tooltip-id="player-tooltip" data-tooltip-content="Bật phát lại tất cả"><CiRepeat size={24} /><span className={`${repeat === 1 ? 'block' : 'hidden'} absolute top-0 left-0 rounded-full text-[11px] pr-[2px] bg-playerbg`}>{1}</span></span>
 
         </div>
         <div className='w-4/5 flex items-center justify-start gap-3'>
@@ -323,7 +350,9 @@ const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
           <MdOutlineQueueMusic size={21} style={{ color: toggleSideBarRight ? "white" : 'rgb(75,85,99)', cursor: 'pointer' }} onClick={() => handleToggleSideBarRight()} />
         </div>
       </div>
-      <ToastContainer />
+      <div style={{ zIndex: "1000" }}>
+        <ToastContainer position='bottom-right' />
+      </div>
     </div>
   )
 }

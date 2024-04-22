@@ -1,6 +1,6 @@
 import React from 'react'
 import { MdKeyboardArrowRight } from "react-icons/md";
-import { ItemsSectionNotSlider } from './';
+import { ItemsSectionNotSlider } from '..';
 
 const SectionTop100Al = ({ items }) => {
 

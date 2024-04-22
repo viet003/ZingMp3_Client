@@ -3,7 +3,7 @@ import { FaPen } from "react-icons/fa";
 import { IoAddCircleOutline } from "react-icons/io5";
 import React from 'react'
 import { NavLink } from "react-router-dom"
-import logo from "../assets/logo.svg"
+import logo from "../assets/images/logo.svg"
 import path from "../utils/path.js"
 import { useSelector } from 'react-redux';
 

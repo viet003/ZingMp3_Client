@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getArrSlider } from '../utils/fn'
-import * as actions from '../store/actions'
+import { getArrSlider } from '../../utils/fn'
+import * as actions from '../../store/actions'
 import { useNavigate } from 'react-router-dom'
 
 const SectionSliderBanner = () => {
@@ -63,13 +63,13 @@ const SectionSliderBanner = () => {
 
     return (
         <div className='w-full overflow-hidden'>
-            <div className='grid grid-cols-3 grid-rows-1 w-full gap-8'>
+            <div className='flex w-full gap-8'>
                 {banner?.map((item, index) => (
                     <img
                         key={item.encodeId}
                         src={item.banner}
                         onClick={() => handleClickBanner(item)}
-                        className={`slider-item flex-1 object-contain rounded-lg ${index <= 2 ? 'block' : 'hidden'} cursor-pointer`}
+                        className={`slider-item w-[30%] flex-1 object-contain rounded-lg ${index <= 2 ? 'block' : 'hidden'} cursor-pointer`}
                     />
                 ))}
             </div>

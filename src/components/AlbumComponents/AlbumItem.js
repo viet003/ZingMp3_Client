@@ -1,10 +1,10 @@
 import React, { memo } from 'react'
 import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
-import * as actions from '../store/actions'
+import * as actions from '../../store/actions'
 import { BsMusicNoteBeamed } from "react-icons/bs";
-import { AudioPlay } from "."
-import LoadingSong from "./LoadingSong"
+import { AudioPlay } from ".."
+import LoadingSong from "../LoadingSong"
 import { FaPlay } from "react-icons/fa";
 
 
