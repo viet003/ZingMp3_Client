@@ -86,6 +86,8 @@ const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
     }
 
     fetchSong()
+
+    // return () => audio.pause()
     // console.log(curSongId)
   }, [curSongId])
 
@@ -145,6 +147,8 @@ const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
         audio.pause()
       }
     }
+
+    return () => audio && audio.pause()
   }, [isPlaying])
 
   // auto next when finish
@@ -293,7 +297,7 @@ const Player = ({ handleToggleSideBarRight, toggleSideBarRight }) => {
     <div className='grid grid-cols-[25%,50%,25%] h-full bg-playerbg px-[25px]'>
       <Tooltip id="player-tooltip" style={{ fontSize: '12px', borderRadius: '20px' }} />
       <div className='flex-auto flex gap-3 items-center'>
-        <img src={detailSong?.thumbnail} alt="thumbnail" className='w-16 h-16 object-cover rounded-md' />
+        <img src={detailSong?.thumbnail} alt="thumbnail" className={`${isPlaying ? 'animate-rotate' : ''} w-16 h-16 object-cover rounded-full duration-200 transition-all`} />
         <div className='flex flex-col'>
           <span className='font-semibold text-gray-700 text-sm'>{detailSong?.title}</span>
           <span className='text-xs text-gray-500'>{detailSong?.artistsNames}</span>

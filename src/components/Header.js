@@ -41,7 +41,7 @@ const Header = () => {
                 <button 
                 onClick={(e) => {e.preventDefault(); setIsOpenStaticAudio(true); dispatch(actions.setPlay(false))}}
                 className='bg-primary text-[13px] h-10 rounded-full px-2 flex items-center w-[170px] justify-center font-semibold text-white hover:bg-hover'>
-                    <p>Nâng cấp tài khoản</p>
+                    <p>Legendary Music</p>
                 </button>
                 <button className='bg-[#e6efef] text-[13px] gap-1 h-10 rounded-full px-2 flex items-center w-[170px] justify-center font-semibold text-primary hover:bg-hover hover:text-white duration-200'>
                     <VscDesktopDownload size={20} />

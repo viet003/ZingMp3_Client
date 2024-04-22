@@ -8,6 +8,7 @@ const StaticAudio = ({ setIsOpenStaticAudio }) => {
   const [isPlaying, setIsPlaying] = useState(true);
 
   useEffect(() => {
+    audio.volume = 0.2
     if (isPlaying) {
       audio.play().catch(error => console.error('Failed to play audio:', error));
     } else {

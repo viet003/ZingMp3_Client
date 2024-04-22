@@ -74,14 +74,25 @@ module.exports = {
             '-webkit-transform': 'scale(1)',
             transform: 'scale(1)'
           }
-        }        
+        },
+        'animation-rotate': {
+          '0%': {
+            '-webkit-transform': 'rotate(0deg)',
+            transform: 'rotate(0deg)'
+          },
+          '100%': {
+            '-webkit-transform': 'rotate(360deg)',
+            transform: 'rotate(360deg)'
+          }
+        },
       },
       animation: {
         'slide-right': 'slide-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;',
         'slide-left': 'slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;',
         'slide-left2': 'slide-left2 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;',
         'scale-up': 'animation-scale-up 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
-        'scale-down': 'animation-scale-down 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both'
+        'scale-down': 'animation-scale-down 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
+        'rotate': 'animation-rotate 10s linear infinite'
       },
     },
   },
