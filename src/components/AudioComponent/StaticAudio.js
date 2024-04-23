@@ -2,6 +2,7 @@ import React, { memo, useEffect, useState } from 'react';
 import fairytail from "../../assets/images/fairytails.jpg";
 import mp3 from "../../assets/audio/fairytail.mp3";
 import { BsPauseFill, BsFillPlayFill } from "react-icons/bs";
+import { LoadingSong } from '..';
 
 const StaticAudio = ({ setIsOpenStaticAudio }) => {
   const [audio] = useState(new Audio(mp3));
@@ -46,7 +47,7 @@ const StaticAudio = ({ setIsOpenStaticAudio }) => {
   return (
     <>
       {
-        audio && (
+        audio && fairytail ? (
           <div className="fixed inset-0 flex justify-center items-center w-full z-50">
             <div className="bg-gray-400 opacity-60 fixed inset-0 h-screen w-screen" onClick={handleClose}></div>
             <div className="relative flex justify-center w-3/4 items-center z-50">
@@ -60,7 +61,7 @@ const StaticAudio = ({ setIsOpenStaticAudio }) => {
               </div>
             </div>
           </div>
-        )
+        ) : (<LoadingSong />)
       }
     </>
   );

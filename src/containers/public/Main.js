@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import {
   SidebarLeft,
   Header,
   Player,
   SidebarRight,
   SetTimeOffMusic,
+  StaticAudio
 } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import moment from "moment";
 import * as actions from "../../store/actions";
+import path from "../../utils/path";
+
+
 
 let time;
 
@@ -22,6 +26,8 @@ const Main = () => {
   const [totalDuration, setTotalDuration] = useState(0);
   const currentDateTime = moment();
   const [futureDateTime, setFutureDateTime] = useState(null);
+  const [isOpenStaticAudio, setIsOpenStaticAudio] = useState(false)
+  const navigate = useNavigate()
 
   // useEffect(() => {
   //   console.log(curSongId)
@@ -53,6 +59,10 @@ const Main = () => {
       time && clearTimeout(time);
     }
   }, [isSetTimeOff]);
+
+  useEffect(() => {
+    navigate(path.HOME)
+  }, [])
 
   const handleSetTimeOff = () => {
     if (totalDuration !== 0) {
@@ -97,7 +107,7 @@ const Main = () => {
       <div className="w-[299px]"></div>
       <div className="w-full bg-primarybg">
         <div className="h-[70px] px-[59px] w-[calc(100%-250px)] flex items-center mb-5 fixed top-0 right-0 bg-primarybg" style={{ zIndex: "30" }}>
-          <Header />
+          <Header setIsOpenStaticAudio={setIsOpenStaticAudio}/>
         </div>
         <div className="h-[70px] w-full"></div>
         <div className="px-[59px]">
@@ -131,6 +141,9 @@ const Main = () => {
           handleSetTimeOff={handleSetTimeOff}
         />
       )}
+      {
+        isOpenStaticAudio && <StaticAudio setIsOpenStaticAudio={setIsOpenStaticAudio} />
+      }
     </div>
   );
 };

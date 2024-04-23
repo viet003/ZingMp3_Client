@@ -1,32 +1,25 @@
 import React, { useState } from 'react'
 import { Search } from './'
-import { HiArrowNarrowLeft } from "react-icons/hi";
-import { HiArrowNarrowRight } from "react-icons/hi";
+import { HiArrowNarrowLeft, HiArrowNarrowRight } from "react-icons/hi";
 import { VscDesktopDownload } from "react-icons/vsc";
-import { CiSettings } from "react-icons/ci";
-import { CiUser } from "react-icons/ci";
+import { CiSettings, CiUser } from "react-icons/ci";
 import { setting_menu, setting_menu_1 } from "../utils/Menu.js"
 import { IoIosArrowForward } from "react-icons/io";
 import { MdArrowOutward } from "react-icons/md";
 import { Login } from "../containers/public"
-import { StaticAudio } from "./"
 import * as actions from "../store/actions"
 import { useDispatch } from 'react-redux';
 
-const Header = () => {
+const Header = ({ setIsOpenStaticAudio }) => {
     const dispatch = useDispatch()
     const [toggle, setToggle] = useState(false)
     const [toggleUser, setToggleUser] = useState(false)
     const [toggleLogin, setToggleLogin] = useState(false)
-    const [isOpenStaticAudio, setIsOpenStaticAudio] = useState(false)
 
     return (
         <div className='flex justify-between w-full items-center'>
             {
                 toggleLogin && <Login setToggleLogin={setToggleLogin} />
-            }
-            {
-                isOpenStaticAudio && <StaticAudio setIsOpenStaticAudio={setIsOpenStaticAudio}/>
             }
             <div className='flex gap-6 w-full items-center'>
                 <div className='flex gap-6 text-gray-400'>
@@ -38,9 +31,9 @@ const Header = () => {
                 </div>
             </div>
             <div className='flex gap-3'>
-                <button 
-                onClick={(e) => {e.preventDefault(); setIsOpenStaticAudio(true); dispatch(actions.setPlay(false))}}
-                className='bg-primary text-[13px] h-10 rounded-full px-2 flex items-center w-[170px] justify-center font-semibold text-white hover:bg-hover'>
+                <button
+                    onClick={(e) => { e.preventDefault(); setIsOpenStaticAudio(true); dispatch(actions.setPlay(false)) }}
+                    className='bg-primary text-[13px] h-10 rounded-full px-2 flex items-center w-[170px] justify-center font-semibold text-white hover:bg-hover'>
                     <p>Legendary Music</p>
                 </button>
                 <button className='bg-[#e6efef] text-[13px] gap-1 h-10 rounded-full px-2 flex items-center w-[170px] justify-center font-semibold text-primary hover:bg-hover hover:text-white duration-200'>

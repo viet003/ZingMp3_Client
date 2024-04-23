@@ -1,23 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import * as apis from "../../controllers"
-import { BsPauseFill, BsFillPlayFill } from "react-icons/bs";
-import { CiShuffle } from "react-icons/ci";
-import { MdSkipPrevious } from "react-icons/md";
-import { MdSkipNext } from "react-icons/md";
-import { CiRepeat } from "react-icons/ci";
+import { BsPauseFill, BsFillPlayFill, BsThreeDots } from "react-icons/bs";
+import { CiShuffle, CiRepeat, CiMicrophoneOn } from "react-icons/ci";
+import { MdSkipPrevious, MdSkipNext, MdOutlineQueueMusic, MdOutlineMusicVideo, MdOutlineOndemandVideo  } from "react-icons/md";
 import { AiOutlineHeart } from "react-icons/ai";
-import { BsThreeDots } from "react-icons/bs";
 import * as actions from '../../store/actions'
 import moment from 'moment';
 import { toast, ToastContainer } from 'react-toastify';
 import { Tooltip } from 'react-tooltip'
 import LoadingSong from '../LoadingSong';
 import { SlVolume2 } from "react-icons/sl";
-import { MdOutlineOndemandVideo } from "react-icons/md";
-import { MdOutlineMusicVideo } from "react-icons/md";
-import { CiMicrophoneOn } from "react-icons/ci";
-import { MdOutlineQueueMusic } from "react-icons/md";
 import 'react-toastify/dist/ReactToastify.css';
 
 
