@@ -21,7 +21,7 @@ const ItemSectionNewRelease = ({ item }) => {
             className={`${curSongId === item?.encodeId ? 'bg-sidebarbg' : 'bg-transparent'} grid grid-cols-[20%,55%,15%] gap-2 p-2 rounded-md hover:bg-sidebarbg`}>
             <div
                 className='relative rounded-md overflow-hidden h-[60px] w-[60px]'>
-                <img src={item?.thumbnail} className='rounded-md object-cover w-full h-full' />
+                <img src={item?.thumbnail} className='rounded-md object-cover w-full h-full' loading='lazy'/>
                 {
                     curSongId !== item.encodeId && <div 
                     onClick={() => {

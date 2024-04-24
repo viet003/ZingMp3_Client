@@ -12,11 +12,15 @@ export { default as ItemsSectionNotSlider } from './HomeComponents/ItemsSectionN
 export { default as SectionTop100Al } from './HomeComponents/SectionTop100Al';
 
 export { default as SectionSlider } from './HomeComponents/SectionSlider';
+export { default as ItemSectionSlider } from './HomeComponents/ItemSectionSlider';
 
 export { default as SectionChart } from './HomeComponents/SectionChart';
 export { default as BannerSectionChart } from './HomeComponents/BannerSectionChart';
 export { default as ItemSectionChart } from './HomeComponents/ItemSectionChart';
 export { default as ChartSectionChart } from './HomeComponents/ChartSectionChart';
+
+export { default as SectionRadio } from './HomeComponents/SectionRadio';
+export { default as ItemsSectionRadio } from './HomeComponents/ItemsSectionRadio';
 
 export { default as SectionNewRelease } from './HomeComponents/SectionNewRelease';
 export { default as ItemSectionNewRelease } from './HomeComponents/ItemSectionNewRelease';

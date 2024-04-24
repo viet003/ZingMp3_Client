@@ -6,6 +6,10 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"); */
 
+.text-shadow {
+    text-shadow: 1px 1px 0 #B8BEC3, -1px 1px 0 #B8BEC3, -1px -1px 0 #B8BEC3, 1px -1px 0 #B8BEC3;
+}
+
 .text-shadow-no1 {
     text-shadow: 1px 1px 0 #4a90e2, -1px 1px 0 #4a90e2, -1px -1px 0 #4a90e2, 1px -1px 0 #4a90e2;
 }
@@ -20,6 +24,44 @@
 
 .shadow-bottom {
     box-shadow: 0 0px 10px -5px rgba(115, 115, 115, 0.75);
+}
+
+.div_slick {
+    width: calc(100%-250px);
+}
+
+.slick-slider {
+    position: relative;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    gap: 20px !important;
+}
+
+.slick-prev {
+    z-index: 1000 !important;
+    left: -20px !important;
+    width: 50px !important;
+    height: 50px !important;
+    display: block !important;
+    border-radius: 25px !important;
+}
+
+.slick-next {
+    z-index: 1000;
+    right: -20px !important;
+    display: block !important;
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 25px !important;
+    background-color: black;
+    opacity: 10;
+}
+
+.slick-prev::before , .slick-next::before {
+    font-size: 25px !important;
 }
 
 /* css for react-custom-scrollbars-2 */

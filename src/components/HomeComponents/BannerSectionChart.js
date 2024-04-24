@@ -24,7 +24,7 @@ const BannerSectionChart = ({ item }) => {
       onMouseEnter={handleHover}
       onMouseLeave={handleOut}
       className='object-cover rounded-md overflow-hidden cursor-pointer'>
-      <img ref={imgRef} src={item?.banner} className='w-full h-[100px]' />
+      <img ref={imgRef} src={item?.banner} className='w-full h-[100px]' loading='lazy'/>
     </div>
   )
 }

@@ -16,11 +16,11 @@ const ItemSectionChart = ({ item, index, percent, textSd }) => {
     onMouseLeave={() => {setIsHover(false)}}
     className={`grid grid-cols-[15%,70%,15%] items-center bg-white bg-opacity-10 hover:bg-opacity-30 p-2 rounded-md cursor-pointer ${curSongId === item?.encodeId ? 'bg-opacity-30' : ''}`}>
       <div className={`flex items-center justify-center text-[30px] ${textSd} `}>
-        <span className='text-[hsla(0%,0%,100%,0.7)] text-opacity-50'>{index + 1}</span>
+        <span className='text-[#6b3483] text-opacity-70'>{index + 1}</span>
       </div>
       <div className='flex items-center gap-4'>
         <div className='relative h-[60px] w-[60px] rounded-md object-cover '>
-          <img src={item?.thumbnail} className='rounded-md object-cover' />
+          <img src={item?.thumbnail} className='rounded-md object-cover' loading='lazy'/>
           {
             curSongId !== item?.encodeId && isHover && (
               <div 

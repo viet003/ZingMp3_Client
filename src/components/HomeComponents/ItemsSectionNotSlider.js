@@ -38,7 +38,7 @@ function ItemsSectionNotSlider({ item, isShow }) {
                     onMouseEnter={handleHover}
                     onMouseLeave={handleOut}
                     className='object-cover rounded-xl cursor-pointer relative overflow-hidden'>
-                    <img ref={imgRef} src={item?.thumbnail} className='rounded-xl w-full' />
+                    <img ref={imgRef} src={item?.thumbnail} className='rounded-xl w-full' loading='lazy'/>
                     {
                         isHover &&
                         <div
