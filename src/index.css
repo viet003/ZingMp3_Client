@@ -41,7 +41,7 @@
 }
 
 .slick-prev {
-    z-index: 1000 !important;
+    z-index: 30 !important;
     left: -20px !important;
     width: 50px !important;
     height: 50px !important;
@@ -50,7 +50,7 @@
 }
 
 .slick-next {
-    z-index: 1000;
+    z-index: 30;
     right: -20px !important;
     display: block !important;
     width: 50px !important;
