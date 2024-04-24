@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
-import { SectionNotSlider, SectionSlider, SectionTop100Al, SectionChart, LoadingApp, SectionNewRelease, SectionSliderBanner, SectionRadio } from './../../components';
+import { SectionNotSlider, SectionSlider, SectionTop100Al, SectionChart, LoadingApp, Footer, SectionNewRelease, SectionSliderBanner, SectionRadio } from './../../components';
 
 
 const Home = () => {
@@ -23,7 +23,7 @@ const Home = () => {
       }
       <SectionSliderBanner />
       <SectionNewRelease />
-      <SectionSlider items={newReleaseChart}/>
+      <SectionSlider items={newReleaseChart} />
       <SectionNotSlider items={chill} />
       <SectionNotSlider items={remix} />
       <SectionNotSlider items={sadMusic} />
@@ -31,6 +31,7 @@ const Home = () => {
       <SectionTop100Al items={top100} />
       <SectionTop100Al items={hotAlbum} />
       <SectionRadio items={hotRadio} />
+      <Footer />
     </div>
   )
 }

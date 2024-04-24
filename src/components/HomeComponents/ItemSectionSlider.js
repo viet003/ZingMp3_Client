@@ -49,15 +49,10 @@ const ItemSectionSlider = ({ item, index }) => {
                         <p className='truncate text-ellipsis text-[12px] text-gray-500 cursor-default'>{item?.artistsNames}</p>
                     </div>
                     <div className='flex items-end justify-between'>
-                        <p className="text-shadow text-6xl text-gray-200 flex">{index + 1}</p>
+                        <p className="text-shadow text-6xl text-gray-200 flex">#{index + 1}</p>
                         <p className='text-gray-500 text-[15px]'>{moment.unix(1713353400).format('DD.MM.yyyy')}</p>
                     </div>
                 </div>
-                {/* <div className={`${isHover ? 'flex' : 'hidden'} flex justify-end items-center cursor-pointer`}>
-                <div data-tooltip-id="newRelease-toolTip" data-tooltip-content="Khác" className='h-[40px] w-[40px] rounded-full hover:bg-gray-300 flex justify-center items-center'>
-                    <BsThreeDots />
-                </div>
-            </div> */}
                 <Tooltip id="newRelease-toolTip" style={{ fontSize: '12px', borderRadius: '20px', backgroundColor: 'gray' }} />
             </div>
         </div>

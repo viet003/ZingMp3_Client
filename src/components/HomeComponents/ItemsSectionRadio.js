@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useRef, useState } from 'react'
 import { FaPlay } from "react-icons/fa";
 import { AudioPlay, LoadingSong } from '..';
 import { useSelector, useDispatch } from 'react-redux';
@@ -6,19 +6,36 @@ import * as actions from "../../store/actions"
 import { Tooltip } from 'react-tooltip'
 
 const ItemsSectionRadio = ({ item }) => {
+  const imgRef = useRef()
   const dispatch = useDispatch()
   const [isHover, setIsHover] = useState(false)
   const { curSongId, loadingSong, isPlaying } = useSelector(state => state.music)
 
+  const handleHover = () => {
+    setIsHover(true);
+    if (imgRef.current) {
+      imgRef.current.classList?.remove('animate-scale-down');
+      imgRef.current.classList?.add('animate-scale-up');
+    }
+  };
+
+  const handleOut = () => {
+    setIsHover(false);
+    if (imgRef.current) {
+      imgRef.current.classList?.remove('animate-scale-up');
+      imgRef.current.classList?.add('animate-scale-down');
+    }
+  };
+
   return (
     <div className='flex flex-col'>
       <div
-        onMouseEnter={() => { setIsHover(true) }}
-        onMouseLeave={() => { setIsHover(false) }}
+        onMouseEnter={handleHover}
+        onMouseLeave={handleOut}
         className="relative flex justify-center items-center">
         <div
           className='relative overflow-hidden h-[150px] w-[150px] rounded-full border-[4px] border-[#E8917D]'>
-          <img src={item?.program?.thumbnail} className='rounded-full object-cover w-full h-full' loading='lazy' />
+          <img ref={imgRef} src={item?.program?.thumbnail} className='rounded-full object-cover w-full h-full' loading='lazy' />
           {
             curSongId !== item.encodeId && <div
               onClick={() => {
