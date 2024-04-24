@@ -80,7 +80,9 @@ const Zingchart = () => {
         </div>
       }
       <WeakChart vnSongs={vnSongs} usSongs={usSongs} kSongs={kSongs} />
-      <Footer className="px-[59px]" />
+      <div className='px-[56px]'>
+        <Footer />
+      </div>
     </div>
   )
 }
