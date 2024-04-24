@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { SectionNotSlider, SectionSlider, SectionTop100Al, SectionChart, LoadingApp, Footer, SectionNewRelease, SectionSliderBanner, SectionRadio } from './../../components';
 
@@ -6,16 +6,21 @@ import { SectionNotSlider, SectionSlider, SectionTop100Al, SectionChart, Loading
 const Home = () => {
   const { chill, remix, sadMusic, top100, hotAlbum, hotRadio, newReleaseChart } = useSelector(state => state.app)
   // const { curSongId } = useSelector(state => state.music)
-  const { loading, curSongId } = useSelector(state => state.music)
+  const { curSongId } = useSelector(state => state.music)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // console.log(hotRadio)
+    let time = setTimeout(() => {
+      setLoading(false)
+    },1000)
+
+    return () => clearTimeout(time)
   }, [hotRadio])
 
   return (
-    <div className='flex flex-col gap-10 w-full overflow-hidden relative py-[30px] h-full overflow-y-scroll'>
+    <div className='flex flex-col gap-10 w-full overflow-hidden relative py-[30px] h-full overflow-y-scroll px-[59px]'>
       {
-        loading && <div className={`absolute right-0 bottom-0 top-0 left-0 z-30 bg-primarybg flex justify-center h-[calc(100vh-70px)] items-center`}>
+        loading && <div className={`absolute right-0 bottom-0 top-0 left-0 z-50 bg-primarybg flex justify-center h-[calc(100vh-70px)] items-center`}>
           {
             <LoadingApp />
           }

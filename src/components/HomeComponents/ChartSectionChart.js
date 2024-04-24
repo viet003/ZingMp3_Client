@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { chart } from "chart.js/auto"
 import { Line } from "react-chartjs-2"
 
-const ChartSectionChart = () => {
+const ChartSectionChart = ({ section }) => {
 
     const { RTChart } = useSelector(state => state.app)
     const [data, setData] = useState(null)
@@ -21,19 +21,20 @@ const ChartSectionChart = () => {
                     beginAtZero: true,
                 },
                 grid: {
-                    color: 'rgba(255,255,255,0.3)',
+                    color: section ? 'rgba(255,255,255,0.3)' : '#91A3B0',
                     drawTicks: false,
                     drawBorder: false,
                 },
                 min: RTChart?.chart?.minScore,
                 max: RTChart?.chart?.maxScore,
                 border: {
-                    dash: [3, 4]
+                    dash: [3, 5],
+                    color: 'transparent'
                 },
             },
             x: {
                 ticks: {
-                    color: '#F2F3F5'
+                    color: section ? '#F2F3F5' : '#91A3B0'
                 },
                 grid: {
                     color: 'transparent',
@@ -69,7 +70,9 @@ const ChartSectionChart = () => {
                     pointBackgroundColor: "white",
                     pointeHoverRadius: 5,
                     pointBorderColor: i === 0 ? "#4a90e2" : i === 1 ? "#50e3c2" : "#e35050",
-                    pointHoverBorderWidth: 5
+                    pointHoverBorderWidth: 5,
+                    categoryPercentage: 10,
+                    barPercentage: 10
 
                 })
             }
@@ -81,7 +84,7 @@ const ChartSectionChart = () => {
     }, [RTChart])
 
     return (
-        <div className='w-[95%] h-[85%] flex items-center justify-center'>
+        <div className={`${section ? 'h-[85%] w-[95%]' : 'h-full w-full'} flex items-center justify-center`}>
             {
                 data && <Line data={data} options={options} />
             }

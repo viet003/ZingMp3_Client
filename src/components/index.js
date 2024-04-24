@@ -36,3 +36,7 @@ export { default as PlayListSong } from './Playlistcomponents/PlayListSong'
 export { default as SetTimeOffMusic } from './AudioComponent/SetTimeOffMusic'
 
 export { default as Footer } from './HomeComponents/Footer';
+
+
+// zingchart components
+export { default as WeakChart } from './ZingChartComponents/WeakChart';

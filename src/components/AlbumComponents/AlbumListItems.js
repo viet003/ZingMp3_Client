@@ -4,19 +4,22 @@ import moment from 'moment'
 import { BsDot } from 'react-icons/bs'
 
 
-const AlbumListItems = ({ songs, totalDuration }) => {
+const AlbumListItems = ({ songs, totalDuration, section, hd }) => {
 
     // console.log({ songs, totalDuration })
     return (
         <div className='w-full flex flex-col text-xs text-gray-600'>
-            <div className=' grid grid-cols-[50%,40%,10%] justify-between items-center p-[10px] font-semibold'>
-                <span>BÀI HÁT</span>
-                <span>ALBUM</span>
-                <span>THỜI GIAN</span>
-            </div>
+            {
+                !hd && <div className={`grid ${section ? 'grid-cols-[50%,40%,10%]' : 'grid-cols-[10%,45%,40%,10%]'} justify-between items-center p-[10px] font-semibold`}>
+                    {!section && <div></div>}
+                    <span>BÀI HÁT</span>
+                    <span>ALBUM</span>
+                    <span>THỜI GIAN</span>
+                </div>
+            }
             <div className='flex flex-col'>
-                {songs?.map(item => (
-                    <AlbumItem key={item.encodeId} songData={item} />
+                {songs?.map((item, index) => (
+                    <AlbumItem key={item.encodeId} songData={item} section={section} index={index} hd={hd}/>
                 ))}
             </div>
             <span className='flex items-center gap-1 py-[10px] border-t border-[rgba(0,0,0,0.05)]'>

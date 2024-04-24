@@ -56,12 +56,12 @@ function Playlist() {
     <div className={`${curSongId ? 'h-[calc(100vh-170px)]' : 'h-[calc(100vh-70px)]'} w-full relative`}>
       {
         isLoading && (
-          <div className='absolute top-0 -left-10 -right-10 bottom-0 bg-primarybg z-30 flex items-center justify-center'>
+          <div className='absolute top-0 left-0 right-0 bottom-0 bg-primarybg z-30 flex items-center justify-center'>
             <LoadingApp />
           </div>
         )
       }
-      <div className={`h-full grid grid-cols-[25%,75%] gap-8 w-full`}>
+      <div className={`h-full grid grid-cols-[25%,75%] gap-8 w-full px-[56px]`}>
         <div className='flex-none flex flex-col items-center gap-2'>
           <div className='mt-[50px] flex flex-col gap-5 cursor-default'>
             <div onMouseEnter={handleHover} onMouseLeave={handleOut} className='w-full cursor-default object-contain rounded-md shadow-md overflow-hidden relative'>
@@ -120,8 +120,10 @@ function Playlist() {
 
           </div>
         </div>
-        <Scrollbars style={{ width: '100%', height: '100%' }}>
-          <AlbumListItems songs={playlistData?.song?.items} totalDuration={playlistData?.song?.totalDuration} />
+        <Scrollbars 
+        autoHide
+        style={{ width: '100%', height: '100%' }}>
+          <AlbumListItems songs={playlistData?.song?.items} totalDuration={playlistData?.song?.totalDuration} section={true}/>
         </Scrollbars>
       </div>
     </div>

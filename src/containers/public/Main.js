@@ -112,7 +112,7 @@ const Main = () => {
           <Header setIsOpenStaticAudio={setIsOpenStaticAudio}/>
         </div>
         <div className="h-[70px] w-full"></div>
-        <div className={`${curSongId ? 'h-[calc(100vh-180px)]' : 'h-[calc(100vh-70px)]'} px-[59px] h-[calc(100vh-180px)]`}>
+        <div className={`${curSongId ? 'h-[calc(100vh-180px)]' : 'h-[calc(100vh-70px)]'} h-[calc(100vh-180px)]`}>
           <Outlet />
         </div>
         <div className={`${curSongId ? "h-[100px]" : "h-0"} w-full`}></div>

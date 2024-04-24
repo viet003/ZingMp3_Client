@@ -18,8 +18,8 @@ const Footer = () => {
             <p className='text-[13px] font-semibold text-gray-500'>ĐỐI TÁC ÂM NHẠC</p>
             <div className='grid grid-cols-8 w-full gap-5'>
                 {
-                    list_Img.map((item) => (
-                        <div className= 'flex justify-center items-center w-full object-fill h-[70px] bg-white rounded-md'>
+                    list_Img.map((item, index) => (
+                        <div key={index} className= 'flex justify-center items-center w-full object-fill h-[70px] bg-white rounded-md'>
                             <img src={item} className='w-[70%] h-[70%] object-fill rounded-md'/>
                         </div>
                     ))

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux';
 import { FaPlay } from 'react-icons/fa';
 import { BannerSectionChart, ItemSectionChart, ChartSectionChart } from '..';
@@ -8,11 +8,6 @@ import path from '../../utils/path';
 const SectionChart = () => {
 
   const { weekChart, RTChart } = useSelector(state => state.app)
-  const [weekChartData, setWeekChartData] = useState([])
-
-  useEffect(() => {
-    setWeekChartData(weekChart)
-  }, [weekChart])
 
   const textSd = ["text-shadow-no1", "text-shadow-no2", "text-shadow-no3"]
 
@@ -42,7 +37,7 @@ const SectionChart = () => {
           </div>
         </div>
         <div className='w-full flex items-center justify-center'>
-          <ChartSectionChart className='w-full' />
+          <ChartSectionChart className='w-full' section={true}/>
         </div>
       </div>
       <div className='grid grid-cols-3 gap-3'>
