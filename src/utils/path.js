@@ -5,8 +5,9 @@ const path = {
     ZINGCHART: '/zingchart',
     RADIO: '/radio',
     PLAYLIST: '/playlist/:title/:pid',
-    WEAKCHART: '/zing-chart-tuan/:title/:encodeId',
-    HUD: '/album/:tittle/:pid'
+    WEEKCHART: '/zingchart/:title/:encodeId',
+    HUD: '/album/:tittle/:pid',
+    NEWSONGS: '/moi-phat-hanh'
 }
 
 export default path

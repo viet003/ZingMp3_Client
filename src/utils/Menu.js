@@ -44,7 +44,7 @@ export const menu = [
 
 export const menu_2 = [
     {
-        path: path.LIBRARY,
+        path: path.NEWSONGS,
         text: "BXH Nhạc mới",
         icons: <PiMusicNotesPlus className="text-[23px]" />
     },

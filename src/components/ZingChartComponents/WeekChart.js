@@ -2,8 +2,11 @@ import React from 'react'
 import bgtop100 from "../../assets/images/bgtop100.jpeg"
 import { BsFillPlayFill } from "react-icons/bs";
 import { AlbumListItems } from ".."
+import { useNavigate } from 'react-router-dom';
 
 const WeekChart = ({ vnSongs, kSongs, usSongs }) => {
+
+    const navigator = useNavigate()
 
     return (
         <div className='w-full relative rounded-md'>
@@ -18,9 +21,11 @@ const WeekChart = ({ vnSongs, kSongs, usSongs }) => {
                                 <BsFillPlayFill className='text-white' />
                             </div>
                         </div>
-                        <AlbumListItems hd={true} songs={vnSongs?.data?.slice(0, 5)} section={false} totalDuration={vnSongs?.data?.song?.totalDuration} />
+                        <AlbumListItems hd={true} songs={vnSongs?.data?.song?.items?.slice(0, 5)} section={false} totalDuration={vnSongs?.data?.song?.totalDuration} />
                         <div className='h-[50px] w-full flex justify-center items-center  px-[56px]'>
-                            <button className='px-5 py-2 rounded-full text-[13px] border-[1px] border-primary hover:bg-primary hover:text-white text-primary transition-all'>Xem tất cả</button>
+                            <button 
+                            onClick={() => {navigator(`${vnSongs?.name}\\${vnSongs?.id}`)}}
+                            className='px-5 py-2 rounded-full text-[13px] border-[1px] border-primary hover:bg-primary hover:text-white text-primary transition-all'>Xem tất cả</button>
                         </div>
                     </div>
                     <div className='bg-white rounded-xl w-full h-full flex flex-col bg-opacity-50 gap-3 p-3'>
@@ -30,9 +35,11 @@ const WeekChart = ({ vnSongs, kSongs, usSongs }) => {
                                 <BsFillPlayFill className='text-white' />
                             </div>
                         </div>
-                        <AlbumListItems hd={true} songs={usSongs?.data?.slice(0, 5)} section={false} totalDuration={usSongs?.data?.song?.totalDuration} />
+                        <AlbumListItems hd={true} songs={usSongs?.data?.song?.items?.slice(0, 5)} section={false} totalDuration={usSongs?.data?.song?.totalDuration} />
                         <div className='h-[50px] w-full flex justify-center items-center  px-[56px]'>
-                            <button className='px-5 py-2 rounded-full text-[13px] border-[1px] border-primary hover:bg-primary hover:text-white text-primary transition-all'>Xem tất cả</button>
+                            <button 
+                            onClick={() => {navigator(`${usSongs?.name}\\${usSongs?.id}`)}}
+                            className='px-5 py-2 rounded-full text-[13px] border-[1px] border-primary hover:bg-primary hover:text-white text-primary transition-all'>Xem tất cả</button>
                         </div>
                     </div>
                     <div className='bg-white rounded-xl w-full h-full flex flex-col bg-opacity-50 gap-3 p-3'>
@@ -42,9 +49,11 @@ const WeekChart = ({ vnSongs, kSongs, usSongs }) => {
                                 <BsFillPlayFill className='text-white' />
                             </div>
                         </div>
-                        <AlbumListItems hd={true} songs={kSongs?.data?.slice(0, 5)} section={false} totalDuration={kSongs?.data?.song?.totalDuration} />
+                        <AlbumListItems hd={true} songs={kSongs?.data?.song?.items?.slice(0, 5)} section={false} totalDuration={kSongs?.data?.song?.totalDuration} />
                         <div className='h-[50px] w-full flex justify-center items-center  px-[56px]'>
-                            <button className='px-5 py-2 rounded-full text-[13px] border-[1px] border-primary hover:bg-primary hover:text-white text-primary transition-all'>Xem tất cả</button>
+                            <button 
+                            onClick={() => {navigator(`${kSongs?.name}\\${kSongs?.id}`)}}
+                            className='px-5 py-2 rounded-full text-[13px] border-[1px] border-primary hover:bg-primary hover:text-white text-primary transition-all'>Xem tất cả</button>
                         </div>
                     </div>
                 </div>

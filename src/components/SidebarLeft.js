@@ -7,10 +7,7 @@ import logo from "../assets/images/logo.svg"
 import path from "../utils/path.js"
 import { useSelector } from 'react-redux';
 
-
-function SidebarLeft
-() {
-
+const SidebarLeft = () => {
     const { curSongId } = useSelector(state => state.music)
 
     return (
@@ -79,4 +76,5 @@ function SidebarLeft
 }
 
 export default SidebarLeft
+
 

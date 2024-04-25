@@ -12,7 +12,7 @@ const AlbumItem = ({ songData, section, index, hd }) => {
 
     const dispatch = useDispatch()
     const { curSongId, isPlaying, loadingSong } = useSelector(state => state.music)
-
+    
 
     return (
         <div className={`${curSongId === songData?.encodeId ? 'bg-gray-300' : ''} grid ${section ? 'grid-cols-[50%,40%,10%] mr-4' : hd ? 'grid-cols-[10%,75%,10%]' : 'grid-cols-[5%,45%,40%,10%]'} justify-between gap-3 items-center p-[10px] border-t border-[rgba(0,0,0,0.05)] rounded-md hover:bg-[#DDE4E4] cursor-pointer`}
@@ -55,7 +55,9 @@ const AlbumItem = ({ songData, section, index, hd }) => {
                 </div>
             }
             <div className='flex-1 flex justify-center'>
-                {moment.utc(songData?.duration * 1000).format('mm:ss')}
+                {
+                    songData?.duration ? moment.utc(songData?.duration * 1000).format('mm:ss') : '05:12:38'
+                }
             </div>
         </div>
     )
