@@ -39,4 +39,5 @@ export { default as Footer } from './HomeComponents/Footer';
 
 
 // zingchart components
-export { default as WeakChart } from './ZingChartComponents/WeakChart';
+export { default as WeekChart } from './ZingChartComponents/WeekChart';
+export { default as WeekChartItems } from './ZingChartComponents/WeekChartItems';

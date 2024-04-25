@@ -86,7 +86,9 @@ const ChartSectionChart = ({ section }) => {
     return (
         <div className={`${section ? 'h-[85%] w-[95%]' : 'h-full w-full'} flex items-center justify-center`}>
             {
-                data && <Line data={data} options={options} />
+                data && <Line
+                    height="350px"
+                    data={data} options={options} />
             }
         </div>
     )

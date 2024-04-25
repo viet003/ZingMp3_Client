@@ -70,7 +70,7 @@ const appReducer = (state = initState, action) => {
                     data: action.homeData?.find(item => item.sectionId === "hNewrelease")?.items || null
                 },
                 RTChart: action.homeData?.find(item => item.sectionType === 'RTChart') || null,
-                weekChart: action.homeData?.find(item => item.sectionType === 'weekChart')?.items || null,
+                weekChart: action.homeData?.find(item => item.sectionType === 'weekChart')?.items || [],
                 newMusic: {
                     name: action.homeData?.find(item => item.sectionId === "hNewrelease")?.title || null,
                     data: action.homeData?.find(item => item.sectionId === "hNewrelease")?.items || null

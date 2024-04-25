@@ -38,3 +38,16 @@ export const apiGetDetailPlaylist = (pid) => new Promise(async (resolve, reject)
         reject(error)
     }
 })
+
+export const apiGetNewReleaseChart = (pid) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await axios({
+            url: '/newreleasechart',
+            method: 'get',
+            params: { id: pid }
+        })
+        resolve(response)
+    } catch (error) {
+        reject(error)
+    }
+})

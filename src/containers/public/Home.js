@@ -10,11 +10,13 @@ const Home = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    let time = setTimeout(() => {
-      setLoading(false)
-    },1000)
-
-    return () => clearTimeout(time)
+    let time;
+    if (hotRadio) {
+      time = setTimeout(() => {
+        setLoading(false)
+      }, 1000)
+    }
+    return () => time && clearTimeout(time)
   }, [hotRadio])
 
   return (

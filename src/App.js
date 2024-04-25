@@ -1,4 +1,5 @@
 import { Album, Home, Main, Radio, Zingchart } from "./containers/public"
+import { WeekChartItems } from "./components"
 import { Library } from "./containers/system"
 import { Route, Routes } from "react-router-dom";
 import path from "./utils/path"
@@ -21,6 +22,7 @@ function App() {
           <Route path={path.ZINGCHART} element={<Zingchart />} />
           <Route path={path.RADIO} element={<Radio />} />
           <Route path={path.PLAYLIST} element={<Album />} />
+          <Route path={path.WEAKCHART} element={<WeekChartItems />} />
           <Route path={path.HUD} element={<Album />} />
         </Route>
       </Routes>

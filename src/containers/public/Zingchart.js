@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { LoadingApp, Footer, ChartSectionChart, AlbumListItems, WeakChart } from './../../components';
+import { LoadingApp, Footer, ChartSectionChart, AlbumListItems, WeekChart } from './../../components';
 import { BsFillPlayFill } from "react-icons/bs";
 import * as apis from "../../controllers/musicController"
+import { elements } from 'chart.js';
 
 const Zingchart = () => {
-  const { hotRadio, top100 } = useSelector(state => state.app)
+  const { hotRadio, top100, weekChart } = useSelector(state => state.app)
   const [loading, setLoading] = useState(false)
+  const [topSongs, setTopSongs] = useState(null)
   const [vnSongs, setVnSongs] = useState({})
   const [usSongs, setUsSongs] = useState({})
   const [kSongs, setKSongs] = useState({})
@@ -15,43 +17,60 @@ const Zingchart = () => {
   useEffect(() => {
     setLoading(true)
     const fetchDetailPlaylist = async () => {
+      const response = await apis.apiGetDetailPlaylist(top100?.data !== null && top100?.data[0]?.encodeId);
+      if (response?.data?.err === 0) {
+        setTopSongs(response.data?.data)
+        // console.log(response.data?.data)
+      }
+    }
+
+    fetchDetailPlaylist()
+
+  }, [top100])
+
+  useEffect(() => {
+    let arrId = []
+    if (weekChart?.length !== 0) {
+      weekChart?.map(elements => {
+        // console.log(elements?.link?.split(".")[0]?.split("/")[3])
+        arrId.push(elements?.link?.split(".")[0]?.split("/")[3])
+      })
+    }
+
+    const fetchDetailPlaylist = async () => {
       // dispatch(actions.setLoading(true))
       const [rs1, rs2, rs3] = await Promise.all([
-        await apis.apiGetDetailPlaylist(top100?.data !== null && top100?.data[0]?.encodeId),
-        await apis.apiGetDetailPlaylist(top100?.data !== null && top100?.data[1]?.encodeId),
-        await apis.apiGetDetailPlaylist(top100?.data !== null && top100?.data[4]?.encodeId),
+        await apis.apiGetNewReleaseChart(arrId?.length !== 0  && arrId[0]),
+        await apis.apiGetNewReleaseChart(arrId?.length !== 0  && arrId[1]),
+        await apis.apiGetNewReleaseChart(arrId?.length !== 0  && arrId[2]),
       ])
-      // dispatch(actions.setLoading(false))
       if (rs1?.data?.err === 0) {
+        console.log(rs1.data?.data)
         setVnSongs({
           name: 'Việt Nam',
-          data: rs1.data?.data
+          data: rs1.data?.data?.items
         })
-        // console.log(rs1.data?.data)
-        // dispatch(actions.setPlaylist(rs1?.data?.data))
       }
       if (rs2?.data?.err === 0) {
+        console.log(rs2.data?.data)
         setUsSongs({
           name: 'US-UK',
-          data: rs2.data?.data
+          data: rs2.data?.data?.items
         })
-        // console.log(rs1.data?.data)
-        // dispatch(actions.setPlaylist(rs1?.data?.data))
       }
       if (rs3?.data?.err === 0) {
+        console.log(rs3.data?.data)
         setKSongs({
           name: 'K-Pop',
-          data: rs3.data?.data
+          data: rs3.data?.data?.items
         })
-        // console.log(rs1.data?.data)
-        // dispatch(actions.setPlaylist(rs1?.data?.data))
       }
       setLoading(false)
     }
 
     fetchDetailPlaylist()
 
-  }, [top100])
+  }, [weekChart])
 
   return (
     <div className='flex flex-col gap-10 w-full overflow-hidden relative py-[30px] h-full overflow-y-scroll'>
@@ -72,14 +91,14 @@ const Zingchart = () => {
         <ChartSectionChart items={hotRadio} section={false} />
       </div>
       <div className='w-full relative  px-[56px]'>
-        <AlbumListItems songs={showFull ? vnSongs?.data?.song?.items : vnSongs?.data?.song?.items?.slice(0, 10)} section={false} totalDuration={vnSongs?.data?.song?.totalDuration} />
+        <AlbumListItems songs={showFull ? topSongs?.song?.items : topSongs?.song?.items?.slice(0, 10)} section={false} totalDuration={topSongs?.song?.totalDuration} />
       </div>
       {
         !showFull && <div className='h-[50px] w-full flex justify-center items-center  px-[56px]'>
           <button onClick={() => setShowFull(prev => !prev)} className='px-5 py-2 rounded-full border-[1px] border-primary hover:bg-primary hover:text-white text-primary transition-all'>Xem top 100</button>
         </div>
       }
-      <WeakChart vnSongs={vnSongs} usSongs={usSongs} kSongs={kSongs} />
+      <WeekChart vnSongs={vnSongs} usSongs={usSongs} kSongs={kSongs} />
       <div className='px-[56px]'>
         <Footer />
       </div>

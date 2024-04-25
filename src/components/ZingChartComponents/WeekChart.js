@@ -1,9 +1,9 @@
 import React from 'react'
 import bgtop100 from "../../assets/images/bgtop100.jpeg"
 import { BsFillPlayFill } from "react-icons/bs";
-import { AlbumListItems } from "../../components"
+import { AlbumListItems } from ".."
 
-const WeakChart = ({ vnSongs, kSongs, usSongs }) => {
+const WeekChart = ({ vnSongs, kSongs, usSongs }) => {
 
     return (
         <div className='w-full relative rounded-md'>
@@ -18,7 +18,7 @@ const WeakChart = ({ vnSongs, kSongs, usSongs }) => {
                                 <BsFillPlayFill className='text-white' />
                             </div>
                         </div>
-                        <AlbumListItems hd={true} songs={vnSongs?.data?.song?.items?.slice(0, 5)} section={false} totalDuration={vnSongs?.data?.song?.totalDuration} />
+                        <AlbumListItems hd={true} songs={vnSongs?.data?.slice(0, 5)} section={false} totalDuration={vnSongs?.data?.song?.totalDuration} />
                         <div className='h-[50px] w-full flex justify-center items-center  px-[56px]'>
                             <button className='px-5 py-2 rounded-full text-[13px] border-[1px] border-primary hover:bg-primary hover:text-white text-primary transition-all'>Xem tất cả</button>
                         </div>
@@ -30,7 +30,7 @@ const WeakChart = ({ vnSongs, kSongs, usSongs }) => {
                                 <BsFillPlayFill className='text-white' />
                             </div>
                         </div>
-                        <AlbumListItems hd={true} songs={usSongs?.data?.song?.items?.slice(0, 5)} section={false} totalDuration={usSongs?.data?.song?.totalDuration} />
+                        <AlbumListItems hd={true} songs={usSongs?.data?.slice(0, 5)} section={false} totalDuration={usSongs?.data?.song?.totalDuration} />
                         <div className='h-[50px] w-full flex justify-center items-center  px-[56px]'>
                             <button className='px-5 py-2 rounded-full text-[13px] border-[1px] border-primary hover:bg-primary hover:text-white text-primary transition-all'>Xem tất cả</button>
                         </div>
@@ -42,7 +42,7 @@ const WeakChart = ({ vnSongs, kSongs, usSongs }) => {
                                 <BsFillPlayFill className='text-white' />
                             </div>
                         </div>
-                        <AlbumListItems hd={true} songs={kSongs?.data?.song?.items?.slice(0, 5)} section={false} totalDuration={kSongs?.data?.song?.totalDuration} />
+                        <AlbumListItems hd={true} songs={kSongs?.data?.slice(0, 5)} section={false} totalDuration={kSongs?.data?.song?.totalDuration} />
                         <div className='h-[50px] w-full flex justify-center items-center  px-[56px]'>
                             <button className='px-5 py-2 rounded-full text-[13px] border-[1px] border-primary hover:bg-primary hover:text-white text-primary transition-all'>Xem tất cả</button>
                         </div>
@@ -53,4 +53,4 @@ const WeakChart = ({ vnSongs, kSongs, usSongs }) => {
     )
 }
 
-export default WeakChart
+export default WeekChart

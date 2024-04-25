@@ -27,9 +27,11 @@ const AlbumItem = ({ songData, section, index, hd }) => {
         >
             {!section && <p className={`${index === 0 ? 'text-shadow-no1' : index === 1 ? 'text-shadow-no2' : index === 2 ? 'text-shadow-no3' : 'text-shadow'} text-3xl text-gray-200 flex`}>#{index + 1}</p>}
             <div className='flex items-center gap-3 flex-1'>
-                <span>
-                    <BsMusicNoteBeamed />
-                </span>
+                {
+                    !hd && <span>
+                        <BsMusicNoteBeamed />
+                    </span>
+                }
                 <div className='w-12 h-10 rounded-md object-cover relative'>
                     <img src={songData?.thumbnail} alt="thumbnailM" className='w-full h-full object-cover rounded-md' />
                     {
