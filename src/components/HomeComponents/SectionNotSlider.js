@@ -3,7 +3,7 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import ItemsSectionNotSlider from './ItemsSectionNotSlider';
 
 
-function SectionNotSlider({ items }) {
+function SectionNotSlider({ items, notSection }) {
   return (
     <div className='w-full flex flex-col gap-3'>
       <div className='flex justify-between items-center'>
@@ -15,9 +15,13 @@ function SectionNotSlider({ items }) {
       </div>
       <div className='grid grid-cols-5 gap-7'>
         {
-          items?.data?.slice(0, 5).map((item) => (
-            <ItemsSectionNotSlider item={item} isShow={false} key={item?.encodeId}/>
-          ))
+          !notSection ?
+            items?.data?.slice(0, 5).map((item) => (
+              <ItemsSectionNotSlider item={item} isShow={false} key={item?.encodeId} />
+            )) :
+            items?.data?.map((item) => (
+              <ItemsSectionNotSlider item={item} isShow={false} key={item?.encodeId} />
+            ))
         }
       </div>
     </div>

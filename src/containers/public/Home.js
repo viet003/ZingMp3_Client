@@ -4,20 +4,19 @@ import { SectionNotSlider, SectionSlider, SectionTop100Al, SectionChart, Loading
 
 
 const Home = () => {
-  const { chill, remix, sadMusic, top100, hotAlbum, hotRadio, newReleaseChart } = useSelector(state => state.app)
+  const { chill, remix, sadMusic, top100, hotAlbum, hotRadio, newReleaseChart, banner } = useSelector(state => state.app)
   // const { curSongId } = useSelector(state => state.music)
-  const { curSongId } = useSelector(state => state.music)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     let time;
-    if (hotRadio) {
+    if (banner?.length !== 0) {
       time = setTimeout(() => {
         setLoading(false)
       }, 1000)
     }
     return () => time && clearTimeout(time)
-  }, [hotRadio])
+  }, [banner])
 
   return (
     <div className='flex flex-col gap-10 w-full overflow-hidden relative py-[30px] h-full overflow-y-scroll px-[59px]'>

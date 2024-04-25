@@ -7,10 +7,11 @@ import { FaPlay, FaPause } from "react-icons/fa";
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import * as actions from "../../store/actions"
-import { LoadingApp, AudioPlay, LoadingSong, AlbumListItems } from "../../components"
+import { LoadingApp, AudioPlay, LoadingSong, AlbumListItems, SectionRadio } from "../../components"
 
 function Playlist() {
   const dispatch = useDispatch()
+  const { hotRadio } = useSelector(state => state.app)
   const { curSongId, isPlaying, loadingSong } = useSelector(state => state.music)
   const { pid } = useParams()
   const [playlistData, setPlaylistData] = useState(null) // Khởi tạo playlistData là null
@@ -53,7 +54,7 @@ function Playlist() {
   }, [pid])
 
   return (
-    <div className={`${curSongId ? 'h-[calc(100vh-170px)]' : 'h-[calc(100vh-70px)]'} w-full relative`}>
+    <div className={`${curSongId ? 'h-[calc(100vh-170px)]' : 'h-[calc(100vh-70px)]'} w-full relative overflow-y-scroll flex flex-col gap-20`}>
       {
         isLoading && (
           <div className='absolute top-0 left-0 right-0 bottom-0 bg-primarybg z-30 flex items-center justify-center'>
@@ -100,7 +101,7 @@ function Playlist() {
               }
             </div>
             <div className='flex flex-col items-center gap-1'>
-              <h3 className='text-[20px] font-bold text-gray-800'>{playlistData?.title}</h3>
+              <h3 className='text-[20px] font-bold text-gray-800 text-center'>{playlistData?.title}</h3>
               <span className='flex gap-2 items-center text-gray-500 text-xs'>
                 <span>Cập nhật:</span>
                 <span>{moment.unix(playlistData?.contentLastUpdate).format("DD/MM/YYYY")}</span>
@@ -112,19 +113,22 @@ function Playlist() {
           <button className='flex gap-2 items-center bg-primary w-[200px] h-[40px] hover:bg-hover rounded-full justify-center text-white font-semibold'>
             {
               !playlistData?.song?.items?.find((item) => item?.encodeId === curSongId) ?
-              <><FaPlay /><p>Phát ngẫu nhiên</p></> : 
-              isPlaying ? <><FaPause /><p>Tạm dừng</p></> : <><FaPlay /><p>Tiếp tục phát</p></>
+                <><FaPlay /><p>Phát ngẫu nhiên</p></> :
+                isPlaying ? <><FaPause /><p>Tạm dừng</p></> : <><FaPlay /><p>Tiếp tục phát</p></>
             }
           </button>
           <div className='flex gap-5'>
 
           </div>
         </div>
-        <Scrollbars 
-        autoHide
-        style={{ width: '100%', height: '100%' }}>
-          <AlbumListItems songs={playlistData?.song?.items} totalDuration={playlistData?.song?.totalDuration} section={true}/>
+        <Scrollbars
+          autoHide
+          style={{ width: '100%', height: '100%', marginTop: "50px" }}>
+          <AlbumListItems songs={playlistData?.song?.items} totalDuration={playlistData?.song?.totalDuration} description={playlistData?.description} section={true} />
         </Scrollbars>
+      </div>
+      <div className='px-[59px] mt-10'>
+        <SectionRadio items={hotRadio} />
       </div>
     </div>
   )
