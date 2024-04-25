@@ -51,3 +51,16 @@ export const apiGetNewReleaseChart = (pid) => new Promise(async (resolve, reject
         reject(error)
     }
 })
+
+export const apiGetTop100 = (pid) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await axios({
+            url: '/top100',
+            method: 'get',
+            params: { id: pid }
+        })
+        resolve(response)
+    } catch (error) {
+        reject(error)
+    }
+})

@@ -7,7 +7,8 @@ const path = {
     PLAYLIST: '/playlist/:title/:pid',
     WEEKCHART: '/zingchart/:title/:encodeId',
     HUD: '/album/:tittle/:pid',
-    NEWSONGS: '/moi-phat-hanh'
+    NEWSONGS: '/moi-phat-hanh',
+    TOP100: '/top100',
 }
 
 export default path

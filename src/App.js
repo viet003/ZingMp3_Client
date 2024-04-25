@@ -1,4 +1,4 @@
-import { Album, Home, Main, Radio, Zingchart, TopSongs } from "./containers/public"
+import { Album, Home, Main, Radio, Zingchart, TopSongs, Top100 } from "./containers/public"
 import { WeekChartItems } from "./components"
 import { Library } from "./containers/system"
 import { Route, Routes } from "react-router-dom";
@@ -25,6 +25,7 @@ function App() {
           <Route path={path.WEEKCHART} element={<WeekChartItems />} />
           <Route path={path.HUD} element={<Album />} />
           <Route path={path.NEWSONGS} element={<TopSongs />} />
+          <Route path={path.TOP100} element={<Top100 />} />
         </Route>
       </Routes>
     </div>

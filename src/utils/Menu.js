@@ -54,7 +54,7 @@ export const menu_2 = [
         icons: <GiMusicalNotes className="text-[23px]" />
     },
     {
-        path: path.ZINGCHART,
+        path: path.TOP100,
         text: "Top 100",
         icons: <CiStar className="text-[23px]" />
     },

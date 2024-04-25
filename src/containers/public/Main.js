@@ -102,13 +102,13 @@ const Main = () => {
     <div className="w-full flex h-full">
       <div
         className={`${curSongId ? " h-[calc(100vh-90px)]" : "h-screen"
-          } w-[250px] bg-sidebarbg fixed top-0 left-0`}
+          } w-[240px] bg-sidebarbg fixed top-0 left-0`}
       >
         <SidebarLeft />
       </div>
-      <div className="w-[250px] min-w-[250px]"></div>
+      <div className="w-[240px] min-w-[240px]"></div>
       <div className="w-full bg-primarybg">
-        <div className="h-[70px] px-[59px] w-[calc(100%-250px)] flex items-center mb-5 fixed top-0 right-0 bg-primarybg" style={{ zIndex: "30" }}>
+        <div className="h-[70px] px-[59px] w-[calc(100%-240px)] flex items-center mb-5 fixed top-0 right-0 bg-primarybg" style={{ zIndex: "30" }}>
           <Header setIsOpenStaticAudio={setIsOpenStaticAudio}/>
         </div>
         <div className="h-[70px] w-full"></div>
