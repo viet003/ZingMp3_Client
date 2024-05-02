@@ -7,7 +7,7 @@ import { FaPlay, FaPause } from "react-icons/fa";
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import * as actions from "../../store/actions"
-import { LoadingApp, AudioPlay, LoadingSong, AlbumListItems, SectionRadio } from "../../components"
+import { LoadingApp, AudioPlay, LoadingSong, AlbumListItems, SectionRadio, AuthorComponents } from "../../components"
 
 function Playlist() {
   const dispatch = useDispatch()
@@ -15,6 +15,7 @@ function Playlist() {
   const { curSongId, isPlaying, loadingSong } = useSelector(state => state.music)
   const { pid } = useParams()
   const [playlistData, setPlaylistData] = useState(null) // Khởi tạo playlistData là null
+  const [authorData, setAuthorData] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
   const [isHover, setIsHover] = useState(false)
 
@@ -44,7 +45,7 @@ function Playlist() {
       // dispatch(actions.setLoading(false))
       if (response?.data?.err === 0) {
         setPlaylistData(response.data?.data)
-        // console.log(response.data?.data)
+        setAuthorData(response.data?.data?.artists)
         dispatch(actions.setPlaylist(response?.data?.data))
       }
       setIsLoading(false)
@@ -128,6 +129,9 @@ function Playlist() {
         </Scrollbars>
       </div>
       <div className='px-[59px] mt-10'>
+          <AuthorComponents items={authorData}/>
+      </div>
+      <div className='px-[59px]'>
         <SectionRadio items={hotRadio} />
       </div>
     </div>

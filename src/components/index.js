@@ -1,8 +1,11 @@
 export { default as Header } from './Header';
 export { default as Search } from './Search';
+
 export { default as SidebarLeft } from './SidebarLeft';
 export { default as SidebarRight } from './SidebarRight';
+
 export { default as SectionSliderBanner } from './HomeComponents/SectionSliderBanner';
+
 export { default as Player } from './AudioComponent/Player';
 export { default as StaticAudio } from './AudioComponent/StaticAudio';
 
@@ -31,6 +34,9 @@ export { default as AudioPlay } from './AudioComponent/AudioPlay';
 
 export { default as AlbumListItems} from './AlbumComponents/AlbumListItems';
 export { default as AlbumItem } from './AlbumComponents/AlbumItem'
+export { default as AuthorComponents } from './AlbumComponents/AuthorComponents'
+export { default as ItemsAuthorComponents } from './AlbumComponents/ItemsAuthorComponents'
+
 
 export { default as PlayListSong } from './Playlistcomponents/PlayListSong'
 export { default as SetTimeOffMusic } from './AudioComponent/SetTimeOffMusic'
