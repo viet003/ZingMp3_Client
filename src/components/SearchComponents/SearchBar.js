@@ -3,11 +3,13 @@ import { FiSearch } from "react-icons/fi";
 import { FiTrendingUp } from "react-icons/fi";
 import * as apis from "../../controllers"
 import ItemSearch from "./ItemSearch"
+import { useNavigate } from 'react-router-dom';
 
 
 let time;
 
-const Search = () => {
+const SearchBar = () => {
+    const navigator = useNavigate()
     const [open, setOpen] = useState(false);
     const [search, setSearch] = useState('');
     const [dataSearch, setDataSearch] = useState(null)
@@ -63,6 +65,13 @@ const Search = () => {
             //         setOpen(false);
             //     }
             // }} // Added onBlur event handler
+            onKeyDown={(e) => {
+                if(e.key === 'Enter') {
+                    e.target.blur();
+                    setOpen(false)
+                    navigator(`/tim-kiem/tat-ca/${search}`)
+                }
+            }}
             className='w-full flex items-center relative min-w-[300px]'
         >
             <span className='h-10 pl-4 bg-[#e6efef] flex items-center justify-center rounded-l-[20px] text-gray-500'>
@@ -121,4 +130,4 @@ const Search = () => {
 }
 
 
-export default Search;
+export default SearchBar;

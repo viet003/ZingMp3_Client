@@ -9,6 +9,8 @@ const path = {
     HUD: '/album/:tittle/:pid',
     NEWSONGS: '/moi-phat-hanh',
     TOP100: '/top100',
+    SEARCHPAGE: '/tim-kiem/tat-ca/:title',
+    ALL: '*'
 }
 
 export default path

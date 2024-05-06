@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Search } from './'
+import { SearchBar } from './'
 import { HiArrowNarrowLeft, HiArrowNarrowRight } from "react-icons/hi";
 import { VscDesktopDownload } from "react-icons/vsc";
 import { CiSettings, CiUser } from "react-icons/ci";
@@ -27,7 +27,7 @@ const Header = ({ setIsOpenStaticAudio }) => {
                     <span><HiArrowNarrowRight size={24} /></span>
                 </div>
                 <div className='w-1/2'>
-                    <Search />
+                    <SearchBar />
                 </div>
             </div>
             <div className='flex gap-3'>

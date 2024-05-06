@@ -1,7 +1,8 @@
 export { default as Header } from './Header';
 
-export { default as Search } from './SearchComponents/Search';
+export { default as SearchBar } from './SearchComponents/SearchBar';
 export { default as ItemSearch } from './SearchComponents/ItemSearch'
+export { default as SearchPage } from './SearchComponents/SearchPage'
 
 export { default as SidebarLeft } from './SidebarLeft';
 export { default as SidebarRight } from './SidebarRight';
