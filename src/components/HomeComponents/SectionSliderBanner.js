@@ -47,7 +47,7 @@ const SectionSliderBanner = () => {
         return () => {
             intervalId && clearInterval(intervalId)
         }
-    }, [])
+    }, [banner])
 
     const handleClickBanner = (item) => {
         if (item?.type === 1) {
