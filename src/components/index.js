@@ -3,6 +3,11 @@ export { default as Header } from './Header';
 export { default as SearchBar } from './SearchComponents/SearchBar';
 export { default as ItemSearch } from './SearchComponents/ItemSearch'
 export { default as SearchPage } from './SearchComponents/SearchPage'
+export { default as SearchAll } from './SearchComponents/SearchAll'
+export { default as SearchSongs } from './SearchComponents/SearchSongs'
+export { default as SearchAuthor } from './SearchComponents/SearchAuthor'
+export { default as SearchAlbum } from './SearchComponents/SearchAlbum'
+
 
 export { default as SidebarLeft } from './SidebarLeft';
 export { default as SidebarRight } from './SidebarRight';

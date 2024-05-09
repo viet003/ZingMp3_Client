@@ -4,7 +4,7 @@ import moment from 'moment'
 import { BsDot } from 'react-icons/bs'
 
 
-const AlbumListItems = ({ songs, totalDuration, section, hd, description }) => {
+const AlbumListItems = ({ songs, totalDuration, section, hd, description, search }) => {
 
     // console.log({ songs, totalDuration })
     return (
@@ -24,7 +24,7 @@ const AlbumListItems = ({ songs, totalDuration, section, hd, description }) => {
             }
             <div className='flex flex-col'>
                 {songs?.map((item, index) => (
-                    <AlbumItem key={item.encodeId} songData={item} section={section} index={index} hd={hd}/>
+                    <AlbumItem key={item.encodeId} songData={item} section={section} index={index} hd={hd} search={search}/>
                 ))}
             </div>
             <span className='flex items-center gap-1 py-[10px] border-t border-[rgba(0,0,0,0.05)]'>

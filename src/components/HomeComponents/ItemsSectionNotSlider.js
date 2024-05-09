@@ -64,14 +64,14 @@ function ItemsSectionNotSlider({ item, isShow }) {
                 </div>
                 {
                     !isShow && (
-                        <p className='font-medium text-[14px] text-gray-500 cursor-default truncate-lines-2 text-ellipsis'>
+                        <p className='font-medium text-[14px] text-gray-900 truncate-lines-2 text-ellipsis hover:text-primary cursor-pointer'>
                             {item?.sortDescription}
                         </p>
                     )
                 }
                 {
                     isShow && (
-                        <p className='font-medium text-[14px] text-gray-500 cursor-default truncate text-ellipsis'>
+                        <p className='font-medium text-[14px] text-gray-900 truncate text-ellipsis hover:text-primary cursor-pointer'>
                             {item?.title}
                         </p>
                     )
@@ -79,7 +79,7 @@ function ItemsSectionNotSlider({ item, isShow }) {
                 <>
                     {
                         isShow && item?.artists && (
-                            <p className='text-[11px] cursor-pointer'>
+                            <p className='text-[11px] cursor-pointer text-gray-500 hover:underline hover:text-primary'>
                                 {
                                     item?.artists?.map((e) => e.name + ', ')
                                 }

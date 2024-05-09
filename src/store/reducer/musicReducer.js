@@ -11,6 +11,8 @@ const initState = {
     title: null,
     data: null,
   },
+  searchData: null,
+  keyword: null
 };
 
 const musicReducer = (state = initState, action) => {
@@ -52,6 +54,16 @@ const musicReducer = (state = initState, action) => {
       return {
         ...state,
         loadingSong: action.loadingSong,
+      };
+    case actionTypes.SEARCH:
+      return {
+        ...state,
+        searchData: action.searchData,
+      };
+    case actionTypes.KEYWORD:
+      return {
+        ...state,
+        keyword: action.keyword,
       };
     default:
       return state;

@@ -8,11 +8,11 @@ import LoadingSong from "../LoadingSong"
 import { FaPlay } from "react-icons/fa";
 
 
-const AlbumItem = ({ songData, section, index, hd }) => {
-
+const AlbumItem = ({ songData, section, index, hd, search }) => {
+    console.log(search)
     const dispatch = useDispatch()
     const { curSongId, isPlaying, loadingSong } = useSelector(state => state.music)
-    
+
 
     return (
         <div className={`${curSongId === songData?.encodeId ? 'bg-gray-300' : ''} grid ${section ? 'grid-cols-[50%,40%,10%] mr-4' : hd ? 'grid-cols-[10%,75%,10%]' : 'grid-cols-[5%,45%,40%,10%]'} justify-between gap-3 items-center p-[10px] border-t border-[rgba(0,0,0,0.05)] rounded-md hover:bg-[#DDE4E4] cursor-pointer`}
@@ -50,7 +50,12 @@ const AlbumItem = ({ songData, section, index, hd }) => {
                 </span>
             </div>
             {
-                !hd && <div className='flex-1 flex items-center justify-start'>
+                !hd && !search && <div className='flex-1 flex items-center justify-start'>
+                    {songData?.album?.title?.length > 30 ? `${songData?.album?.title?.slice(0, 30)}...` : songData?.album?.title}
+                </div>
+            }
+            {
+                search && <div className='flex-1 flex items-center justify-start'>
                     {songData?.album?.title?.length > 30 ? `${songData?.album?.title?.slice(0, 30)}...` : songData?.album?.title}
                 </div>
             }

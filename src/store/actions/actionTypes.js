@@ -11,6 +11,8 @@ const actionTypes = {
     SET_PLAY: 'SET_PLAY',
     SET_HISTORY_SONG: 'SET_HISTORY_SONG',
     LOADING_SONG: 'LOADING_SONG',
+    SEARCH: 'SEARCH',
+    KEYWORD: 'KEYWORD',
 
     // login_out
     LOGIN_SUCCESS: 'LOGIN',

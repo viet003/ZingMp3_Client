@@ -1,4 +1,5 @@
 import actionTypes from "./actionTypes";
+import * as controller from '../../controllers'
 
 export const setCurSongId = (sid) => ({
     type: actionTypes.SET_CUR_SONG_ID,
@@ -39,4 +40,34 @@ export const setLoadingApp = (loadingApp) => ({
 export const setLoadingSong = (loadingSong) => ({
     type: actionTypes.LOADING_SONG,
     loadingSong
+})  
+
+export const setKeyWord = (keyword) => ({
+    type: actionTypes.KEYWORD,
+    keyword
 })
+
+export const getSearchData = (input) => async (dispatch) => {
+    try {
+        const response = await controller.searchApi(input)
+
+        if (response?.data.err === 0) {
+            dispatch({
+                type: actionTypes.SEARCH,
+                searchData: response.data.data
+            })
+            // console.log(response?.data?.data)
+        } else {
+            dispatch({
+                type: actionTypes.SEARCH,
+                searchData: null
+            })
+        }
+
+    } catch (error) {
+        dispatch({
+            type: actionTypes.SEARCH,
+            searchData: null
+        })
+    }
+}

@@ -12,7 +12,7 @@ const Top100 = () => {
         const fectchData = async () => {
             const response = await apis.apiGetTop100();
             if (response?.data?.err === 0) {
-                console.log(response?.data?.data)
+                // console.log(response?.data?.data)
                 setDataTop100(response?.data?.data)
             }
             setLoading(false)
