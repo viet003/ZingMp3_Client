@@ -12,10 +12,16 @@ const SearchSongs = ({ count }) => {
     }, [searchData])
 
     return (
-        <div className='mt-5 '>
-            <h1 className='text-[20px] font-semibold py-3 px-2'>Bài Hát</h1>
-            <AlbumListItems songs={count ? data?.slice(0,6) : data} section={true} totalDuration={2432424} hd={true} search={true}/>
-        </div>
+        data?.length > 0 ? (
+            <div className='mt-5 '>
+                <h1 className='text-[20px] font-semibold py-3 px-2'>Bài Hát</h1>
+                <AlbumListItems songs={count ? data?.slice(0, 6) : data} section={true} totalDuration={2432424} hd={true} search={true} />
+            </div>
+        ) : (
+            <div className='w-full h-[200px] bg-sidebarbg mt-4 rounded-xl grid place-items-center	'>
+                <p className='text-[20px] text-primary text-opacity-50'>Không có kết quả được tìm thấy!</p>
+            </div>
+        )
     )
 }
 
